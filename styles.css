@@ -565,23 +565,39 @@ p {
 
 .project-card {
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 0.95rem;
-  background: linear-gradient(180deg, #10131a, #0d1016);
+  border-radius: 14px;
+  padding: 0.95rem 1rem;
+  background:
+    linear-gradient(150deg, rgba(255, 122, 0, 0.08), rgba(255, 122, 0, 0) 44%),
+    linear-gradient(150deg, #10131a, #0d1016 60%);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
 }
 
 .project-tag {
   display: inline-flex;
-  font-size: 0.76rem;
-  color: #ffb476;
-  border: 1px solid rgba(255, 122, 0, 0.45);
+  width: fit-content;
+  font-size: 0.74rem;
+  color: #ffd5b0;
+  border: 1px solid rgba(255, 122, 0, 0.42);
   border-radius: 999px;
-  padding: 0.2rem 0.55rem;
-  margin-bottom: 0.55rem;
+  background: rgba(255, 122, 0, 0.1);
+  padding: 0.22rem 0.56rem;
+  margin-bottom: 0.15rem;
+  letter-spacing: 0.01em;
+}
+
+.project-card h3 {
+  margin-bottom: 0.1rem;
+  color: #f3f4f7;
 }
 
 .project-card p {
-  margin-top: 0.3rem;
+  margin-top: 0;
+  color: #d2d6de;
+  line-height: 1.56;
 }
 
 .project + .project {
@@ -593,15 +609,23 @@ p {
 .project a,
 .project-card a {
   display: inline-block;
-  margin-top: 0.55rem;
-  color: var(--accent);
+  width: fit-content;
+  margin-top: auto;
+  color: #ffd7b1;
+  border: 1px solid rgba(255, 122, 0, 0.42);
+  border-radius: 999px;
+  background: rgba(255, 122, 0, 0.1);
+  padding: 0.34rem 0.72rem;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.82rem;
 }
 
 .project a:hover,
 .project-card a:hover {
-  color: #ff9c48;
+  color: #ffffff;
+  background: rgba(255, 122, 0, 0.24);
+  border-color: rgba(255, 122, 0, 0.68);
 }
 
 .reviews-controls {
@@ -741,17 +765,28 @@ p {
 
 .timeline-item {
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 0.85rem 0.9rem;
-  background: #10131a;
+  border-radius: 14px;
+  padding: 0.9rem 0.95rem;
+  background:
+    linear-gradient(150deg, rgba(255, 122, 0, 0.08), rgba(255, 122, 0, 0) 44%),
+    linear-gradient(150deg, #10131a, #0d1016 60%);
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 .timeline-year {
   display: inline-flex;
-  color: #ffb476;
-  font-size: 0.82rem;
+  width: fit-content;
+  color: #ffd5b0;
+  font-size: 0.74rem;
   font-weight: 600;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.15rem;
+  border: 1px solid rgba(255, 122, 0, 0.42);
+  border-radius: 999px;
+  background: rgba(255, 122, 0, 0.1);
+  padding: 0.22rem 0.56rem;
 }
 
 .timeline-item + .timeline-item {
@@ -760,7 +795,12 @@ p {
 }
 
 .timeline-item p {
-  color: #cfd2da;
+  color: #cfd4dd;
+}
+
+.timeline-item h3 {
+  color: #f3f4f7;
+  margin-bottom: 0.1rem;
 }
 
 .edu-card {
