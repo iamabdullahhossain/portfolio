@@ -24,6 +24,73 @@ if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
 }
 
+const reviewsGrid = document.getElementById('reviewsGrid');
+if (reviewsGrid) {
+  const showMessage = (message) => {
+    reviewsGrid.innerHTML = `<p class="reviews-message">${message}</p>`;
+  };
+
+  const createReviewCard = (review) => {
+    const card = document.createElement('article');
+    card.className = 'review-card';
+
+    const text = document.createElement('p');
+    text.className = 'review-text';
+    text.textContent = review.review;
+
+    const meta = document.createElement('div');
+    meta.className = 'review-meta';
+
+    const name = document.createElement('strong');
+    name.textContent = review.name;
+
+    const role = document.createElement('span');
+    role.textContent = `${review.designation} · ${review.company}`;
+
+    const toggleButton = document.createElement('button');
+    toggleButton.type = 'button';
+    toggleButton.className = 'review-toggle';
+    toggleButton.textContent = 'Read more';
+    toggleButton.setAttribute('aria-expanded', 'false');
+    toggleButton.addEventListener('click', () => {
+      const isExpanded = card.classList.toggle('is-expanded');
+      toggleButton.textContent = isExpanded ? 'Read less' : 'Read more';
+      toggleButton.setAttribute('aria-expanded', String(isExpanded));
+    });
+
+    meta.appendChild(name);
+    meta.appendChild(role);
+    card.appendChild(text);
+    card.appendChild(meta);
+    card.appendChild(toggleButton);
+    return card;
+  };
+
+  showMessage('Loading reviews...');
+  fetch('reviews.json')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Review request failed');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (!Array.isArray(data) || data.length === 0) {
+        showMessage('No reviews available yet.');
+        return;
+      }
+      reviewsGrid.innerHTML = '';
+      data.forEach((item) => {
+        if (item && item.review && item.name) {
+          reviewsGrid.appendChild(createReviewCard(item));
+        }
+      });
+    })
+    .catch(() => {
+      showMessage('Unable to load reviews right now.');
+    });
+}
+
 const slider = document.querySelector('.workshot-slider');
 if (slider) {
   const slides = Array.from(slider.querySelectorAll('.workshot-image'));
