@@ -26,8 +26,53 @@ if (yearElement) {
 
 const reviewsGrid = document.getElementById('reviewsGrid');
 if (reviewsGrid) {
+  const reviewsPrev = document.getElementById('reviewsPrev');
+  const reviewsNext = document.getElementById('reviewsNext');
+
   const showMessage = (message) => {
     reviewsGrid.innerHTML = `<p class="reviews-message">${message}</p>`;
+  };
+
+  const updateReviewNavState = () => {
+    if (!reviewsPrev || !reviewsNext) {
+      return;
+    }
+
+    const maxScroll = Math.max(0, reviewsGrid.scrollWidth - reviewsGrid.clientWidth);
+    const atStart = reviewsGrid.scrollLeft <= 2;
+    const atEnd = reviewsGrid.scrollLeft >= maxScroll - 2;
+
+    reviewsPrev.disabled = atStart;
+    reviewsNext.disabled = atEnd;
+  };
+
+  const bindReviewSliderControls = () => {
+    if (!reviewsPrev || !reviewsNext) {
+      return;
+    }
+
+    const stepSize = () => {
+      const firstCard = reviewsGrid.querySelector('.review-card');
+      if (!firstCard) {
+        return 280;
+      }
+      const cardWidth = firstCard.getBoundingClientRect().width;
+      const gridStyle = window.getComputedStyle(reviewsGrid);
+      const gap = parseFloat(gridStyle.gap) || 0;
+      return cardWidth + gap;
+    };
+
+    reviewsPrev.addEventListener('click', () => {
+      reviewsGrid.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+    });
+
+    reviewsNext.addEventListener('click', () => {
+      reviewsGrid.scrollBy({ left: stepSize(), behavior: 'smooth' });
+    });
+
+    reviewsGrid.addEventListener('scroll', updateReviewNavState);
+    window.addEventListener('resize', updateReviewNavState);
+    updateReviewNavState();
   };
 
   const createReviewCard = (review) => {
@@ -47,22 +92,10 @@ if (reviewsGrid) {
     const role = document.createElement('span');
     role.textContent = `${review.designation} · ${review.company}`;
 
-    const toggleButton = document.createElement('button');
-    toggleButton.type = 'button';
-    toggleButton.className = 'review-toggle';
-    toggleButton.textContent = 'Read more';
-    toggleButton.setAttribute('aria-expanded', 'false');
-    toggleButton.addEventListener('click', () => {
-      const isExpanded = card.classList.toggle('is-expanded');
-      toggleButton.textContent = isExpanded ? 'Read less' : 'Read more';
-      toggleButton.setAttribute('aria-expanded', String(isExpanded));
-    });
-
     meta.appendChild(name);
     meta.appendChild(role);
     card.appendChild(text);
     card.appendChild(meta);
-    card.appendChild(toggleButton);
     return card;
   };
 
@@ -85,6 +118,8 @@ if (reviewsGrid) {
           reviewsGrid.appendChild(createReviewCard(item));
         }
       });
+      bindReviewSliderControls();
+      updateReviewNavState();
     })
     .catch(() => {
       showMessage('Unable to load reviews right now.');
