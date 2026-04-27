@@ -676,6 +676,12 @@ p {
   overflow: hidden;
 }
 
+.review-card.is-expanded .review-text {
+  line-clamp: unset;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
 .review-text::before {
   content: "\201C";
   color: rgba(255, 122, 0, 0.45);
@@ -700,6 +706,25 @@ p {
 .review-meta span {
   color: #b7bcc6;
   font-size: 0.82rem;
+}
+
+.review-toggle {
+  align-self: flex-start;
+  border: 1px solid rgba(255, 122, 0, 0.45);
+  border-radius: 999px;
+  padding: 0.35rem 0.82rem;
+  background: rgba(255, 122, 0, 0.12);
+  color: #ffd7b1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+}
+
+.review-toggle:hover {
+  background: rgba(255, 122, 0, 0.24);
+  color: #ffffff;
+  border-color: rgba(255, 122, 0, 0.68);
 }
 
 .reviews-message {

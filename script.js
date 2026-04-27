@@ -92,9 +92,22 @@ if (reviewsGrid) {
     const role = document.createElement('span');
     role.textContent = `${review.designation} · ${review.company}`;
 
+    const toggleButton = document.createElement('button');
+    toggleButton.type = 'button';
+    toggleButton.className = 'review-toggle';
+    toggleButton.textContent = 'Read more';
+    toggleButton.setAttribute('aria-expanded', 'false');
+    toggleButton.addEventListener('click', () => {
+      const isExpanded = card.classList.toggle('is-expanded');
+      toggleButton.textContent = isExpanded ? 'Read less' : 'Read more';
+      toggleButton.setAttribute('aria-expanded', String(isExpanded));
+      updateReviewNavState();
+    });
+
     meta.appendChild(name);
     meta.appendChild(role);
     card.appendChild(text);
+    card.appendChild(toggleButton);
     card.appendChild(meta);
     return card;
   };
