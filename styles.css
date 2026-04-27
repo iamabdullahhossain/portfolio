@@ -558,12 +558,23 @@ p {
 }
 
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  display: flex;
+  align-items: stretch;
   gap: 0.85rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0.35rem;
+}
+
+.projects-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .project-card {
+  flex: 0 0 min(360px, 85vw);
+  scroll-snap-align: start;
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 0.95rem 1rem;
@@ -758,12 +769,23 @@ p {
 }
 
 .timeline-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  display: flex;
+  align-items: stretch;
   gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0.3rem;
+}
+
+.timeline-list::-webkit-scrollbar {
+  display: none;
 }
 
 .timeline-item {
+  flex: 0 0 min(300px, 82vw);
+  scroll-snap-align: start;
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 0.9rem 0.95rem;
@@ -893,9 +915,7 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .expertise-grid,
-  .projects-grid,
-  .timeline-list {
+  .expertise-grid {
     grid-template-columns: 1fr;
   }
 

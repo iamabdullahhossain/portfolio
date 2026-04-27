@@ -24,55 +24,63 @@ if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
 }
 
+const setupHorizontalControls = (container, prevBtn, nextBtn, itemSelector, fallbackStep = 280) => {
+  if (!container || !prevBtn || !nextBtn) {
+    return;
+  }
+
+  const stepSize = () => {
+    const firstItem = container.querySelector(itemSelector);
+    if (!firstItem) {
+      return fallbackStep;
+    }
+    const itemWidth = firstItem.getBoundingClientRect().width;
+    const containerStyle = window.getComputedStyle(container);
+    const gap = parseFloat(containerStyle.gap) || 0;
+    return itemWidth + gap;
+  };
+
+  const updateNavState = () => {
+    const maxScroll = Math.max(0, container.scrollWidth - container.clientWidth);
+    const atStart = container.scrollLeft <= 2;
+    const atEnd = container.scrollLeft >= maxScroll - 2;
+    prevBtn.disabled = atStart;
+    nextBtn.disabled = atEnd;
+  };
+
+  prevBtn.addEventListener('click', () => {
+    container.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    container.scrollBy({ left: stepSize(), behavior: 'smooth' });
+  });
+
+  container.addEventListener('scroll', updateNavState);
+  window.addEventListener('resize', updateNavState);
+  updateNavState();
+
+  return updateNavState;
+};
+
 const reviewsGrid = document.getElementById('reviewsGrid');
 if (reviewsGrid) {
   const reviewsPrev = document.getElementById('reviewsPrev');
   const reviewsNext = document.getElementById('reviewsNext');
+  let refreshReviewControls = () => {};
 
   const showMessage = (message) => {
     reviewsGrid.innerHTML = `<p class="reviews-message">${message}</p>`;
   };
 
-  const updateReviewNavState = () => {
-    if (!reviewsPrev || !reviewsNext) {
-      return;
-    }
-
-    const maxScroll = Math.max(0, reviewsGrid.scrollWidth - reviewsGrid.clientWidth);
-    const atStart = reviewsGrid.scrollLeft <= 2;
-    const atEnd = reviewsGrid.scrollLeft >= maxScroll - 2;
-
-    reviewsPrev.disabled = atStart;
-    reviewsNext.disabled = atEnd;
-  };
-
   const bindReviewSliderControls = () => {
-    if (!reviewsPrev || !reviewsNext) {
-      return;
-    }
-
-    const stepSize = () => {
-      const firstCard = reviewsGrid.querySelector('.review-card');
-      if (!firstCard) {
-        return 280;
-      }
-      const cardWidth = firstCard.getBoundingClientRect().width;
-      const gridStyle = window.getComputedStyle(reviewsGrid);
-      const gap = parseFloat(gridStyle.gap) || 0;
-      return cardWidth + gap;
-    };
-
-    reviewsPrev.addEventListener('click', () => {
-      reviewsGrid.scrollBy({ left: -stepSize(), behavior: 'smooth' });
-    });
-
-    reviewsNext.addEventListener('click', () => {
-      reviewsGrid.scrollBy({ left: stepSize(), behavior: 'smooth' });
-    });
-
-    reviewsGrid.addEventListener('scroll', updateReviewNavState);
-    window.addEventListener('resize', updateReviewNavState);
-    updateReviewNavState();
+    refreshReviewControls = setupHorizontalControls(
+      reviewsGrid,
+      reviewsPrev,
+      reviewsNext,
+      '.review-card',
+      280
+    ) || (() => {});
   };
 
   const createReviewCard = (review) => {
@@ -101,7 +109,7 @@ if (reviewsGrid) {
       const isExpanded = card.classList.toggle('is-expanded');
       toggleButton.textContent = isExpanded ? 'Read less' : 'Read more';
       toggleButton.setAttribute('aria-expanded', String(isExpanded));
-      updateReviewNavState();
+      refreshReviewControls();
     });
 
     meta.appendChild(name);
@@ -132,12 +140,22 @@ if (reviewsGrid) {
         }
       });
       bindReviewSliderControls();
-      updateReviewNavState();
+      refreshReviewControls();
     })
     .catch(() => {
       showMessage('Unable to load reviews right now.');
     });
 }
+
+const projectsGrid = document.querySelector('.projects-grid');
+const projectsPrev = document.getElementById('projectsPrev');
+const projectsNext = document.getElementById('projectsNext');
+setupHorizontalControls(projectsGrid, projectsPrev, projectsNext, '.project-card', 300);
+
+const timelineList = document.querySelector('.timeline-list');
+const experiencePrev = document.getElementById('experiencePrev');
+const experienceNext = document.getElementById('experienceNext');
+setupHorizontalControls(timelineList, experiencePrev, experienceNext, '.timeline-item', 260);
 
 const slider = document.querySelector('.workshot-slider');
 if (slider) {
