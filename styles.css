@@ -636,6 +636,7 @@ p {
 
 .reviews-grid {
   display: flex;
+  align-items: flex-start;
   gap: 0.8rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
