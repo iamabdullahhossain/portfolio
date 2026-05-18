@@ -87,6 +87,13 @@ svg {
   letter-spacing: 0.03em;
 }
 
+.brand .site-logo,
+.site-logo {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
 .nav-links {
   display: flex;
   gap: 1.5rem;
