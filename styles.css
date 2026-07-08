@@ -55,6 +55,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   margin: 0;
@@ -1161,12 +1165,11 @@ footer {
 
 /* Vertical Role Rotator */
 .hero-role-container {
-  display: inline-block;
-  vertical-align: top;
+  display: block;
   overflow: hidden;
   position: relative;
   height: 1.15em;
-  margin-left: 0.1em;
+  margin-top: 0.45rem;
   font-size: 0.82em;
 }
 
@@ -1279,8 +1282,6 @@ footer {
 /* Specific media adjustments for vertical rotator */
 @media (max-width: 620px) {
   .hero-role-container {
-    display: block;
-    margin-left: 0;
-    margin-top: 0.2rem;
+    margin-top: 0.3rem;
   }
 }
