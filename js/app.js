@@ -473,8 +473,22 @@ function setupContactForm() {
 
       const name = document.getElementById('form-name').value;
       const email = document.getElementById('form-email').value;
+      const details = document.getElementById('form-details').value;
+      const services = selectedServices.length > 0 ? selectedServices.join(', ') : 'Not Specified';
 
-      showToast(`Thank you ${name}! Your inquiry has been submitted.`);
+      const myEmail = "iamabdullahhossain@gmail.com";
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${name} [${services}]`);
+      const body = encodeURIComponent(
+        `Name: ${name}\n` +
+        `Sender Email: ${email}\n` +
+        `Requirement Area: ${services}\n\n` +
+        `Project Details / Inquiry:\n${details}`
+      );
+
+      // Trigger user's mail client (Gmail / Outlook / Apple Mail)
+      window.location.href = `mailto:${myEmail}?subject=${subject}&body=${body}`;
+
+      showToast(`Thank you ${name}! Opening your email client to send the message...`);
 
       form.reset();
       serviceBtns.forEach(b => b.classList.remove('selected'));
