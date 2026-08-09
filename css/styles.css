@@ -1915,27 +1915,34 @@ html, body {
 
 @media (max-width: 768px) {
   body {
-    padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
   }
 
+  /* Compact Ultra-Frosted Liquid Glassmorphism Bottom Navigation Bar */
   .mobile-bottom-nav {
     display: flex;
     align-items: center;
     justify-content: space-around;
     position: fixed;
-    bottom: 12px;
+    bottom: 10px;
     left: 12px;
     right: 12px;
-    height: 64px;
-    background: rgba(18, 18, 22, 0.90);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 24px;
+    height: 52px;
+    background: rgba(22, 22, 28, 0.75);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
     z-index: 2500;
-    padding: 0 0.5rem;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    padding: 0 0.35rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
     transition: all var(--transition-normal);
+  }
+
+  body.light-theme .mobile-bottom-nav {
+    background: rgba(255, 255, 255, 0.72);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.9);
   }
 
   .mobile-nav-item {
@@ -1943,32 +1950,33 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 2px;
     flex: 1;
-    height: 52px;
-    border-radius: 16px;
+    height: 44px;
+    border-radius: 14px;
     color: var(--text-muted);
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     font-weight: 600;
     text-decoration: none;
     transition: all var(--transition-normal);
     position: relative;
+    border: 1px solid transparent;
   }
 
   .mobile-nav-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 24px;
-    border-radius: 12px;
+    width: 22px;
+    height: 18px;
+    border-radius: 10px;
     transition: all var(--transition-fast);
   }
 
   .mobile-nav-item i,
   .mobile-nav-item svg {
-    width: 19px;
-    height: 19px;
+    width: 16px;
+    height: 16px;
     transition: all var(--transition-fast);
   }
 
@@ -1978,34 +1986,36 @@ html, body {
 
   .mobile-nav-item.active {
     color: var(--accent-yellow);
-    background: rgba(255, 199, 0, 0.12);
+    background: rgba(255, 199, 0, 0.14);
+    border: 1px solid rgba(255, 199, 0, 0.28);
+    box-shadow: 0 3px 12px rgba(255, 199, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     font-weight: 700;
   }
 
   .mobile-nav-item.active .mobile-nav-icon {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 
   .mobile-nav-item.active i,
   .mobile-nav-item.active svg {
     color: var(--accent-yellow);
-    filter: drop-shadow(0 0 6px rgba(255, 199, 0, 0.5));
+    filter: drop-shadow(0 0 6px rgba(255, 199, 0, 0.6));
   }
 
   .mobile-nav-item.active::after {
     content: '';
     position: absolute;
-    top: 4px;
-    width: 18px;
-    height: 3px;
+    top: 3px;
+    width: 14px;
+    height: 2.5px;
     background: var(--accent-yellow);
-    border-radius: 3px;
-    box-shadow: 0 0 10px var(--accent-yellow);
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--accent-yellow);
   }
 
   /* Toast Notification positioning on mobile */
   .toast-notification {
-    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(75px + env(safe-area-inset-bottom, 0px));
     left: 1rem;
     right: 1rem;
   }
