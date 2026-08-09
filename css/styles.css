@@ -1623,20 +1623,31 @@ img {
 }
 
 .service-pill-btn {
-  padding: 0.45rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
   font-size: 0.825rem;
   color: var(--text-secondary);
   font-weight: 600;
+  cursor: pointer;
   transition: all var(--transition-fast);
+}
+
+.service-pill-btn i,
+.service-pill-btn svg {
+  width: 14px;
+  height: 14px;
 }
 
 .service-pill-btn.selected, .service-pill-btn:hover {
   background: rgba(255, 199, 0, 0.15);
   border-color: var(--accent-yellow);
   color: var(--accent-yellow);
+  transform: translateY(-1px);
 }
 
 /* --------------------------------------------------------------------------

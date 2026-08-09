@@ -65,13 +65,18 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">Requirement Area</label>
+            <div class="form-label-group" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <label class="form-label" style="margin-bottom: 0;">Requirement Area</label>
+              <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">(Select all that apply)</span>
+            </div>
             <input type="hidden" id="form-services" name="services" value="Not Specified">
             <div class="service-selector-pills">
-              <button type="button" class="service-pill-btn" data-value="Flutter Mobile App">Flutter Mobile App</button>
-              <button type="button" class="service-pill-btn" data-value="Real-time Systems">Real-time Messaging</button>
-              <button type="button" class="service-pill-btn" data-value="API Integration">API & Backend</button>
-              <button type="button" class="service-pill-btn" data-value="Full-time Role">Full-Time Opportunity</button>
+              <button type="button" class="service-pill-btn" data-value="Flutter & Mobile App"><i data-lucide="smartphone"></i> Flutter & Mobile App</button>
+              <button type="button" class="service-pill-btn" data-value="AI Feature Integration"><i data-lucide="bot"></i> AI Features & Integration</button>
+              <button type="button" class="service-pill-btn" data-value="Real-time & Live Systems"><i data-lucide="zap"></i> Real-time & Live Systems</button>
+              <button type="button" class="service-pill-btn" data-value="API & Backend Architecture"><i data-lucide="server"></i> API & Backend Architecture</button>
+              <button type="button" class="service-pill-btn" data-value="Store Release & Publishing"><i data-lucide="rocket"></i> Store Release & Publishing</button>
+              <button type="button" class="service-pill-btn" data-value="Full-Time / Contract Role"><i data-lucide="briefcase"></i> Full-Time / Lead Role</button>
             </div>
           </div>
 
