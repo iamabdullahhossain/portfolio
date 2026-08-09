@@ -203,19 +203,28 @@ function renderProjects(categoryFilter = 'All') {
   if (window.lucide) window.lucide.createIcons();
 }
 
-// Client Testimonials
+// Client Testimonials (3D Animatic Coverflow Card Stack)
 function renderTestimonials() {
-  const container = document.getElementById('testimonials-grid');
+  const container = document.getElementById('testimonial-3d-stage');
+  const dotsContainer = document.getElementById('t-dots');
+  const prevBtn = document.getElementById('t-prev-btn');
+  const nextBtn = document.getElementById('t-next-btn');
+
   if (!container || !portfolioData.testimonials) return;
 
-  container.innerHTML = portfolioData.testimonials.map(t => `
-    <div class="glass-card testimonial-card">
-      <div>
+  const testimonials = portfolioData.testimonials;
+  let activeIndex = 0;
+  let autoplayTimer = null;
+
+  container.innerHTML = testimonials.map((t, idx) => `
+    <div class="testimonial-stack-card ${idx === 0 ? 'active' : idx === 1 ? 'next' : idx === testimonials.length - 1 ? 'prev' : ''}" data-index="${idx}">
+      <div class="card-header-badge">
+        <span class="recommend-tag"><i data-lucide="check-circle-2"></i> Endorsement</span>
         <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">"${t.quote}"</p>
       </div>
-      <div class="testimonial-author">
-        <img src="${t.avatar}" alt="${t.client}" class="testimonial-avatar" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120'">
+      <p class="t-quote-text">"${t.quote}"</p>
+      <div class="t-author-row">
+        <img src="${t.avatar}" alt="${t.client}" class="t-avatar-img" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120'">
         <div>
           <div class="author-name">${t.client}</div>
           <div class="author-role">${t.role}</div>
@@ -223,6 +232,87 @@ function renderTestimonials() {
       </div>
     </div>
   `).join('');
+
+  if (dotsContainer) {
+    dotsContainer.innerHTML = testimonials.map((_, idx) => `
+      <span class="t-dot ${idx === 0 ? 'active' : ''}" data-index="${idx}"></span>
+    `).join('');
+  }
+
+  if (window.lucide) window.lucide.createIcons();
+
+  const cards = Array.from(container.children);
+  const dots = dotsContainer ? Array.from(dotsContainer.children) : [];
+
+  function render3DStack(index) {
+    activeIndex = index;
+    if (activeIndex < 0) activeIndex = testimonials.length - 1;
+    if (activeIndex >= testimonials.length) activeIndex = 0;
+
+    const total = testimonials.length;
+    const prevIndex = (activeIndex - 1 + total) % total;
+    const nextIndex = (activeIndex + 1) % total;
+
+    cards.forEach((card, idx) => {
+      card.classList.remove('active', 'prev', 'next');
+      if (idx === activeIndex) {
+        card.classList.add('active');
+      } else if (idx === prevIndex) {
+        card.classList.add('prev');
+      } else if (idx === nextIndex) {
+        card.classList.add('next');
+      }
+    });
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === activeIndex);
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.onclick = () => {
+      render3DStack(activeIndex - 1);
+      resetAutoplay();
+    };
+  }
+
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      render3DStack(activeIndex + 1);
+      resetAutoplay();
+    };
+  }
+
+  dots.forEach(dot => {
+    dot.onclick = (e) => {
+      const idx = parseInt(e.target.getAttribute('data-index'), 10);
+      render3DStack(idx);
+      resetAutoplay();
+    };
+  });
+
+  cards.forEach(card => {
+    card.onclick = () => {
+      const idx = parseInt(card.getAttribute('data-index'), 10);
+      if (idx !== activeIndex) {
+        render3DStack(idx);
+        resetAutoplay();
+      }
+    };
+  });
+
+  function startAutoplay() {
+    autoplayTimer = setInterval(() => {
+      render3DStack(activeIndex + 1);
+    }, 5000);
+  }
+
+  function resetAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    startAutoplay();
+  }
+
+  startAutoplay();
 }
 
 // FAQ Accordion

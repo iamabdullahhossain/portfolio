@@ -1,16 +1,37 @@
 <!-- =========================================================================
-     8. Reviews & Testimonials
+     8. Reviews & Testimonials (3D Animatic Card Stack)
      ========================================================================= -->
-<section class="section" id="testimonials">
+<section class="section testimonials-section" id="testimonials">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag"><i data-lucide="heart"></i> Endorsements</span>
+      <span class="section-tag"><i data-lucide="heart"></i> Endorsements & Recommendations</span>
       <h2 class="section-title">Reviews & <span>Testimonials</span></h2>
       <p class="section-subtitle">What senior developers, QA engineers, and team leads say about working with Abdullah Hossain.</p>
     </div>
 
-    <div class="testimonials-grid" id="testimonials-grid">
-      <!-- Dynamically populated from data.js -->
+    <!-- 3D Card Stack Testimonials Showcase -->
+    <div class="testimonial-stack-wrapper">
+      <div class="testimonial-glow-backdrop"></div>
+      
+      <div class="testimonial-3d-stage" id="testimonial-3d-stage">
+        <!-- Dynamically rendered 3D card stack from app.js -->
+      </div>
+
+      <!-- Carousel Navigation & Indicators -->
+      <div class="testimonial-controls-bar">
+        <button class="t-nav-btn t-prev" id="t-prev-btn" aria-label="Previous Review">
+          <i data-lucide="arrow-left"></i>
+        </button>
+
+        <div class="testimonial-dots" id="t-dots">
+          <!-- Dynamically generated dots -->
+        </div>
+
+        <button class="t-nav-btn t-next" id="t-next-btn" aria-label="Next Review">
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
     </div>
   </div>
 </section>
+
