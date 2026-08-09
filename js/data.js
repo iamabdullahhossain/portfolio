@@ -31,6 +31,7 @@ const portfolioData = {
       company: "N.I.Biz Soft",
       duration: "2026 - Present",
       type: "Full-Time",
+      isCurrent: true,
       description: "Building end-to-end software solutions—engineering cross-platform mobile apps with Flutter and developing robust backend APIs & services using PHP & Laravel."
     },
     {
@@ -38,6 +39,7 @@ const portfolioData = {
       company: "RazinSoft Limited",
       duration: "2025 - 2026",
       type: "Full-Time",
+      isCurrent: false,
       description: "Focusing on maintainable Flutter architecture, real-time mobile feature delivery, and scalable product engineering."
     },
     {
@@ -45,6 +47,7 @@ const portfolioData = {
       company: "Chuty Bangladesh PVT Ltd",
       duration: "2023 - 2025",
       type: "Full-Time",
+      isCurrent: false,
       description: "Engineered mobile application solutions with clean architecture, offline-first sync, and backend integrations."
     },
     {
@@ -52,6 +55,7 @@ const portfolioData = {
       company: "Authentic Four Technology",
       duration: "2021 - 2022",
       type: "Full-Time",
+      isCurrent: false,
       description: "Developed native Android apps and core features using Java/Kotlin, REST APIs, and modern mobile UI patterns."
     }
   ],

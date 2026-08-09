@@ -64,21 +64,31 @@ function renderPillars() {
   if (window.lucide) window.lucide.createIcons();
 }
 
-// Work Experience Timeline
+// Work Experience Section
 function renderExperience() {
   const container = document.getElementById('experience-list');
   if (!container || !portfolioData.experience) return;
 
   container.innerHTML = portfolioData.experience.map(item => `
-    <div class="timeline-item glass-card">
-      <div class="timeline-header">
-        <h4 class="timeline-role">${item.role}</h4>
-        <span class="timeline-duration">${item.duration}</span>
+    <div class="experience-card glass-card ${item.isCurrent ? 'current-card' : ''}">
+      <div class="exp-card-header">
+        <div>
+          <h3 class="exp-role">${item.role}</h3>
+          <div class="exp-company-info">
+            <span class="exp-company"><i data-lucide="building-2"></i> ${item.company}</span>
+            <span class="exp-type">${item.type}</span>
+          </div>
+        </div>
+        <div class="exp-date-group">
+          ${item.isCurrent ? '<span class="present-badge"><span class="present-dot"></span> Present</span>' : ''}
+          <span class="exp-duration"><i data-lucide="calendar"></i> ${item.duration}</span>
+        </div>
       </div>
-      <div class="timeline-company">${item.company}</div>
-      <p class="timeline-desc">${item.description}</p>
+      <p class="exp-desc">${item.description}</p>
     </div>
   `).join('');
+
+  if (window.lucide) window.lucide.createIcons();
 }
 
 // Education Timeline (Removed per requirements)
