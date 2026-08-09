@@ -290,25 +290,25 @@ const portfolioData = {
       quote: "I've had the pleasure of working with Abdullah Hossain, an exceptionally talented Associate Programmer (App) at ChutyRooms... Abdullah always responds swiftly, resolving issues with remarkable efficiency and precision. Beyond his technical expertise, Abdullah is a proactive and collaborative team player.",
       client: "Anisur Rahman Akib",
       role: "Software Quality Assurance · RILO IT & Software Ltd.",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120&h=120"
+      avatar: "https://media.licdn.com/dms/image/v2/D5603AQGwjK8UTgTrBg/profile-displayphoto-crop_800_800/B56Z9K9IapG4AI-/0/1783668967724?e=1787788800&v=beta&t=wLPIIppK6LdAbEzbcyr7sUWzuD1o7txZFH7vac__QDI"
     },
     {
       quote: "I can confidently say that he is an exceptional developer with a deep understanding of Flutter and Android development. His ability to solve complex problems efficiently and his keen eye for detail make him a valuable asset to any development team.",
       client: "Joyanta Dutta",
       role: "Senior Backend Developer · Chuty Bangladesh Pvt Ltd",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120"
+      avatar: "https://media.licdn.com/dms/image/v2/D5603AQHLOQVzni8KZA/profile-displayphoto-crop_800_800/B56Z0T5NpLKAAI-/0/1774155262595?e=1787788800&v=beta&t=lB-HuRtzTWUqzKPWsGwiOVvJVDXDw4dIWrzyNPkjh-w"
     },
     {
       quote: "He is skilled in software development, writes clean and efficient code, and is always eager to learn new technologies. Abdullah is a proactive problem-solver and a great team player.",
       client: "Shimanta Mutsuddi",
       role: "Senior Mobile Application Developer · Softrobotics Bangladesh Limited",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120"
+      avatar: "https://media.licdn.com/dms/image/v2/D5635AQG57VC5dFN7Fg/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1695279924069?e=1786885200&v=beta&t=VhbNYIdvXM9tQX1h34xZTpYM8rB6n_U5veBDOtkw6Lw"
     },
     {
       quote: "During our time working together, I found him dedicated, helpful, and supportive. He always handled his work with responsibility and stayed focused on quality. His communication was clear, and working as a team was easy with him.",
       client: "Md Tarik Bin Aziz",
       role: "Sr. Flutter Developer · Razinsoft LTD",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=120&h=120"
+      avatar: "https://media.licdn.com/dms/image/v2/D5603AQGn4RRD9a-EYA/profile-displayphoto-crop_800_800/B56ZlYErouKIAI-/0/1758119249169?e=1787788800&v=beta&t=EpclHBUv4O4ApU3ReyKDGpYQkiDzEDSOzrXcaK90_6Q"
     }
   ],
 
