@@ -320,7 +320,7 @@ const portfolioData = {
     },
     {
       question: "How can we get in touch or start a project?",
-      answer: "You can reach out directly via Phone/WhatsApp (+8801624563436), Email (contact@iamabdullahhossain.com), or submit the project scope form on this website."
+      answer: "You can reach out directly via Phone/WhatsApp (+8801624563436), Email (iamabdullahhossain@gmail.com), or submit the project scope form on this website."
     }
   ]
 };
