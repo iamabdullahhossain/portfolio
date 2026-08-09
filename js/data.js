@@ -27,9 +27,16 @@ const portfolioData = {
 
   experience: [
     {
+      role: "Software Engineer",
+      company: "N.I.Biz Soft",
+      duration: "2026 - Present",
+      type: "Full-Time",
+      description: "Building end-to-end software solutions—engineering cross-platform mobile apps with Flutter and developing robust backend APIs & services using PHP & Laravel."
+    },
+    {
       role: "Flutter Developer (Mid-Level)",
       company: "RazinSoft Limited",
-      duration: "2025 - Present",
+      duration: "2025 - 2026",
       type: "Full-Time",
       description: "Focusing on maintainable Flutter architecture, real-time mobile feature delivery, and scalable product engineering."
     },
