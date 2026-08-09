@@ -53,6 +53,70 @@
   --nav-height: 80px;
 }
 
+/* Light Theme Variables */
+body.light-theme {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-hover: rgba(248, 250, 252, 0.95);
+
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-focus: rgba(217, 119, 6, 0.4);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  --accent-yellow: #d97706;
+  --accent-yellow-hover: #b45309;
+  --accent-yellow-glow: rgba(217, 119, 6, 0.2);
+
+  color-scheme: light;
+}
+
+/* Theme Toggle Button Styling */
+.theme-toggle-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+  transform: scale(1.08);
+}
+
+body.light-theme .theme-toggle-btn .sun-icon {
+  display: none;
+}
+
+body.light-theme .theme-toggle-btn .moon-icon {
+  display: block;
+  color: #0f172a;
+}
+
+body:not(.light-theme) .theme-toggle-btn .sun-icon {
+  display: block;
+  color: var(--accent-yellow);
+}
+
+body:not(.light-theme) .theme-toggle-btn .moon-icon {
+  display: none;
+}
+
 /* --------------------------------------------------------------------------
    2. CSS Reset & Core Styling
    -------------------------------------------------------------------------- */

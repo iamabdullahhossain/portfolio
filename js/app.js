@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupContactForm();
   setupModalEvents();
   setupPhotoSlider();
+  setupThemeToggle();
 });
 
 /* --------------------------------------------------------------------------
@@ -575,3 +576,29 @@ function setupPhotoSlider() {
 
   startAutoplay();
 }
+
+// Light & Dark Theme Toggle Functionality
+function setupThemeToggle() {
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const savedTheme = localStorage.getItem('portfolio-theme');
+
+  // Apply saved theme preference on load
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+  } else {
+    document.body.classList.remove('light-theme');
+  }
+
+  if (!themeToggleBtn) return;
+
+  themeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const isLight = document.body.classList.contains('light-theme');
+    localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  });
+}
+
