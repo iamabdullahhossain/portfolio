@@ -1545,6 +1545,27 @@ img {
   align-items: center;
   justify-content: center;
   color: var(--accent-yellow);
+  font-size: 1.15rem;
+}
+
+.linkedin-item .contact-link-icon {
+  background: rgba(10, 102, 194, 0.15);
+  color: #0a66c2;
+}
+
+.linkedin-item:hover .contact-link-icon {
+  background: #0a66c2;
+  color: #ffffff;
+}
+
+.github-item .contact-link-icon {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+.github-item:hover .contact-link-icon {
+  background: var(--text-primary);
+  color: var(--bg-primary);
 }
 
 .contact-link-label {
