@@ -447,12 +447,14 @@ function setupModalEvents() {
       }
     });
   }
-}
-
-// Contact Form Handler & Service Selector
+// Contact Form Handler & Service Selector (Formspree Integration)
 function setupContactForm() {
   const serviceBtns = document.querySelectorAll('.service-pill-btn');
   let selectedServices = [];
+
+  const form = document.getElementById('lead-contact-form');
+  const servicesHiddenInput = document.getElementById('form-services');
+  const submitBtn = document.getElementById('submit-lead-btn');
 
   serviceBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -463,36 +465,52 @@ function setupContactForm() {
       } else {
         selectedServices.push(val);
       }
+      if (servicesHiddenInput) {
+        servicesHiddenInput.value = selectedServices.length > 0 ? selectedServices.join(', ') : 'Not Specified';
+      }
     });
   });
 
-  const form = document.getElementById('lead-contact-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const name = document.getElementById('form-name').value;
-      const email = document.getElementById('form-email').value;
-      const details = document.getElementById('form-details').value;
-      const services = selectedServices.length > 0 ? selectedServices.join(', ') : 'Not Specified';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending... <i data-lucide="loader"></i>';
+        if (window.lucide) window.lucide.createIcons();
+      }
 
-      const myEmail = "iamabdullahhossain@gmail.com";
-      const subject = encodeURIComponent(`Portfolio Inquiry from ${name} [${services}]`);
-      const body = encodeURIComponent(
-        `Name: ${name}\n` +
-        `Sender Email: ${email}\n` +
-        `Requirement Area: ${services}\n\n` +
-        `Project Details / Inquiry:\n${details}`
-      );
+      const formData = new FormData(form);
 
-      // Trigger user's mail client (Gmail / Outlook / Apple Mail)
-      window.location.href = `mailto:${myEmail}?subject=${subject}&body=${body}`;
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
 
-      showToast(`Thank you ${name}! Opening your email client to send the message...`);
-
-      form.reset();
-      serviceBtns.forEach(b => b.classList.remove('selected'));
-      selectedServices = [];
+        if (response.ok) {
+          showToast(`Thank you ${name}! Your message has been sent directly to my email.`);
+          form.reset();
+          serviceBtns.forEach(b => b.classList.remove('selected'));
+          selectedServices = [];
+          if (servicesHiddenInput) servicesHiddenInput.value = 'Not Specified';
+        } else {
+          showToast(`Oops! Something went wrong. Please try again.`);
+        }
+      } catch (err) {
+        showToast(`Network error. Please check your connection.`);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Send Message <i data-lucide="send"></i>';
+          if (window.lucide) window.lucide.createIcons();
+        }
+      }
     });
   }
 }
