@@ -1,8 +1,39 @@
-/* ==========================================================================
-   Abdullah Hossain - Interactive Application Logic
-   ========================================================================== */
+// Helper function to load HTML section modules asynchronously
+async function loadSectionModules() {
+  const sections = [
+    { id: 'header-root', file: 'sections/header.html' },
+    { id: 'hero-root', file: 'sections/hero.html' },
+    { id: 'about-root', file: 'sections/about.html' },
+    { id: 'experience-root', file: 'sections/experience.html' },
+    { id: 'services-root', file: 'sections/services.html' },
+    { id: 'gallery-root', file: 'sections/gallery.html' },
+    { id: 'tech-root', file: 'sections/tech.html' },
+    { id: 'projects-root', file: 'sections/projects.html' },
+    { id: 'testimonials-root', file: 'sections/testimonials.html' },
+    { id: 'faq-root', file: 'sections/faq.html' },
+    { id: 'contact-root', file: 'sections/contact.html' },
+    { id: 'footer-root', file: 'sections/footer.html' }
+  ];
 
-document.addEventListener('DOMContentLoaded', () => {
+  for (const section of sections) {
+    const el = document.getElementById(section.id);
+    if (el) {
+      try {
+        const response = await fetch(section.file);
+        if (response.ok) {
+          el.innerHTML = await response.text();
+        }
+      } catch (err) {
+        console.error(`Failed to load ${section.file}:`, err);
+      }
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // Load modular HTML sections first
+  await loadSectionModules();
+
   // Initialize Lucide Icons
   if (window.lucide) {
     window.lucide.createIcons();
@@ -25,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupProjectFilters();
   setupContactForm();
   setupModalEvents();
+  setupPhotoSlider();
 });
 
 /* --------------------------------------------------------------------------
@@ -371,4 +403,85 @@ function showToast(message) {
       toast.classList.remove('show');
     }, 4500);
   }
+}
+
+// Animatic 3D Coverflow Gallery Slider Logic
+function setupPhotoSlider() {
+  const container = document.getElementById('gallery-slider');
+  const prevBtn = document.getElementById('gallery-prev-btn');
+  const nextBtn = document.getElementById('gallery-next-btn');
+  const dotsContainer = document.getElementById('gallery-dots');
+
+  if (!container || !prevBtn || !nextBtn || !dotsContainer) return;
+
+  const cards = Array.from(container.querySelectorAll('.gallery-slide-card'));
+  const dots = Array.from(dotsContainer.children);
+  let activeIndex = 0;
+  let autoplayTimer = null;
+
+  function render3DStack(index) {
+    activeIndex = index;
+    if (activeIndex < 0) activeIndex = cards.length - 1;
+    if (activeIndex >= cards.length) activeIndex = 0;
+
+    const total = cards.length;
+    const prevIndex = (activeIndex - 1 + total) % total;
+    const nextIndex = (activeIndex + 1) % total;
+
+    cards.forEach((card, idx) => {
+      card.classList.remove('active', 'prev', 'next');
+      if (idx === activeIndex) {
+        card.classList.add('active');
+      } else if (idx === prevIndex) {
+        card.classList.add('prev');
+      } else if (idx === nextIndex) {
+        card.classList.add('next');
+      }
+    });
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === activeIndex);
+    });
+  }
+
+  prevBtn.addEventListener('click', () => {
+    render3DStack(activeIndex - 1);
+    resetAutoplay();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    render3DStack(activeIndex + 1);
+    resetAutoplay();
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      const targetIndex = parseInt(e.target.getAttribute('data-index'), 10);
+      render3DStack(targetIndex);
+      resetAutoplay();
+    });
+  });
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.getAttribute('data-index'), 10);
+      if (idx !== activeIndex) {
+        render3DStack(idx);
+        resetAutoplay();
+      }
+    });
+  });
+
+  function startAutoplay() {
+    autoplayTimer = setInterval(() => {
+      render3DStack(activeIndex + 1);
+    }, 4500);
+  }
+
+  function resetAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    startAutoplay();
+  }
+
+  startAutoplay();
 }

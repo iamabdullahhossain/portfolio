@@ -83,6 +83,11 @@ const portfolioData = {
       icon: "map-pin",
       title: "Maps & Mobile Features",
       description: "Google Maps integration, Geolocation, In-App Purchases, device media/camera APIs, and app store release workflows."
+    },
+    {
+      icon: "bot",
+      title: "AI Integration",
+      description: "Smart AI assistants, LLM integration, OpenAI/Gemini APIs, prompt engineering, and intelligent features in mobile apps."
     }
   ],
 

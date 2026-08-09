@@ -1,0 +1,61 @@
+<!-- =========================================================================
+     5.5. Photo Gallery Showcase Slider (Animatic 3D Card Stack)
+     ========================================================================= -->
+<section class="section gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag"><i data-lucide="camera"></i> Moments & Highlights</span>
+      <h2 class="section-title">Life & <span>Engineering Journey</span></h2>
+      <p class="section-subtitle">A glimpse into developer life, events, and collaborative milestones.</p>
+    </div>
+
+    <div class="animatic-gallery-wrapper">
+      <div class="gallery-container" id="gallery-slider">
+        <div class="gallery-slide-card active" data-index="0">
+          <div class="card-inner">
+            <img src="asset/img1.JPG" alt="Developer Journey 1">
+            <div class="card-overlay">
+              <span class="card-tag">Engineering</span>
+              <h3 class="card-title">Building Scalable Mobile Apps</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide-card next" data-index="1">
+          <div class="card-inner">
+            <img src="asset/img2.JPG" alt="Developer Journey 2">
+            <div class="card-overlay">
+              <span class="card-tag">Workplace</span>
+              <h3 class="card-title">Collaborative Tech Culture</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide-card prev" data-index="2">
+          <div class="card-inner">
+            <img src="asset/img3.JPG" alt="Developer Journey 3">
+            <div class="card-overlay">
+              <span class="card-tag">Milestones</span>
+              <h3 class="card-title">Delivering High-Impact Systems</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="gallery-nav-btn gallery-prev" id="gallery-prev-btn" aria-label="Previous image">
+          <i data-lucide="arrow-left"></i>
+        </button>
+        <button class="gallery-nav-btn gallery-next" id="gallery-next-btn" aria-label="Next image">
+          <i data-lucide="arrow-right"></i>
+        </button>
+
+        <!-- Indicators -->
+        <div class="gallery-indicators" id="gallery-dots">
+          <span class="gallery-dot active" data-index="0"></span>
+          <span class="gallery-dot" data-index="1"></span>
+          <span class="gallery-dot" data-index="2"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
