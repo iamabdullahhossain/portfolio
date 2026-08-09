@@ -1,39 +1,8 @@
-// Helper function to load HTML section modules asynchronously
-async function loadSectionModules() {
-  const sections = [
-    { id: 'header-root', file: 'sections/header.html' },
-    { id: 'hero-root', file: 'sections/hero.html' },
-    { id: 'about-root', file: 'sections/about.html' },
-    { id: 'experience-root', file: 'sections/experience.html' },
-    { id: 'services-root', file: 'sections/services.html' },
-    { id: 'gallery-root', file: 'sections/gallery.html' },
-    { id: 'tech-root', file: 'sections/tech.html' },
-    { id: 'projects-root', file: 'sections/projects.html' },
-    { id: 'testimonials-root', file: 'sections/testimonials.html' },
-    { id: 'faq-root', file: 'sections/faq.html' },
-    { id: 'contact-root', file: 'sections/contact.html' },
-    { id: 'footer-root', file: 'sections/footer.html' }
-  ];
+/* ==========================================================================
+   Abdullah Hossain - Interactive Application Logic
+   ========================================================================== */
 
-  for (const section of sections) {
-    const el = document.getElementById(section.id);
-    if (el) {
-      try {
-        const response = await fetch(section.file);
-        if (response.ok) {
-          el.innerHTML = await response.text();
-        }
-      } catch (err) {
-        console.error(`Failed to load ${section.file}:`, err);
-      }
-    }
-  }
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-  // Load modular HTML sections first
-  await loadSectionModules();
-
+document.addEventListener('DOMContentLoaded', () => {
   // Initialize Lucide Icons
   if (window.lucide) {
     window.lucide.createIcons();
