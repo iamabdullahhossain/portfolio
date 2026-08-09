@@ -416,6 +416,8 @@ function setupModalEvents() {
       }
     });
   }
+}
+
 // Contact Form Handler & Service Selector (Formspree Integration)
 function setupContactForm() {
   const serviceBtns = document.querySelectorAll('.service-pill-btn');
