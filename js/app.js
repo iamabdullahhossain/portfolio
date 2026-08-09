@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup Event Listeners
   setupHeaderScroll();
   setupMobileNav();
+  setupNavigationScrollSpy();
   setupProjectFilters();
   setupContactForm();
   setupModalEvents();
@@ -343,6 +344,76 @@ function setupMobileNav() {
       toggleBtn.setAttribute('aria-expanded', isExpanded);
     });
   }
+}
+
+// Navigation Active Section & Smooth Scroll Spy Manager (Top Header + Mobile Bottom Nav)
+function setupNavigationScrollSpy() {
+  const topNavLinks = document.querySelectorAll('.header .nav-link');
+  const bottomNavItems = document.querySelectorAll('.mobile-nav-item');
+  if (!topNavLinks.length && !bottomNavItems.length) return;
+
+  // Serialized section list in page scroll order
+  const sectionIds = ['hero', 'about', 'experience', 'services', 'gallery', 'tech', 'projects', 'testimonials', 'faq', 'contact'];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  // Click listener for mobile bottom nav items
+  bottomNavItems.forEach(item => {
+    item.addEventListener('click', () => {
+      bottomNavItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+
+      // Close top mobile menu if open
+      const navLinks = document.getElementById('nav-links');
+      if (navLinks) navLinks.classList.remove('active');
+    });
+  });
+
+  // ScrollSpy listener
+  function onScrollSpy() {
+    let currentSectionId = 'hero';
+    const scrollPosition = window.scrollY + (window.innerHeight * 0.35);
+
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+
+      if (scrollPosition >= top && scrollPosition < top + height) {
+        currentSectionId = section.getAttribute('id');
+      }
+    }
+
+    // Special case for page bottom
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 60) {
+      currentSectionId = 'contact';
+    }
+
+    // Update Top Nav Links Active State
+    topNavLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === `#${currentSectionId}`) {
+        topNavLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+
+    // Map section IDs to bottom nav data-sections
+    let mappedBottomSection = currentSectionId;
+    if (['about'].includes(currentSectionId)) mappedBottomSection = 'hero';
+    if (['gallery', 'tech'].includes(currentSectionId)) mappedBottomSection = 'services';
+    if (['testimonials', 'faq'].includes(currentSectionId)) mappedBottomSection = 'projects';
+
+    bottomNavItems.forEach(item => {
+      const sec = item.getAttribute('data-section');
+      if (sec === mappedBottomSection) {
+        bottomNavItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScrollSpy, { passive: true });
+  onScrollSpy();
 }
 
 // Category Filter Tabs
