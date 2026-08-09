@@ -1,415 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio landing page for Abdullah Hossain, Full Stack Flutter Developer." />
-  <title>Abdullah Hossain | Full Stack Flutter Developer</title>
-  <link rel="icon" type="image/png" href="profile.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="profile.png" sizes="192x192" />
-  <link rel="apple-touch-icon" href="profile.png" />
-  <link rel="shortcut icon" type="image/png" href="profile.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap" rel="stylesheet" />
-  <script>
-    (function () {
-      const theme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="asset/logo.png">
+
+  <!-- Primary Meta Tags -->
+  <title>Abdullah Hossain — Full Stack Software Engineer | Mobile App Developer</title>
+  <meta name="title" content="Abdullah Hossain — Full Stack Software Engineer | Mobile App Developer">
+  <meta name="description" content="Portfolio of Abdullah Hossain, a Full Stack Software Engineer & Mobile App Developer specializing in Flutter, Dart, Riverpod, Real-time Systems, and Clean Architecture.">
+  <meta name="keywords" content="Abdullah Hossain, Flutter Developer, Full Stack Software Engineer, Mobile App Developer, Dart, Riverpod, Android Developer, Dhaka Bangladesh">
+  <meta name="author" content="Abdullah Hossain">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://iamabdullahhossain.vercel.app/">
+  <meta property="og:title" content="Abdullah Hossain — Full Stack Software Engineer">
+  <meta property="og:description" content="Mobile App Engineer with 4+ years experience building production-ready mobile apps with clean architecture, real-time systems, and scalable API integrations.">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
-  <div class="page-bg"></div>
-  <div class="shell">
-    <header class="hero-frame" id="top" data-aos="fade-up">
-      <nav class="top-nav">
-        <a class="brand" href="#top"><img src="logo.png" alt="Abdullah Hossain" class="site-logo" /></a>
-        <div class="nav-links">
-          <a href="#top">Home</a>
-          <a href="#skills">Services</a>
-          <a href="#about">About Me</a>
-          <a href="#projects">Portfolio</a>
-          <a href="#reviews">Reviews</a>
-          <a href="#contact">Contact Me</a>
-        </div>
-        <div class="nav-actions">
-          <button id="soundToggle" class="sound-toggle-btn sound_toggle_btn" aria-label="Toggle sound effects" aria-pressed="true">
-            <svg class="sound-on-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-            </svg>
-            <svg class="sound-off-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <line x1="23" y1="9" x2="17" y2="15" />
-              <line x1="17" y1="9" x2="23" y2="15" />
-            </svg>
-          </button>
-          <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
-            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2" />
-              <path d="M12 20v2" />
-              <path d="m4.93 4.93 1.41 1.41" />
-              <path d="m17.66 17.66 1.41 1.41" />
-              <path d="M2 12h2" />
-              <path d="M20 12h2" />
-              <path d="m6.34 17.66-1.41 1.41" />
-              <path d="m19.07 4.93-1.41 1.41" />
-            </svg>
-            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-            </svg>
-          </button>
-          <a class="btn primary nav-cta" href="#contact">Hire Me</a>
-        </div>
-      </nav>
 
-      <div class="hero-content">
-        <div class="hero-text" data-aos="fade-right">
-          <p class="eyebrow" data-aos="fade-up" data-aos-delay="50">Hi I am</p>
-          <p class="name-tag" data-aos="fade-up" data-aos-delay="100">Abdullah Hossain</p>
-          <h1 data-aos="fade-up" data-aos-delay="150">
-            <span class="title-top">Full Stack</span>
-            <div id="hero-role" class="hero-role-container">
-              <div class="hero-rotate-track">
-                <span class="active">Software Engineer</span>
-                <span>Mobile App Developer</span>
-                <span>Vibe Coder</span>
-                <span>Tech Enthusiast</span>
-                
-              </div>
+  <!-- =========================================================================
+       1. Navigation Header
+       ========================================================================= -->
+  <header class="header" id="header">
+    <div class="container nav-container">
+      <a href="#hero" class="logo" id="brand-logo" aria-label="Abdullah Hossain Home">
+        <img src="asset/logo.png" alt="Abdullah Hossain Logo" class="logo-img">
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#tech" class="nav-link">Tech Stack</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="asset/Flutter_Abdullah_Hossain.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="nav-cta-btn">
+          Hire Me <i data-lucide="external-link"></i>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Hero Section
+       ========================================================================= -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge-wrapper">
+            <div class="status-pill">
+              <span class="status-dot"></span>
+              <span>Actively working as mobile application developer</span>
             </div>
+          </div>
+
+          <h1 class="hero-headline">
+            Full Stack Software Engineer & <span class="highlight">Mobile App Developer</span>
           </h1>
-          <p class="summary" data-aos="fade-up" data-aos-delay="200">
-            Mobile App Engineer with 4+ years of experience building
-            production-ready mobile apps with clean architecture, real-time
-            systems, and scalable API integrations.
+
+          <p class="hero-subheadline">
+            Mobile App Engineer with 4+ years of experience building production-ready mobile apps with clean architecture, real-time systems, and scalable API integrations. Specializing in high-performance Flutter applications.
           </p>
 
-          <div class="social-links" data-aos="fade-up" data-aos-delay="250">
-            <a href="mailto:iamabdullahhossain@gmail.com" aria-label="Email">@</a>
-            <a href="https://linkedin.com/in/iamabdullahhossain" target="_blank" rel="noopener noreferrer"
-              aria-label="LinkedIn">in</a>
-            <a href="https://github.com/iamabdullahhossain" target="_blank" rel="noopener noreferrer"
-              aria-label="GitHub">gh</a>
-          </div>
-
-          <div class="actions" data-aos="fade-up" data-aos-delay="300">
-            <a class="btn primary" href="#contact">Hire Me</a>
-            <a class="btn ghost" href="Flutter_Abdullah_Hossain.pdf" target="_blank" rel="noopener noreferrer">Download
-              CV</a>
-          </div>
-
-          <div class="stats-grid" data-aos="fade-up" data-aos-delay="350">
-            <div class="stat">
-              <strong>3+</strong>
-              <span>Years Experience</span>
-            </div>
-            <div class="stat">
-              <strong>40+</strong>
-              <span>Projects Done</span>
-            </div>
-            <div class="stat">
-              <strong>80+</strong>
-              <span>Happy Clients</span>
-            </div>
+          <div class="hero-ctas">
+            <a href="asset/Flutter_Abdullah_Hossain.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" id="hero-hire-me-cta">
+              Hire Me <i data-lucide="external-link"></i>
+            </a>
+            <a href="#contact" class="btn btn-secondary btn-lg" id="hero-primary-cta">
+              Get In Touch <i data-lucide="sparkles"></i>
+            </a>
+            <a href="#projects" class="btn btn-secondary btn-lg" id="hero-secondary-cta">
+              View Projects <i data-lucide="folder-git-2"></i>
+            </a>
           </div>
         </div>
 
-        <div class="hero-image-wrap tilt" data-aos="fade-left">
-          <div class="hero-image-circle"></div>
-          <img src="profile.png" alt="Portrait of Abdullah Hossain" class="profile" />
+        <div class="hero-image-wrapper">
+          <div class="profile-card">
+            <div class="profile-glow"></div>
+            <img src="asset/profile.png" alt="Abdullah Hossain Profile" class="profile-img">
+            <div class="profile-badge">
+              <i data-lucide="award" style="color: var(--accent-yellow);"></i>
+              <span>4+ Yrs Exp.</span>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
 
-    <main>
-      <section class="card" id="about" data-aos="fade-up">
-        <h2>About Me</h2>
-        <p>
-          I specialize in high-performance Flutter applications, real-time
-          systems, and pixel-perfect mobile UI implementation. Currently
-          working at RazinSoft Limited as a Flutter Developer with a strong
-          focus on maintainable architecture and reliable product delivery.
+      <!-- Metrics Stats Counter Bar -->
+      <div class="stats-grid" id="stats-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. About & Core Pillars Section
+       ========================================================================= -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i data-lucide="user"></i> About Me</span>
+        <h2 class="section-title">Engineering <span>Clean & Scalable</span> Mobile Systems</h2>
+        <p class="section-subtitle" id="about-bio-text">
+          Mobile App Engineer specializing in high-performance Flutter applications, real-time systems, and pixel-perfect mobile UI implementation. Focused on maintainable architecture and reliable product delivery.
         </p>
-      </section>
+      </div>
 
-      <section class="card workshot-card" id="workshot" data-aos="fade-up">
-        <div class="workshot-slider" aria-label="Work gallery slider">
-          <img src="img1.JPG" alt="Abdullah Hossain working at the office" class="workshot-image active" />
-          <img src="img2.JPG" alt="Abdullah Hossain in a professional setting" class="workshot-image" />
-          <img src="img3.JPG" alt="Abdullah Hossain during work" class="workshot-image" />
-          <button class="slider-btn prev" type="button" aria-label="Previous slide">&#10094;</button>
-          <button class="slider-btn next" type="button" aria-label="Next slide">&#10095;</button>
-          <div class="slider-dots" aria-label="Slider pagination">
-            <button class="dot active" type="button" aria-label="Go to slide 1"></button>
-            <button class="dot" type="button" aria-label="Go to slide 2"></button>
-            <button class="dot" type="button" aria-label="Go to slide 3"></button>
+      <div class="pillars-grid" id="pillars-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. Work Experience Section
+       ========================================================================= -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i data-lucide="briefcase"></i> Track Record</span>
+        <h2 class="section-title">Work <span>Experience</span></h2>
+        <p class="section-subtitle">Over 4+ years of hands-on experience building mobile apps across software companies in Bangladesh.</p>
+      </div>
+
+      <div class="experience-full-wrapper">
+        <div class="timeline-list" id="experience-list">
+          <!-- Dynamically populated from data.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. Services Offered Section
+       ========================================================================= -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i data-lucide="cpu"></i> Expertise & Capabilities</span>
+        <h2 class="section-title">Core <span>Services</span></h2>
+        <p class="section-subtitle">Tailored technical solutions crafted for startups, enterprises, and mobile products.</p>
+      </div>
+
+      <div class="services-grid" id="services-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. Tech Stack Matrix
+       ========================================================================= -->
+  <section class="section" id="tech">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i data-lucide="code-2"></i> Skills & Expertise</span>
+        <h2 class="section-title">Core Expertise <span>& Skills</span></h2>
+        <p class="section-subtitle">Technologies, frameworks, and architecture patterns leveraged daily.</p>
+      </div>
+
+      <div class="tech-matrix-grid" id="tech-matrix-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. Featured Shipped Projects (Portfolio Showcase)
+       ========================================================================= -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i data-lucide="layers"></i> Portfolio Showcase</span>
+        <h2 class="section-title">Featured <span>Projects</span></h2>
+        <p class="section-subtitle">Production mobile and web applications built with Flutter, real-time engines, and clean architecture.</p>
+      </div>
+
+      <!-- Filter Category Tabs -->
+      <div class="projects-filter" id="projects-filter">
+        <button class="filter-btn active" data-category="All">All Projects</button>
+        <button class="filter-btn" data-category="Productivity">Productivity</button>
+        <button class="filter-btn" data-category="Marketplace">Marketplace</button>
+        <button class="filter-btn" data-category="EdTech">EdTech</button>
+        <button class="filter-btn" data-category="Hospitality">Hospitality</button>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. Reviews & Testimonials
+       ========================================================================= -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i data-lucide="heart"></i> Endorsements</span>
+        <h2 class="section-title">Reviews & <span>Testimonials</span></h2>
+        <p class="section-subtitle">What senior developers, QA engineers, and team leads say about working with Abdullah Hossain.</p>
+      </div>
+
+      <div class="testimonials-grid" id="testimonials-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. FAQ Section (Accordion)
+       ========================================================================= -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i data-lucide="help-circle"></i> FAQ</span>
+        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+        <p class="section-subtitle">Key information regarding technical expertise, development workflow, and collaboration.</p>
+      </div>
+
+      <div class="faq-container" id="faq-container">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       10. Contact Section
+       ========================================================================= -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-info-col">
+          <span class="section-tag"><i data-lucide="mail"></i> Direct Outreach</span>
+          <h2 class="contact-info-title">Let's Build Something <span>Great Together</span></h2>
+          <p class="contact-info-desc">Have a mobile app project, custom software requirement, or job opportunity? Feel free to reach out directly.</p>
+
+          <div class="contact-direct-links">
+            <a href="tel:+8801624563436" class="contact-link-item">
+              <div class="contact-link-icon"><i data-lucide="phone"></i></div>
+              <div>
+                <div class="contact-link-label">Phone / WhatsApp</div>
+                <div class="contact-link-value">+880 1624-563436</div>
+              </div>
+            </a>
+
+            <a href="mailto:contact@iamabdullahhossain.com" class="contact-link-item">
+              <div class="contact-link-icon"><i data-lucide="mail"></i></div>
+              <div>
+                <div class="contact-link-label">Email</div>
+                <div class="contact-link-value">contact@iamabdullahhossain.com</div>
+              </div>
+            </a>
+
+            <div class="contact-link-item">
+              <div class="contact-link-icon"><i data-lucide="map-pin"></i></div>
+              <div>
+                <div class="contact-link-label">Location</div>
+                <div class="contact-link-value">Dhaka, Bangladesh</div>
+              </div>
+            </div>
+
+            <a href="https://linkedin.com/in/iamabdullahhossain" target="_blank" class="contact-link-item">
+              <div class="contact-link-icon"><i data-lucide="linkedin"></i></div>
+              <div>
+                <div class="contact-link-label">LinkedIn</div>
+                <div class="contact-link-value">linkedin.com/in/iamabdullahhossain</div>
+              </div>
+            </a>
+
+            <a href="https://github.com/iamabdullahhossain" target="_blank" class="contact-link-item">
+              <div class="contact-link-icon"><i data-lucide="github"></i></div>
+              <div>
+                <div class="contact-link-label">GitHub</div>
+                <div class="contact-link-value">github.com/iamabdullahhossain</div>
+              </div>
+            </a>
           </div>
         </div>
-        <div class="workshot-overlay">
-          <h3>In Action</h3>
-          <p>Focused on building reliable mobile products for real users.</p>
-        </div>
-      </section>
 
-      <section class="card" id="skills" data-aos="fade-up">
-        <div class="section-head">
-          <h2>Core Expertise</h2>
+        <div class="contact-form-col">
+          <form class="contact-form" id="lead-contact-form">
+            <div class="form-group">
+              <label class="form-label" for="form-name">Your Full Name</label>
+              <input type="text" id="form-name" class="form-input" placeholder="e.g. John Doe" required>
+            </div>
 
-        </div>
-        <div class="expertise-compact">
-          <details class="expertise-item">
-            <summary>Core Mobile Development</summary>
-            <div class="skill-chips">
-              <span>Flutter Development</span><span>Android Development</span><span>Dart
-                Programming</span><span>Object-Oriented Programming (OOP)</span>
+            <div class="form-group">
+              <label class="form-label" for="form-email">Your Work Email</label>
+              <input type="email" id="form-email" class="form-input" placeholder="e.g. john@company.com" required>
             </div>
-          </details>
-          <details class="expertise-item">
-            <summary>State Management</summary>
-            <div class="skill-chips">
-              <span>Riverpod</span><span>GetX</span><span>Provider</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Navigation and Architecture</summary>
-            <div class="skill-chips">
-              <span>Go Router</span><span>Design Patterns</span><span>Feature-first Architecture</span><span>Layered
-                Architecture</span><span>MVC</span><span>MVVM</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Local Storage and Offline</summary>
-            <div class="skill-chips">
-              <span>Hive (local database)</span><span>Offline-first app design</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Backend & Databases</summary>
-            <div class="skill-chips">
-              <span>PHP</span><span>Laravel</span><span>MySQL</span><span>REST API Integration</span><span>Dio (HTTP
-                client)</span><span>Backend Integration</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>UI/UX Development</summary>
-            <div class="skill-chips">
-              <span>Pixel-perfect UI (Figma to Flutter)</span><span>UI Engineering</span><span>Responsive UI
-                Design</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Maps and Location</summary>
-            <div class="skill-chips">
-              <span>Google Maps Integration</span><span>Geolocation</span><span>Geocoding</span><span>Location
-                Services</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Firebase Services</summary>
-            <div class="skill-chips">
-              <span>Firebase Authentication</span><span>Firebase Cloud Messaging (Push
-                Notifications)</span><span>Firebase Real-time Features</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Real-time and Communication</summary>
-            <div class="skill-chips">
-              <span>Real-time Chat Systems</span><span>Pusher Integration</span><span>Messaging Systems</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Mobile Features and Integrations</summary>
-            <div class="skill-chips">
-              <span>Push Notifications</span><span>Media/Image/File Upload</span><span>Camera
-                Integration</span><span>Image Picker</span><span>File Caching</span><span>Background
-                Downloads</span><span>Device Permission Handling</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Monetization and Payments</summary>
-            <div class="skill-chips">
-              <span>In-App Purchases</span><span>Subscription Systems</span><span>App Monetization</span>
-            </div>
-          </details>
-          <details class="expertise-item">
-            <summary>Tools and DevOps</summary>
-            <div class="skill-chips">
-              <span>Git and GitHub</span><span>Postman</span><span>Android
-                Studio</span><span>Xcode</span><span>Jira</span><span>Trello</span>
-            </div>
-          </details>
-        </div>
-      </section>
 
-      <section class="card" id="projects" data-aos="fade-up">
-        <div class="section-head">
-          <h2>Featured Projects</h2>
-          <div class="reviews-controls" aria-label="Projects slider controls">
-            <button class="reviews-nav" id="projectsPrev" type="button" aria-label="Previous projects">
-              &#10094;
+            <div class="form-group">
+              <label class="form-label">Requirement Area</label>
+              <div class="service-selector-pills">
+                <button type="button" class="service-pill-btn" data-value="Flutter Mobile App">Flutter Mobile App</button>
+                <button type="button" class="service-pill-btn" data-value="Real-time Systems">Real-time Messaging</button>
+                <button type="button" class="service-pill-btn" data-value="API Integration">API & Backend</button>
+                <button type="button" class="service-pill-btn" data-value="Full-time Role">Full-Time Opportunity</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-details">Project Details / Inquiry</label>
+              <textarea id="form-details" class="form-textarea" rows="4" placeholder="Describe your app requirements, target timeline, or position details..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" id="submit-lead-btn" style="width: 100%;">
+              Send Message <i data-lucide="send"></i>
             </button>
-            <button class="reviews-nav" id="projectsNext" type="button" aria-label="Next projects">
-              &#10095;
-            </button>
-          </div>
+          </form>
         </div>
-        <div class="projects-grid">
-          <article class="project-card tilt" data-aos="zoom-in-up">
-            <span class="project-tag">Productivity</span>
-            <h3>Supraskills TM</h3>
-            <p>
-              Flutter-based task management platform with Firebase push
-              notifications, Riverpod, Hive offline support, timeline
-              scheduling, media uploads, internal messaging, and localization.
-            </p>
-            <a href="https://apps.apple.com/us/app/supraskills-tm/id6757388694" target="_blank"
-              rel="noopener noreferrer">View on the App Store</a>
-          </article>
+      </div>
+    </div>
+  </section>
 
-          <article class="project-card tilt" data-aos="zoom-in-up" data-aos-delay="100">
-            <span class="project-tag">Marketplace</span>
-            <h3>Ready Classify</h3>
-            <p>
-              Flutter marketplace app with Firebase auth and messaging, social
-              sign-in, maps and geolocation, Dio APIs, Riverpod, Pusher
-              real-time updates, and permission-driven mobile workflows.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.readyclassify" target="_blank"
-              rel="noopener noreferrer">View on Google Play</a>
-          </article>
+  <!-- =========================================================================
+       11. Footer
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-copy">
+        &copy; 2026 Abdullah Hossain. All rights reserved. Full Stack Software Engineer | Mobile App Developer.
+      </div>
+      <ul class="footer-links">
+        <li><a href="#hero" class="nav-link">Back to Top <i data-lucide="arrow-up"></i></a></li>
+      </ul>
+    </div>
+  </footer>
 
-          <article class="project-card tilt" data-aos="zoom-in-up" data-aos-delay="200">
-            <span class="project-tag">EdTech</span>
-            <h3>Bridge LMS</h3>
-            <p>
-              Learning management app with course tracking, assignments, and
-              scalable backend integrations for smooth educational workflows.
-            </p>
-            <a href="https://apps.apple.com/us/app/bridge-%D8%AC%D8%B3%D8%B1-%D8%B9%D8%A8%D9%88%D8%B1%D9%83/id6751279145"
-              target="_blank" rel="noopener noreferrer">View on the App Store</a>
-          </article>
-
-          <article class="project-card tilt" data-aos="zoom-in-up" data-aos-delay="300">
-            <span class="project-tag">LMS</span>
-            <h3>EduMali</h3>
-            <p>
-              Full LMS ecosystem with video streaming, offline support, payment
-              integration, analytics, messaging, and notifications.
-            </p>
-          </article>
-
-          <article class="project-card tilt" data-aos="zoom-in-up" data-aos-delay="400">
-            <span class="project-tag">Hospitality</span>
-            <h3>Chuty Rooms</h3>
-            <p>
-              Hotel booking platform with maps integration, real-time
-              availability, and review and rating features.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.chutyrooms.crapp" target="_blank"
-              rel="noopener noreferrer">View on Google Play</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="card" id="reviews" data-aos="fade-up">
-        <div class="section-head">
-          <h2>Reviews</h2>
-          <div class="reviews-controls" aria-label="Review slider controls">
-            <button class="reviews-nav" id="reviewsPrev" type="button" aria-label="Previous reviews">
-              &#10094;
-            </button>
-            <button class="reviews-nav" id="reviewsNext" type="button" aria-label="Next reviews">
-              &#10095;
-            </button>
-          </div>
-        </div>
-        <div class="reviews-grid" id="reviewsGrid" aria-live="polite"></div>
-      </section>
-
-      <section class="card" id="experience" data-aos="fade-up">
-        <div class="section-head">
-          <h2>Experience</h2>
-          <div class="reviews-controls" aria-label="Experience slider controls">
-            <button class="reviews-nav" id="experiencePrev" type="button" aria-label="Previous experiences">
-              &#10094;
-            </button>
-            <button class="reviews-nav" id="experienceNext" type="button" aria-label="Next experiences">
-              &#10095;
-            </button>
-          </div>
-        </div>
-        <div class="timeline-list">
-          <article class="timeline-item">
-            <p class="timeline-year">2025 - Present</p>
-            <h3>Flutter Developer (Mid-Level)</h3>
-            <p>RazinSoft Limited</p>
-          </article>
-          <article class="timeline-item">
-            <p class="timeline-year">2023 - 2025</p>
-            <h3>Flutter Developer</h3>
-            <p>Chuty Bangladesh PVT Ltd</p>
-          </article>
-          <article class="timeline-item">
-            <p class="timeline-year">2021 - 2022</p>
-            <h3>Android Developer</h3>
-            <p>Authentic Four Technology</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="card" id="education" data-aos="fade-up">
-        <div class="section-head">
-          <h2>Education</h2>
-
-        </div>
-        <article class="edu-card">
-          <p class="timeline-year">Degree</p>
-          <h3>BSc in Computer Science and Engineering</h3>
-          <p>Port City International University</p>
-        </article>
-      </section>
-
-      <section class="card" id="contact" data-aos="fade-up">
-        <div class="section-head">
-          <h2>Contact Me</h2>
-
-        </div>
-        <div class="contact-panel">
-          <p>Let’s build something impactful together.</p>
-          <p>Phone: <a href="tel:+8801624563436">+8801624563436</a></p>
-          <p>Location: Dhaka, Bangladesh</p>
-          <div class="contact-links">
-            <a href="mailto:iamabdullahhossain@gmail.com">Email Me</a>
-            <a href="https://linkedin.com/in/iamabdullahhossain" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/iamabdullahhossain" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer data-aos="fade-up">
-      <p>© <span id="year"></span> Abdullah Hossain. All rights reserved.</p>
-    </footer>
+  <!-- =========================================================================
+       12. Interactive Project Details Modal
+       ========================================================================= -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="modal-close" aria-label="Close modal">
+        <i data-lucide="x"></i>
+      </button>
+      <div id="modal-body">
+        <!-- Dynamically rendered when a project card is clicked -->
+      </div>
+    </div>
   </div>
 
-  <button id="scrollToTop" class="scroll-to-top-btn" aria-label="Scroll to top">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="m18 15-6-6-6 6"/>
-    </svg>
-  </button>
+  <!-- =========================================================================
+       13. Toast Notification
+       ========================================================================= -->
+  <div class="toast-notification" id="toast">
+    <i data-lucide="check-circle-2" style="color: var(--accent-emerald);"></i>
+    <span id="toast-message">Submission received successfully!</span>
+  </div>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="script.js"></script>
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
-
 </html>
