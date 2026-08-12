@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupModalEvents();
   setupPhotoSlider();
   setupThemeToggle();
+  checkUrlPackageParam();
 });
 
 /* --------------------------------------------------------------------------
@@ -342,6 +343,13 @@ function setupMobileNav() {
       navLinks.classList.toggle('active');
       const isExpanded = navLinks.classList.contains('active');
       toggleBtn.setAttribute('aria-expanded', isExpanded);
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 }
@@ -684,5 +692,44 @@ function setupThemeToggle() {
       window.lucide.createIcons();
     }
   });
+}
+
+// Auto-select package from URL parameter & scroll to Contact Section
+function checkUrlPackageParam() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const pkg = urlParams.get('package');
+
+  if (pkg) {
+    const contactSection = document.getElementById('contact');
+    const formDetails = document.getElementById('form-details');
+    const formServices = document.getElementById('form-services');
+    const formContainer = document.querySelector('.contact-form');
+
+    if (formDetails) {
+      formDetails.value = `Hi Abdullah,\n\nI am interested in ordering the package:\n📦 ${pkg}\n\nPlease share availability and next steps to get started.\n\nThanks!`;
+    }
+
+    if (formServices) {
+      formServices.value = `Package: ${pkg}`;
+    }
+
+    if (formContainer) {
+      let badge = document.getElementById('selected-pkg-badge');
+      if (!badge) {
+        badge = document.createElement('div');
+        badge.id = 'selected-pkg-badge';
+        badge.style.cssText = 'background: rgba(255, 199, 0, 0.12); border: 1px solid var(--accent-yellow); border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 18px; color: var(--accent-yellow); font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between;';
+        formContainer.insertBefore(badge, formContainer.firstChild);
+      }
+      badge.innerHTML = `<span><i data-lucide="check-circle-2" style="vertical-align:middle; margin-right:6px;"></i> Selected Package: <strong>${pkg}</strong></span> <a href="packages.html" style="font-size:0.775rem; color:var(--text-secondary); text-decoration:underline;">Change Package</a>`;
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    setTimeout(() => {
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300);
+  }
 }
 

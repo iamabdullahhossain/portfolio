@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="asset/logo.png">
+
+  <!-- Primary Meta Tags -->
+  <title>Service Packages & Pricing — Abdullah Hossain | Full Stack & Mobile Engineer</title>
+  <meta name="title" content="Service Packages & Pricing — Abdullah Hossain">
+  <meta name="description" content="Explore clear, value-driven service packages for Mobile App Development (Flutter), Full Stack Web Solutions, and Dedicated App Maintenance by Abdullah Hossain.">
+  <meta name="author" content="Abdullah Hossain">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Font Awesome Brands -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/packages.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. Navigation Header
+       ========================================================================= -->
+  <header class="header" id="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" id="brand-logo" aria-label="Abdullah Hossain Home">
+        <img src="asset/logo.png" alt="Abdullah Hossain Logo" class="logo-img">
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#experience" class="nav-link">Experience</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="packages.html" class="nav-link active">Packages</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+
+        <a href="index.html#contact" class="btn btn-primary" id="nav-cta-btn">
+          Get in Touch <i data-lucide="arrow-right"></i>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Packages Hero Section
+       ========================================================================= -->
+  <section class="packages-hero">
+    <div class="container">
+      <div class="packages-badge">
+        <i data-lucide="sparkles"></i>
+        <span>Transparent & Value-Driven Pricing</span>
+      </div>
+
+      <h1 class="packages-title">
+        Engineered Packages Tailored for <span class="highlight">Your Growth</span>
+      </h1>
+
+      <p class="packages-subtitle">
+        Whether you are a startup launching your MVP, an enterprise scaling cross-platform apps, or looking for ongoing maintenance — pick a package engineered for high performance.
+      </p>
+
+      <!-- Billing Toggle Switch (Segmented Control) -->
+      <div class="billing-switch-wrapper">
+        <button type="button" class="billing-tab-btn active" id="label-monthly">
+          <i data-lucide="calendar"></i> Monthly Billing
+        </button>
+        <button type="button" class="billing-tab-btn" id="label-yearly">
+          <i data-lucide="sparkles"></i> Yearly Billing
+          <span class="save-pill">Save 20%</span>
+        </button>
+        <input type="checkbox" id="billing-toggle" class="toggle-switch-checkbox" style="display:none;">
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. Main Packages Grid
+       ========================================================================= -->
+  <section class="container">
+    <div class="packages-grid">
+
+      <!-- Package 1: MVP Launchpad -->
+      <div class="package-card glass-card">
+        <div class="package-header">
+          <h3 class="package-name">MVP Launchpad</h3>
+          <p class="package-desc">Perfect for early-stage startups needing a fast, robust prototype or single-platform mobile application.</p>
+        </div>
+
+        <div class="package-price-box">
+          <div class="package-price">
+            <span class="package-currency">$</span>
+            <span class="package-price-amount" data-monthly="450" data-yearly="360">450</span>
+          </div>
+          <div class="package-period" data-monthly-period="/ month" data-yearly-period="/ month (billed annually)">/ month</div>
+          <div class="package-timeline"><i data-lucide="clock"></i> Fast Turnaround (2 - 3 Weeks)</div>
+        </div>
+
+        <ul class="package-features">
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Single Platform App (Android or iOS / Web)</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Flutter Clean Architecture Setup</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Up to 5 Core Screens & Flow UI</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> REST API Integration (Authentication, Data Fetching)</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Local Data Caching & Offline Storage</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> 14 Days Free Post-Launch Support</li>
+          <li class="package-feature-item muted"><i data-lucide="x-circle"></i> Dual iOS & Android Simultaneous Build</li>
+          <li class="package-feature-item muted"><i data-lucide="x-circle"></i> Real-time WebSockets & Live Chat</li>
+        </ul>
+
+        <button class="btn btn-outline package-cta select-package-btn" data-package="MVP Launchpad ($450/mo)">
+          Choose MVP Package
+        </button>
+      </div>
+
+      <!-- Package 2: Pro Mobile & Web (Featured) -->
+      <div class="package-card featured glass-card">
+        <div class="popular-badge">Most Popular</div>
+
+        <div class="package-header">
+          <h3 class="package-name" style="color: var(--accent-yellow);">Pro Dual-Platform</h3>
+          <p class="package-desc">Complete production-ready cross-platform Flutter application for iOS & Android with advanced architecture.</p>
+        </div>
+
+        <div class="package-price-box">
+          <div class="package-price">
+            <span class="package-currency">$</span>
+            <span class="package-price-amount" data-monthly="950" data-yearly="760">950</span>
+          </div>
+          <div class="package-period" data-monthly-period="/ month" data-yearly-period="/ month (billed annually)">/ month</div>
+          <div class="package-timeline"><i data-lucide="clock"></i> Production Delivery (4 - 6 Weeks)</div>
+        </div>
+
+        <ul class="package-features">
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> <strong>Dual iOS & Android</strong> Native Performance Apps</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Riverpod / Bloc State Management System</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Up to 12 Responsive Screens & Dynamic Animations</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Firebase / OneSignal Push Notifications</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Payment Gateway (Stripe, BKash, SSLCommerz)</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Play Store & Apple App Store Publishing</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> 30 Days Priority Technical Warranty</li>
+          <li class="package-feature-item muted"><i data-lucide="x-circle"></i> Custom Admin Portal Dashboard</li>
+        </ul>
+
+        <button class="btn btn-primary package-cta select-package-btn" data-package="Pro Dual-Platform ($950/mo)">
+          Choose Pro Package <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- Package 3: Enterprise Full Stack -->
+      <div class="package-card glass-card">
+        <div class="package-header">
+          <h3 class="package-name">Enterprise Full-Stack</h3>
+          <p class="package-desc">End-to-end ecosystem: Cross-platform Mobile Apps, Backend APIs, Custom Web Admin Dashboard & Infrastructure.</p>
+        </div>
+
+        <div class="package-price-box">
+          <div class="package-price">
+            <span class="package-currency">$</span>
+            <span class="package-price-amount" data-monthly="1,800" data-yearly="1,440">1,800</span>
+          </div>
+          <div class="package-period" data-monthly-period="/ month" data-yearly-period="/ month (billed annually)">/ month</div>
+          <div class="package-timeline"><i data-lucide="clock"></i> Enterprise Build (7 - 9 Weeks)</div>
+        </div>
+
+        <ul class="package-features">
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> iOS & Android Mobile Apps + Web Version</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Custom Web Admin Dashboard (Laravel / React / Next.js)</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Microservices or Scalable REST/GraphQL API Backend</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Real-time WebSockets & Live Data Sync</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Role-based Access Control (RBAC) & Analytics</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Automated CI/CD Deployment & Cloud Setup (AWS / Vercel)</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> 60 Days VIP Maintenance & Dedicated SLA</li>
+        </ul>
+
+        <button class="btn btn-outline package-cta select-package-btn" data-package="Enterprise Full-Stack ($1,800/mo)">
+          Choose Enterprise Package
+        </button>
+      </div>
+
+      <!-- Package 4: Dedicated Retainer -->
+      <div class="package-card glass-card">
+        <div class="package-header">
+          <h3 class="package-name">Dedicated App Maintenance</h3>
+          <p class="package-desc">Ongoing developer support, bug fixing, performance optimization, and continuous feature updates.</p>
+        </div>
+
+        <div class="package-price-box">
+          <div class="package-price">
+            <span class="package-currency">$</span>
+            <span class="package-price-amount" data-monthly="650" data-yearly="520">650</span>
+          </div>
+          <div class="package-period" data-monthly-period="/ month" data-yearly-period="/ month (billed annually)">/ month</div>
+          <div class="package-timeline" style="color:var(--accent-purple); background:rgba(168,85,247,0.1);"><i data-lucide="repeat"></i> Continuous Dedicated Engineering</div>
+        </div>
+
+        <ul class="package-features">
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> 30 Dedicated Engineering Hours / Month</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> OS Version & Library Compatibility Upgrades</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Instant Hotfix & Security Patching</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Weekly Backup & Server Monitoring</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Feature Enhancements & Refactoring</li>
+          <li class="package-feature-item"><i data-lucide="check-circle-2"></i> Direct Slack / WhatsApp Communication Channel</li>
+        </ul>
+
+        <button class="btn btn-outline package-cta select-package-btn" data-package="Dedicated Retainer ($750/mo)">
+          Book Retainer Plan
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. Interactive Custom Package Estimator Calculator
+       ========================================================================= -->
+  <section class="estimator-section">
+    <div class="container">
+      <div class="section-header text-center" style="margin-bottom: 40px;">
+        <span class="section-tag"><i data-lucide="calculator"></i> Custom Estimator</span>
+        <h2 class="section-title">Calculate Your Custom Project Cost</h2>
+        <p class="section-subtitle">Select the modules and features your app requires to get an instant estimated quote & timeline.</p>
+      </div>
+
+      <div class="estimator-card">
+        <!-- Checkboxes -->
+        <div class="estimator-options">
+
+          <div>
+            <div class="option-group-title"><i data-lucide="smartphone"></i> Platforms & Screens</div>
+            <div class="checkbox-grid">
+              <label class="calc-checkbox-card checked">
+                <input type="checkbox" class="calc-option" data-price="400" data-days="5" data-name="Android Platform" checked disabled>
+                <span class="calc-checkbox-label">Android Platform (Base)</span>
+              </label>
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="350" data-days="4" data-name="iOS Platform Support">
+                <span class="calc-checkbox-label">iOS Platform Support (+$350)</span>
+              </label>
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="450" data-days="6" data-name="Web Version (Flutter/React)">
+                <span class="calc-checkbox-label">Web App Version (+$450)</span>
+              </label>
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="300" data-days="5" data-name="Complex Custom Animations">
+                <span class="calc-checkbox-label">Advanced UI Animations (+$300)</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <div class="option-group-title"><i data-lucide="database"></i> Features & API Integrations</div>
+            <div class="checkbox-grid">
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="250" data-days="3" data-name="Authentication (Social/OTP)">
+                <span class="calc-checkbox-label">Auth (Social/OTP/JWT) (+$250)</span>
+              </label>
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="350" data-days="4" data-name="Payment Gateway Integration">
+                <span class="calc-checkbox-label">Payment Gateway (+$350)</span>
+              </label>
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="450" data-days="6" data-name="Real-time WebSockets / Chat">
+                <span class="calc-checkbox-label">Live Chat / WebSockets (+$450)</span>
+              </label>
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="300" data-days="4" data-name="Push Notifications & Analytics">
+                <span class="calc-checkbox-label">Push Notifications (+$300)</span>
+              </label>
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="200" data-days="3" data-name="Multi-language Localization">
+                <span class="calc-checkbox-label">Multi-language i18n (+$200)</span>
+              </label>
+              <label class="calc-checkbox-card">
+                <input type="checkbox" class="calc-option" data-price="600" data-days="8" data-name="Web Admin Dashboard">
+                <span class="calc-checkbox-label">Custom Admin Panel (+$600)</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Summary Sidebar -->
+        <div class="estimator-summary-box">
+          <div>
+            <h4 class="summary-title">Estimate Summary</h4>
+            <div class="est-price-val" id="est-price-val">$500</div>
+            <div class="est-time-val" id="est-time-val">Estimated Timeline: ~7 days</div>
+            
+            <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase;">Selected Add-ons:</div>
+            <div class="selected-features-list" id="selected-features-list">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <button class="btn btn-primary select-package-btn" style="width:100%; justify-content:center;" data-package="Calculated Custom Package">
+            Request Quote For This Build
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. Detailed Feature Comparison Table
+       ========================================================================= -->
+  <section class="container comparison-section">
+    <div class="section-header text-center" style="margin-bottom: 40px;">
+      <span class="section-tag"><i data-lucide="layers"></i> Side-by-Side</span>
+      <h2 class="section-title">Package Comparison Breakdown</h2>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Features / Specs</th>
+            <th>MVP Launchpad</th>
+            <th>Pro Dual-Platform</th>
+            <th>Enterprise Full-Stack</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Platforms Covered</strong></td>
+            <td>Android OR iOS</td>
+            <td>Android + iOS</td>
+            <td>Android + iOS + Web</td>
+          </tr>
+          <tr>
+            <td><strong>Clean Architecture & Riverpod</strong></td>
+            <td><i data-lucide="check" class="table-check"></i></td>
+            <td><i data-lucide="check" class="table-check"></i></td>
+            <td><i data-lucide="check" class="table-check"></i></td>
+          </tr>
+          <tr>
+            <td><strong>Screen Count</strong></td>
+            <td>Up to 5 Screens</td>
+            <td>Up to 12 Screens</td>
+            <td>Unlimited / Scalable</td>
+          </tr>
+          <tr>
+            <td><strong>API & Backend Connectivity</strong></td>
+            <td>Basic REST APIs</td>
+            <td>REST / GraphQL / Auth</td>
+            <td>Full Custom Backend + DB</td>
+          </tr>
+          <tr>
+            <td><strong>Payment Gateway Integration</strong></td>
+            <td><i data-lucide="x" class="table-cross"></i></td>
+            <td><i data-lucide="check" class="table-check"></i></td>
+            <td><i data-lucide="check" class="table-check"></i></td>
+          </tr>
+          <tr>
+            <td><strong>Real-time WebSockets</strong></td>
+            <td><i data-lucide="x" class="table-cross"></i></td>
+            <td>Optional Add-on</td>
+            <td><i data-lucide="check" class="table-check"></i></td>
+          </tr>
+          <tr>
+            <td><strong>Store Publishing Setup</strong></td>
+            <td>1 Store</td>
+            <td>Both Stores</td>
+            <td>Both Stores + Cloud Hosting</td>
+          </tr>
+          <tr>
+            <td><strong>Post-Launch Technical Support</strong></td>
+            <td>14 Days</td>
+            <td>30 Days</td>
+            <td>60 Days VIP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. Tailored Banner
+       ========================================================================= -->
+  <section class="container">
+    <div class="custom-banner">
+      <div>
+        <h3 class="custom-banner-title">Need a Special Tailored Requirement?</h3>
+        <p class="custom-banner-desc">Have complex legacy code to refactor, or an enterprise tender? Let's get on a 15-minute consultation call.</p>
+      </div>
+      <a href="index.html#contact" class="btn btn-primary" style="white-space: nowrap;">
+        Schedule Free Call <i data-lucide="calendar"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. Footer
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-copy">
+        &copy; 2026 Abdullah Hossain. All rights reserved. Vibe Coded with love ❤️
+      </div>
+      <ul class="footer-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="#" class="nav-link">Back to Top <i data-lucide="arrow-up"></i></a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-nav-item">
+      <div class="mobile-nav-icon"><i data-lucide="home"></i></div>
+      <span>Home</span>
+    </a>
+    <a href="packages.html" class="mobile-nav-item active">
+      <div class="mobile-nav-icon"><i data-lucide="package"></i></div>
+      <span>Packages</span>
+    </a>
+    <a href="index.html#services" class="mobile-nav-item">
+      <div class="mobile-nav-icon"><i data-lucide="layers"></i></div>
+      <span>Services</span>
+    </a>
+    <a href="index.html#projects" class="mobile-nav-item">
+      <div class="mobile-nav-icon"><i data-lucide="folder-code"></i></div>
+      <span>Projects</span>
+    </a>
+    <a href="index.html#contact" class="mobile-nav-item">
+      <div class="mobile-nav-icon"><i data-lucide="mail"></i></div>
+      <span>Contact</span>
+    </a>
+  </nav>
+
+  <!-- =========================================================================
+       8. Package Booking Modal
+       ========================================================================= -->
+  <div class="modal-overlay" id="package-modal">
+    <div class="modal-box" style="max-width: 500px;">
+      <button class="modal-close-btn" id="modal-close" aria-label="Close modal">
+        <i data-lucide="x"></i>
+      </button>
+      <div id="modal-body">
+        <h3 style="font-size: 1.4rem; font-weight:700; margin-bottom: 8px;">Book Package</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">
+          You are inquiring about: <strong id="modal-package-name" style="color: var(--accent-yellow);">Package</strong>
+        </p>
+
+        <form id="package-inquiry-form" style="display:flex; flex-direction:column; gap:16px;">
+          <input type="hidden" id="input-package-name" name="package_name" value="">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--text-secondary);">Your Name</label>
+            <input type="text" required placeholder="John Doe" style="width:100%; padding:12px 16px; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); color:var(--text-primary); outline:none;">
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--text-secondary);">Email Address</label>
+            <input type="email" required placeholder="john@example.com" style="width:100%; padding:12px 16px; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); color:var(--text-primary); outline:none;">
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--text-secondary);">Project Brief / Notes (Optional)</label>
+            <textarea rows="3" placeholder="Tell me a bit about your app idea or timeline..." style="width:100%; padding:12px 16px; background:var(--bg-secondary); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); color:var(--text-primary); outline:none; resize:vertical;"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;">
+            Send Package Inquiry <i data-lucide="send"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toast">
+    <i data-lucide="check-circle-2" style="color: var(--accent-emerald);"></i>
+    <span id="toast-message">Submission received successfully!</span>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/packages.js"></script>
+</body>
+</html>
