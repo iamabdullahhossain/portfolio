@@ -2316,3 +2316,86 @@ html, body {
     font-size: 0.775rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Animatic & Dynamic Micro-Interaction Enhancements
+   -------------------------------------------------------------------------- */
+
+/* Ambient Floating Background Mesh Gradient */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 15% 20%, rgba(255, 199, 0, 0.04) 0%, transparent 40%),
+              radial-gradient(circle at 85% 70%, rgba(6, 182, 212, 0.04) 0%, transparent 45%),
+              radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  animation: ambientMeshFloat 18s ease-in-out infinite alternate;
+}
+
+@keyframes ambientMeshFloat {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.08) translate(-15px, 20px); }
+  100% { transform: scale(1) translate(15px, -15px); }
+}
+
+/* Scroll Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(35px) scale(0.97);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.reveal-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Enhanced 3D Glass Card Hover Shimmer & Glow */
+.glass-card, .profile-card, .project-card, .service-card, .tech-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.glass-card:hover, .project-card:hover, .service-card:hover, .tech-card:hover {
+  border-color: rgba(255, 199, 0, 0.35);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 199, 0, 0.15);
+}
+
+/* Button Pulse & Bounce Animations */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: rotate(30deg) translateY(-100%);
+  transition: transform 0.75s ease;
+}
+
+.btn-primary:hover::after {
+  transform: rotate(30deg) translateY(100%);
+}
+
+/* Floating Status Dot Wave Pulse */
+.status-dot {
+  animation: pulseDotWave 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseDotWave {
+  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  50% { transform: scale(1.15); opacity: 0.85; box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+}
+

@@ -32,7 +32,61 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupPhotoSlider();
   setupThemeToggle();
   checkUrlPackageParam();
+
+  // Animatic Polish Effects
+  setupScrollReveal();
+  setupCardTilt();
 });
+
+// Scroll Reveal Animations via IntersectionObserver
+function setupScrollReveal() {
+  const observerOptions = {
+    threshold: 0.12,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-active');
+      }
+    });
+  }, observerOptions);
+
+  const revealElements = document.querySelectorAll(
+    '.section-header, .glass-card, .stat-item, .experience-card, .service-card, .tech-card, .project-card, .contact-wrapper, .hero-content, .profile-card'
+  );
+
+  revealElements.forEach((el, idx) => {
+    el.classList.add('reveal-on-scroll');
+    el.style.transitionDelay = `${(idx % 4) * 0.08}s`;
+    observer.observe(el);
+  });
+}
+
+// Dynamic 3D Card Tilt on Hover
+function setupCardTilt() {
+  const cards = document.querySelectorAll('.glass-card, .profile-card, .project-card, .service-card, .tech-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -7;
+      const rotateY = ((x - centerX) / centerX) * 7;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+    });
+  });
+}
+
 
 // Load sections dynamically from sections/ directory
 async function loadSections() {
