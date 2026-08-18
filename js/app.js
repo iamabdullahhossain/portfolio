@@ -32,11 +32,46 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupPhotoSlider();
   setupThemeToggle();
   checkUrlPackageParam();
+  setupFloatingChat();
+
+  // Re-create Lucide icons for dynamically loaded elements
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
 
   // Animatic Polish Effects
   setupScrollReveal();
   setupCardTilt();
 });
+
+// Floating Quick Chat Widget Handler
+function setupFloatingChat() {
+  const widget = document.querySelector('.floating-chat-widget');
+  const triggerBtn = document.getElementById('chat-trigger-btn');
+  const closeBtn = document.getElementById('chat-close-btn');
+
+  if (!widget || !triggerBtn) return;
+
+  triggerBtn.addEventListener('click', () => {
+    widget.classList.toggle('active');
+    const badge = triggerBtn.querySelector('.chat-notification-badge');
+    if (badge) badge.style.display = 'none';
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      widget.classList.remove('active');
+    });
+  }
+
+  // Close when clicking outside widget
+  document.addEventListener('click', (e) => {
+    if (!widget.contains(e.target) && widget.classList.contains('active')) {
+      widget.classList.remove('active');
+    }
+  });
+}
+
 
 // Scroll Reveal Animations via IntersectionObserver
 function setupScrollReveal() {
