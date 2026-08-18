@@ -195,8 +195,7 @@ const portfolioData = {
         "Multi-language localization support"
       ],
       storeLinks: {
-        liveWeb: "#",
-        github: "#"
+        appStore: "https://apps.apple.com/us/app/supraskills-tm/id6757388694"
       }
     },
     {
@@ -216,8 +215,7 @@ const portfolioData = {
         "Permission-driven mobile workflows (camera, storage, location)"
       ],
       storeLinks: {
-        liveWeb: "#",
-        github: "#"
+        playStore: "https://play.google.com/store/apps/details?id=com.readyclassify"
       }
     },
     {
@@ -237,29 +235,7 @@ const portfolioData = {
         "Clean feature-first mobile architecture"
       ],
       storeLinks: {
-        liveWeb: "#",
-        github: "#"
-      }
-    },
-    {
-      id: "edumali",
-      title: "EduMali",
-      tagline: "Complete LMS & Video Streaming Ecosystem",
-      category: "EdTech",
-      role: "Flutter & Mobile Developer",
-      impact: "Full LMS ecosystem with video streaming, offline content caching, payment processing, analytics, messaging, and push alerts.",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800",
-      tags: ["Flutter", "Video Streaming", "Offline Caching", "Payment Gateway", "Analytics"],
-      overview: "EduMali is an extensive mobile learning ecosystem tailored for digital courses and video streaming. It incorporates offline course viewing, secure payment gateways, learning analytics, messaging, and push notifications.",
-      features: [
-        "High-definition video streaming player with offline lesson caching",
-        "Integrated payment gateways & course subscription handling",
-        "Real-time learner analytics & progress metrics",
-        "In-app messaging & automated student notifications"
-      ],
-      storeLinks: {
-        liveWeb: "#",
-        github: "#"
+        appStore: "https://apps.apple.com/us/app/bridge-%D8%AC%D8%B3%D8%B1-%D8%B9%D8%A0%D9%88%D8%B1%D9%83/id6751279145"
       }
     },
     {
@@ -279,8 +255,7 @@ const portfolioData = {
         "Responsive, pixel-perfect mobile UI design"
       ],
       storeLinks: {
-        liveWeb: "#",
-        github: "#"
+        playStore: "https://play.google.com/store/apps/details?id=com.chutyrooms.crapp"
       }
     }
   ],

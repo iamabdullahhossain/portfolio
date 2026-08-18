@@ -262,12 +262,23 @@ function renderProjects(categoryFilter = 'All') {
         <div class="project-tags">
           ${project.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
         </div>
-        <div class="project-actions">
+        <div class="project-actions" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
           <button class="btn btn-primary btn-sm view-details-btn" onclick="openProjectModal('${project.id}')">
             View Details <i data-lucide="arrow-right"></i>
           </button>
+          ${project.storeLinks && project.storeLinks.playStore ? `
+            <a href="${project.storeLinks.playStore}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Google Play Store" style="padding: 0.45rem 0.75rem;">
+              <i class="fa-brands fa-google-play"></i> Play Store
+            </a>
+          ` : ''}
+          ${project.storeLinks && project.storeLinks.appStore ? `
+            <a href="${project.storeLinks.appStore}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Apple App Store" style="padding: 0.45rem 0.75rem;">
+              <i class="fa-brands fa-apple"></i> App Store
+            </a>
+          ` : ''}
         </div>
       </div>
+
     </div>
   `).join('');
 
@@ -573,6 +584,21 @@ function openProjectModal(projectId) {
         `).join('')}
       </ul>
     </div>
+
+    ${project.storeLinks ? `
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+        ${project.storeLinks.playStore ? `
+          <a href="${project.storeLinks.playStore}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="gap: 0.5rem;">
+            <i class="fa-brands fa-google-play"></i> Get on Play Store
+          </a>
+        ` : ''}
+        ${project.storeLinks.appStore ? `
+          <a href="${project.storeLinks.appStore}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="gap: 0.5rem;">
+            <i class="fa-brands fa-apple"></i> Download on App Store
+          </a>
+        ` : ''}
+      </div>
+    ` : ''}
   `;
 
   modalOverlay.classList.add('open');
