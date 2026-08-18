@@ -2,7 +2,10 @@
    Abdullah Hossain - Interactive Application Logic
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  // Load modular HTML sections dynamically
+  await loadSections();
+
   // Initialize Lucide Icons
   if (window.lucide) {
     window.lucide.createIcons();
@@ -30,6 +33,38 @@ document.addEventListener('DOMContentLoaded', () => {
   setupThemeToggle();
   checkUrlPackageParam();
 });
+
+// Load sections dynamically from sections/ directory
+async function loadSections() {
+  const sections = [
+    { containerId: 'header-container', path: 'sections/header.html' },
+    { containerId: 'hero-container', path: 'sections/hero.html' },
+    { containerId: 'about-container', path: 'sections/about.html' },
+    { containerId: 'experience-container', path: 'sections/experience.html' },
+    { containerId: 'services-container', path: 'sections/services.html' },
+    { containerId: 'gallery-container', path: 'sections/gallery.html' },
+    { containerId: 'tech-container', path: 'sections/tech.html' },
+    { containerId: 'projects-container', path: 'sections/projects.html' },
+    { containerId: 'testimonials-container', path: 'sections/testimonials.html' },
+    { containerId: 'faq-section-container', path: 'sections/faq.html' },
+    { containerId: 'contact-container', path: 'sections/contact.html' },
+    { containerId: 'footer-container', path: 'sections/footer.html' }
+  ];
+
+  await Promise.all(sections.map(async ({ containerId, path }) => {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    try {
+      const res = await fetch(path);
+      if (res.ok) {
+        el.innerHTML = await res.text();
+      }
+    } catch (err) {
+      console.error(`Failed to load section ${path}:`, err);
+    }
+  }));
+}
+
 
 /* --------------------------------------------------------------------------
    1. Dynamic Rendering Functions
