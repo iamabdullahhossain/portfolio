@@ -19,9 +19,9 @@
           <span class="dot dot-green"></span>
         </div>
         
-        <div class="gh-terminal-title">
+        <div class="gh-terminal-title" title="iamabdullahhossain / contributions.log">
           <i class="fa-brands fa-git-alt"></i>
-          <span>iamabdullahhossain / <strong>contributions.log</strong></span>
+          <span class="gh-terminal-path">iamabdullahhossain / <strong>contributions.log</strong></span>
         </div>
 
         <div class="gh-live-badge">
@@ -34,10 +34,10 @@
       <div class="gh-chart-toolbar">
         <div class="gh-tab-group">
           <button class="gh-tab-btn active" id="gh-tab-heatmap" onclick="switchGithubChart('heatmap')">
-            <i data-lucide="grid"></i> 365 Days Heatmap
+            <i data-lucide="grid"></i> <span>365 Days Heatmap</span>
           </button>
           <button class="gh-tab-btn" id="gh-tab-activity" onclick="switchGithubChart('activity')">
-            <i data-lucide="activity"></i> Activity Wave
+            <i data-lucide="activity"></i> <span>Activity Wave</span>
           </button>
         </div>
 
@@ -52,6 +52,12 @@
       <div class="gh-chart-canvas">
         <!-- View 1: Exact GitHub Heatmap with Dark Grey Empty Cells -->
         <div id="gh-view-heatmap" class="gh-chart-view active">
+          <!-- Mobile Scroll Indicator -->
+          <div class="gh-scroll-hint">
+            <i data-lucide="move-horizontal"></i>
+            <span>Scroll horizontally to view 365 days</span>
+          </div>
+
           <div class="gh-chart-scroll-box" id="gh-heatmap-wrapper">
             <a href="https://github.com/iamabdullahhossain" target="_blank" rel="noopener noreferrer" title="View GitHub Profile">
               <img 
@@ -78,6 +84,11 @@
 
         <!-- View 2: Commit Activity Wave Graph -->
         <div id="gh-view-activity" class="gh-chart-view">
+          <div class="gh-scroll-hint">
+            <i data-lucide="move-horizontal"></i>
+            <span>Scroll horizontally to view wave</span>
+          </div>
+
           <div class="gh-chart-scroll-box">
             <img 
               id="gh-activity-graph" 
@@ -97,7 +108,7 @@
         </div>
         <div class="gh-footer-right">
           <a href="https://github.com/iamabdullahhossain?tab=repositories" target="_blank" rel="noopener noreferrer" class="gh-footer-link">
-            Explore All Public Repositories <i data-lucide="arrow-right"></i>
+            <span>Explore All Public Repositories</span> <i data-lucide="arrow-right"></i>
           </a>
         </div>
       </div>

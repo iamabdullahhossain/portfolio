@@ -2545,6 +2545,7 @@ body::before {
 
 .gh-terminal-frame {
   max-width: 980px;
+  width: 100%;
   margin: 0 auto;
   background: linear-gradient(180deg, rgba(23, 23, 34, 0.95) 0%, rgba(15, 15, 23, 0.98) 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2569,12 +2570,14 @@ body::before {
   padding: 1rem 1.5rem;
   background: rgba(10, 10, 15, 0.75);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 0.75rem;
 }
 
 .gh-terminal-dots {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .gh-terminal-dots .dot {
@@ -2591,15 +2594,25 @@ body::before {
 .gh-terminal-title {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   font-family: 'JetBrains Mono', 'Fira Code', monospace, sans-serif;
   font-size: 0.88rem;
   color: var(--text-secondary);
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .gh-terminal-title i {
   color: #f05032;
   font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.gh-terminal-path {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .gh-terminal-title strong {
@@ -2617,6 +2630,8 @@ body::before {
   font-size: 0.75rem;
   font-weight: 600;
   color: #22c55e;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .live-pulse-dot {
@@ -2668,9 +2683,11 @@ body::before {
   transition: all var(--transition-fast);
 }
 
-.gh-tab-btn i {
+.gh-tab-btn i,
+.gh-tab-btn svg {
   width: 15px;
   height: 15px;
+  flex-shrink: 0;
 }
 
 .gh-tab-btn:hover {
@@ -2696,6 +2713,7 @@ body::before {
   font-weight: 600;
   text-decoration: none;
   transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
 .gh-profile-pill:hover {
@@ -2704,9 +2722,11 @@ body::before {
   background: rgba(255, 199, 0, 0.08);
 }
 
-.gh-profile-pill i {
+.gh-profile-pill i,
+.gh-profile-pill svg {
   width: 13px;
   height: 13px;
+  flex-shrink: 0;
 }
 
 /* Canvas & Views */
@@ -2725,18 +2745,56 @@ body::before {
   opacity: 1;
 }
 
+/* Scroll Hint for Touch / Mobile Screens */
+.gh-scroll-hint {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 0.65rem;
+  padding: 0.3rem 0.6rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gh-scroll-hint i,
+.gh-scroll-hint svg {
+  width: 13px;
+  height: 13px;
+  color: var(--accent-yellow);
+  animation: nudgeHorizontal 1.8s ease-in-out infinite;
+}
+
+@keyframes nudgeHorizontal {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
 .gh-chart-scroll-box {
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 1.25rem;
   background: rgba(10, 10, 15, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: var(--radius-md);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 199, 0, 0.3) rgba(255, 255, 255, 0.02);
+}
+
+@media (min-width: 860px) {
+  .gh-chart-scroll-box {
+    justify-content: center;
+  }
 }
 
 .gh-chart-scroll-box::-webkit-scrollbar {
@@ -2750,9 +2808,9 @@ body::before {
 
 .gh-chart-scroll-box img,
 .gh-chart-scroll-box svg {
-  max-width: 100%;
+  max-width: none;
   height: auto;
-  min-width: 680px;
+  min-width: 660px;
   display: block;
 }
 
@@ -2804,7 +2862,6 @@ body::before {
 .legend-cell.l3 { background: #26a641; }
 .legend-cell.l4 { background: #39d353; }
 
-
 /* Footer */
 .gh-terminal-footer {
   display: flex;
@@ -2824,12 +2881,15 @@ body::before {
   gap: 0.5rem;
   font-family: 'JetBrains Mono', 'Fira Code', monospace, sans-serif;
   color: var(--text-muted);
+  min-width: 0;
 }
 
-.gh-footer-left i {
+.gh-footer-left i,
+.gh-footer-left svg {
   color: var(--accent-yellow);
   width: 14px;
   height: 14px;
+  flex-shrink: 0;
 }
 
 .gh-footer-link {
@@ -2847,30 +2907,153 @@ body::before {
   transform: translateX(3px);
 }
 
-.gh-footer-link i {
+.gh-footer-link i,
+.gh-footer-link svg {
   width: 14px;
   height: 14px;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
+  .gh-terminal-frame {
+    border-radius: 14px;
+  }
+
+  .gh-terminal-header {
+    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .gh-terminal-title {
+    font-size: 0.75rem;
+  }
+
+  .gh-live-badge {
+    padding: 3px 8px;
+    font-size: 0.68rem;
+  }
+
   .gh-chart-toolbar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    padding: 0.75rem 0.85rem 0.4rem;
+    gap: 0.6rem;
   }
+
   .gh-tab-group {
     width: 100%;
+    display: flex;
   }
+
   .gh-tab-btn {
     flex: 1;
     justify-content: center;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.78rem;
   }
+
+  .gh-tab-btn i,
+  .gh-tab-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
   .gh-profile-pill {
     width: 100%;
     justify-content: center;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.78rem;
   }
+
+  .gh-chart-canvas {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .gh-scroll-hint {
+    display: flex;
+  }
+
+  .gh-chart-scroll-box {
+    padding: 0.85rem 0.65rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .gh-chart-scroll-box img,
+  .gh-chart-scroll-box svg {
+    min-width: 640px;
+  }
+
+  .gh-heatmap-legend {
+    justify-content: space-between;
+    padding: 0 0.25rem;
+    margin-top: 0.75rem;
+  }
+
+  .gh-heatmap-legend .legend-text {
+    font-size: 0.72rem;
+  }
+
   .gh-terminal-footer {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .gh-footer-left {
+    font-size: 0.72rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .gh-footer-link {
+    font-size: 0.75rem;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .gh-terminal-header {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .gh-terminal-dots {
+    gap: 5px;
+  }
+
+  .gh-terminal-dots .dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .gh-terminal-title {
+    font-size: 0.7rem;
+  }
+
+  .gh-tab-btn {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.35rem;
+    gap: 0.3rem;
+  }
+
+  .gh-tab-btn i,
+  .gh-tab-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .gh-chart-canvas {
+    padding: 0.6rem 0.5rem;
+  }
+
+  .gh-chart-scroll-box {
+    padding: 0.75rem 0.4rem;
+  }
+
+  .gh-chart-scroll-box img,
+  .gh-chart-scroll-box svg {
+    min-width: 600px;
   }
 }
 
