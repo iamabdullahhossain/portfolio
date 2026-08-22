@@ -2748,11 +2748,25 @@ body::before {
   border-radius: 4px;
 }
 
-.gh-chart-scroll-box img {
+.gh-chart-scroll-box img,
+.gh-chart-scroll-box svg {
   max-width: 100%;
   height: auto;
   min-width: 680px;
   display: block;
+}
+
+/* SVG Dark Mode styling for Heatmap */
+.gh-chart-scroll-box svg rect[fill="#ebedf0"],
+.gh-chart-scroll-box svg rect[fill="#eeeeee"],
+.gh-chart-scroll-box svg rect[data-count="0"] {
+  fill: #161b22 !important;
+}
+
+.gh-chart-scroll-box svg text {
+  fill: #7d8590 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 9px !important;
 }
 
 /* Heatmap Legend */
@@ -2784,11 +2798,12 @@ body::before {
   display: inline-block;
 }
 
-.legend-cell.l0 { background: #ebedf0; }
-.legend-cell.l1 { background: #9be9a8; }
-.legend-cell.l2 { background: #40c463; }
-.legend-cell.l3 { background: #30a14e; }
-.legend-cell.l4 { background: #216e39; }
+.legend-cell.l0 { background: #161b22; border: 1px solid rgba(255, 255, 255, 0.08); }
+.legend-cell.l1 { background: #0e4429; }
+.legend-cell.l2 { background: #006d32; }
+.legend-cell.l3 { background: #26a641; }
+.legend-cell.l4 { background: #39d353; }
+
 
 /* Footer */
 .gh-terminal-footer {

@@ -888,6 +888,13 @@ function checkUrlPackageParam() {
 // Fetch and Render Live GitHub Profile & Repositories
 async function fetchAndRenderGitHubStats() {
   const username = 'iamabdullahhossain';
+  const heatmapWrapper = document.getElementById('gh-heatmap-wrapper');
+
+  // Load and render dark GitHub contribution calendar with grey empty cells
+  if (heatmapWrapper) {
+    loadDarkGitHubHeatmap(username, heatmapWrapper);
+  }
+
   const reposContainer = document.getElementById('github-repos-container');
   const reposEl = document.getElementById('gh-total-repos');
   const starsEl = document.getElementById('gh-total-stars');
@@ -905,6 +912,7 @@ async function fetchAndRenderGitHubStats() {
 
     // 2. Fetch User Repositories
     const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=pushed&per_page=30`);
+
     if (reposRes.ok) {
       const repos = await reposRes.json();
       
@@ -1036,6 +1044,30 @@ window.switchGithubChart = function(type) {
     window.lucide.createIcons();
   }
 };
+
+// Fetch SVG and convert empty white cells into GitHub dark grey (#161b22)
+async function loadDarkGitHubHeatmap(username, container) {
+  try {
+    const res = await fetch(`https://ghchart.rshah.org/39d353/${username}`);
+    if (res.ok) {
+      let svgText = await res.text();
+      // Replace light white/grey empty cell fills with authentic GitHub dark mode grey
+      svgText = svgText
+        .replace(/fill="#ebedf0"/gi, 'fill="#161b22"')
+        .replace(/fill="#eeeeee"/gi, 'fill="#161b22"')
+        .replace(/fill="#8b949e"/gi, 'fill="#7d8590"');
+      
+      container.innerHTML = `
+        <a href="https://github.com/${username}" target="_blank" rel="noopener noreferrer" title="View GitHub Profile Contributions" style="display:block; width:100%;">
+          ${svgText}
+        </a>
+      `;
+    }
+  } catch (err) {
+    console.warn('Could not transform GitHub SVG in client:', err);
+  }
+}
+
 
 
 
