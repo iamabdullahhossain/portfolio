@@ -26,14 +26,14 @@ const portfolioData = {
   },
 
   experience: [
- /*    {
-      role: "Software Engineer",
-      company: "N.I.Biz Soft",
-      duration: "2026 - Present",
-      type: "Full-Time",
-      isCurrent: true,
-      description: "Building end-to-end software solutions—engineering cross-platform mobile apps with Flutter and developing robust backend APIs & services using PHP & Laravel."
-    }, */
+    /*    {
+         role: "Software Engineer",
+         company: "N.I.Biz Soft",
+         duration: "2026 - Present",
+         type: "Full-Time",
+         isCurrent: true,
+         description: "Building end-to-end software solutions—engineering cross-platform mobile apps with Flutter and developing robust backend APIs & services using PHP & Laravel."
+       }, */
     {
       role: "Flutter Developer (Mid-Level)",
       company: "RazinSoft Limited",
@@ -76,6 +76,11 @@ const portfolioData = {
       description: "High-performance cross-platform Flutter applications with pixel-perfect UI implementation and clean layered architecture."
     },
     {
+      icon: "code",
+      title: "Object-Oriented Programming",
+      description: "Writing maintainable, scalable, and reusable code adhering to SOLID principles and OOP design patterns."
+    },
+    {
       icon: "zap",
       title: "Real-Time Systems",
       description: "Real-time chat, Pusher integration, WebSocket streaming, and instant push notification systems (Firebase Cloud Messaging)."
@@ -100,11 +105,7 @@ const portfolioData = {
       title: "AI Integration",
       description: "Smart AI assistants, LLM integration, OpenAI/Gemini APIs, prompt engineering, and intelligent features in mobile apps."
     },
-    {
-      icon: "code",
-      title: "Object-Oriented Programming",
-      description: "Writing maintainable, scalable, and reusable code adhering to SOLID principles and OOP design patterns."
-    }
+
   ],
 
   services: [
