@@ -1,0 +1,110 @@
+<!-- =========================================================================
+     GitHub Commit Activity & Contribution Chart
+     ========================================================================= -->
+<section class="section github-section-wrapper" id="github">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag"><i class="fa-brands fa-github"></i> Open Source Track Record</span>
+      <h2 class="section-title">GitHub <span>Commit Activity</span></h2>
+      <p class="section-subtitle">Real-time commit calendar graph and year-round contribution frequency.</p>
+    </div>
+
+    <!-- Premium Terminal Commit Window -->
+    <div class="gh-terminal-frame">
+      <!-- Terminal Header / Titlebar -->
+      <div class="gh-terminal-header">
+        <div class="gh-terminal-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        
+        <div class="gh-terminal-title">
+          <i class="fa-brands fa-git-alt"></i>
+          <span>iamabdullahhossain / <strong>contributions.log</strong></span>
+        </div>
+
+        <div class="gh-live-badge">
+          <span class="live-pulse-dot"></span>
+          <span>Live Sync</span>
+        </div>
+      </div>
+
+      <!-- Chart Control Tabs -->
+      <div class="gh-chart-toolbar">
+        <div class="gh-tab-group">
+          <button class="gh-tab-btn active" id="gh-tab-heatmap" onclick="switchGithubChart('heatmap')">
+            <i data-lucide="grid"></i> 365 Days Heatmap
+          </button>
+          <button class="gh-tab-btn" id="gh-tab-activity" onclick="switchGithubChart('activity')">
+            <i data-lucide="activity"></i> Activity Wave
+          </button>
+        </div>
+
+        <a href="https://github.com/iamabdullahhossain" target="_blank" rel="noopener noreferrer" class="gh-profile-pill">
+          <i class="fa-brands fa-github"></i>
+          <span>@iamabdullahhossain</span>
+          <i data-lucide="external-link" style="width:12px; height:12px;"></i>
+        </a>
+      </div>
+
+      <!-- Main Chart Display Canvas -->
+      <div class="gh-chart-canvas">
+        <!-- View 1: Exact GitHub Heatmap (as in screenshot) -->
+        <div id="gh-view-heatmap" class="gh-chart-view active">
+          <div class="gh-chart-scroll-box">
+            <a href="https://github.com/iamabdullahhossain" target="_blank" rel="noopener noreferrer" title="View GitHub Profile">
+              <img 
+                id="gh-contribution-chart" 
+                src="https://ghchart.rshah.org/iamabdullahhossain" 
+                alt="Abdullah Hossain GitHub Commit Calendar" 
+                loading="lazy"
+              />
+            </a>
+          </div>
+          
+          <div class="gh-heatmap-legend">
+            <span class="legend-text">Less</span>
+            <div class="legend-cells">
+              <span class="legend-cell l0"></span>
+              <span class="legend-cell l1"></span>
+              <span class="legend-cell l2"></span>
+              <span class="legend-cell l3"></span>
+              <span class="legend-cell l4"></span>
+            </div>
+            <span class="legend-text">More Commits</span>
+          </div>
+        </div>
+
+        <!-- View 2: Commit Activity Wave Graph -->
+        <div id="gh-view-activity" class="gh-chart-view">
+          <div class="gh-chart-scroll-box">
+            <img 
+              id="gh-activity-graph" 
+              src="https://github-readme-activity-graph.vercel.app/graph?username=iamabdullahhossain&bg_color=12121a&color=2ea043&line=2ea043&point=ffffff&area=true&hide_border=true&custom_title=Recent%20Commit%20Frequency" 
+              alt="GitHub Activity Wave Graph" 
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal Footer Bar -->
+      <div class="gh-terminal-footer">
+        <div class="gh-footer-left">
+          <i data-lucide="terminal"></i>
+          <span>git log --author="Abdullah Hossain" --stat</span>
+        </div>
+        <div class="gh-footer-right">
+          <a href="https://github.com/iamabdullahhossain?tab=repositories" target="_blank" rel="noopener noreferrer" class="gh-footer-link">
+            Explore All Public Repositories <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+

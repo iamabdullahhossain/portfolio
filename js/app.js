@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderProjects('All');
   renderTestimonials();
   renderFaqs();
+  fetchAndRenderGitHubStats();
 
   // Setup Event Listeners
   setupHeaderScroll();
@@ -133,6 +134,7 @@ async function loadSections() {
     { containerId: 'services-container', path: 'sections/services.html' },
     { containerId: 'gallery-container', path: 'sections/gallery.html' },
     { containerId: 'tech-container', path: 'sections/tech.html' },
+    { containerId: 'github-container', path: 'sections/github.html' },
     { containerId: 'projects-container', path: 'sections/projects.html' },
     { containerId: 'testimonials-container', path: 'sections/testimonials.html' },
     { containerId: 'faq-section-container', path: 'sections/faq.html' },
@@ -882,4 +884,158 @@ function checkUrlPackageParam() {
     }, 300);
   }
 }
+
+// Fetch and Render Live GitHub Profile & Repositories
+async function fetchAndRenderGitHubStats() {
+  const username = 'iamabdullahhossain';
+  const reposContainer = document.getElementById('github-repos-container');
+  const reposEl = document.getElementById('gh-total-repos');
+  const starsEl = document.getElementById('gh-total-stars');
+  const forksEl = document.getElementById('gh-total-forks');
+  const followersEl = document.getElementById('gh-followers');
+
+  try {
+    // 1. Fetch User Profile Data
+    const userRes = await fetch(`https://api.github.com/users/${username}`);
+    if (userRes.ok) {
+      const userData = await userRes.json();
+      if (reposEl) reposEl.textContent = userData.public_repos || '0';
+      if (followersEl) followersEl.textContent = userData.followers || '0';
+    }
+
+    // 2. Fetch User Repositories
+    const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=pushed&per_page=30`);
+    if (reposRes.ok) {
+      const repos = await reposRes.json();
+      
+      // Calculate total stars and forks
+      let totalStars = 0;
+      let totalForks = 0;
+      repos.forEach(repo => {
+        totalStars += (repo.stargazers_count || 0);
+        totalForks += (repo.forks_count || 0);
+      });
+
+      if (starsEl) starsEl.textContent = totalStars;
+      if (forksEl) forksEl.textContent = totalForks;
+
+      // Filter non-forked and select top 6 recent/starred repos
+      const featuredRepos = repos
+        .filter(r => !r.fork)
+        .slice(0, 6);
+
+      if (reposContainer && featuredRepos.length > 0) {
+        reposContainer.innerHTML = featuredRepos.map(repo => {
+          const langColor = getLanguageColor(repo.language);
+          return `
+            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="glass-card repo-card">
+              <div>
+                <div class="repo-top">
+                  <div class="repo-name-group">
+                    <i data-lucide="book-mark"></i>
+                    <span class="repo-name">${escapeHtml(repo.name)}</span>
+                  </div>
+                  <span class="repo-badge">${repo.private ? 'Private' : 'Public'}</span>
+                </div>
+                <p class="repo-desc">${escapeHtml(repo.description || 'Open source repository by Abdullah Hossain.')}</p>
+              </div>
+
+              <div class="repo-bottom">
+                ${repo.language ? `
+                  <div class="repo-lang">
+                    <span class="lang-dot" style="background-color: ${langColor};"></span>
+                    <span>${repo.language}</span>
+                  </div>
+                ` : ''}
+                <div class="repo-stat-item">
+                  <i data-lucide="star" style="width: 14px; height: 14px;"></i>
+                  <span>${repo.stargazers_count}</span>
+                </div>
+                <div class="repo-stat-item">
+                  <i data-lucide="git-fork" style="width: 14px; height: 14px;"></i>
+                  <span>${repo.forks_count}</span>
+                </div>
+              </div>
+            </a>
+          `;
+        }).join('');
+
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      } else if (reposContainer) {
+        reposContainer.innerHTML = `<p style="color: var(--text-secondary); grid-column: 1/-1;">Check out my complete code repository on <a href="https://github.com/${username}" target="_blank" style="color:var(--accent-yellow);">GitHub</a>.</p>`;
+      }
+    }
+  } catch (error) {
+    console.warn('GitHub API rate limit or network issue:', error);
+    if (reposContainer) {
+      reposContainer.innerHTML = `
+        <div style="grid-column: 1/-1; padding: 1.5rem; text-align: center; color: var(--text-secondary);">
+          <p>Explore all repositories directly on <a href="https://github.com/${username}" target="_blank" style="color:var(--accent-yellow); font-weight:700;">GitHub Profile <i data-lucide="external-link" style="width:14px; height:14px; vertical-align:middle;"></i></a></p>
+        </div>
+      `;
+      if (window.lucide) window.lucide.createIcons();
+    }
+  }
+}
+
+// Color map for programming languages
+function getLanguageColor(lang) {
+  const colors = {
+    'Dart': '#00B4AB',
+    'Flutter': '#02569B',
+    'Kotlin': '#A97BFF',
+    'Java': '#b07219',
+    'JavaScript': '#f1e05a',
+    'TypeScript': '#3178c6',
+    'PHP': '#4F5D95',
+    'HTML': '#e34c26',
+    'CSS': '#563d7c',
+    'Python': '#3572A5'
+  };
+  return colors[lang] || '#ffc700';
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/[&<>"']/g, function(m) {
+    switch (m) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#039;';
+      default: return m;
+    }
+  });
+}
+
+// Switch between GitHub Heatmap and Activity Wave charts
+window.switchGithubChart = function(type) {
+  const heatmapTab = document.getElementById('gh-tab-heatmap');
+  const activityTab = document.getElementById('gh-tab-activity');
+  const heatmapView = document.getElementById('gh-view-heatmap');
+  const activityView = document.getElementById('gh-view-activity');
+
+  if (!heatmapTab || !activityTab || !heatmapView || !activityView) return;
+
+  if (type === 'heatmap') {
+    heatmapTab.classList.add('active');
+    activityTab.classList.remove('active');
+    heatmapView.classList.add('active');
+    activityView.classList.remove('active');
+  } else if (type === 'activity') {
+    activityTab.classList.add('active');
+    heatmapTab.classList.remove('active');
+    activityView.classList.add('active');
+    heatmapView.classList.remove('active');
+  }
+
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+};
+
+
 
