@@ -283,7 +283,7 @@ const portfolioData = {
       quote: "He is skilled in software development, writes clean and efficient code, and is always eager to learn new technologies. Abdullah is a proactive problem-solver and a great team player.",
       client: "Shimanta Mutsuddi",
       role: "Senior Mobile Application Developer · Softrobotics Bangladesh Limited",
-      avatar: "https://media.licdn.com/dms/image/v2/D5635AQG57VC5dFN7Fg/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1695279924069?e=1786885200&v=beta&t=VhbNYIdvXM9tQX1h34xZTpYM8rB6n_U5veBDOtkw6Lw"
+      avatar: "https://media.licdn.com/dms/image/v2/D5635AQG57VC5dFN7Fg/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1695279924069?e=1787983200&v=beta&t=uwmjcKFBLyWIS3d1N_XIJxMWhCgvjcthxMeXOG60BP8"
     },
     {
       quote: "During our time working together, I found him dedicated, helpful, and supportive. He always handled his work with responsibility and stayed focused on quality. His communication was clear, and working as a team was easy with him.",
