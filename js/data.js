@@ -40,7 +40,7 @@ const portfolioData = {
       duration: "2025 - Present",
       type: "Full-Time",
       isCurrent: true,
-      description: "Focusing on maintainable Flutter architecture, real-time mobile feature delivery, and scalable product engineering."
+      description: "Leading Flutter app development with Riverpod and clean architecture. Engineering real-time chat, Google Maps geolocation, and offline-first data sync for enterprise and marketplace applications."
     },
     {
       role: "Flutter Developer",
@@ -48,7 +48,7 @@ const portfolioData = {
       duration: "2023 - 2025",
       type: "Full-Time",
       isCurrent: false,
-      description: "Engineered mobile application solutions with clean architecture, offline-first sync, and backend integrations."
+      description: "Engineered scalable Flutter mobile applications using Clean Architecture and offline-first data sync. Collaborated closely with cross-functional teams to integrate complex RESTful APIs, push notifications, and payment gateways."
     },
     {
       role: "Android Developer",
@@ -56,7 +56,7 @@ const portfolioData = {
       duration: "2021 - 2022",
       type: "Full-Time",
       isCurrent: false,
-      description: "Developed native Android apps and core features using Java/Kotlin, REST APIs, and modern mobile UI patterns."
+      description: "Built native Android mobile applications utilizing Java/Kotlin and Jetpack components. Focused on UI optimization, smooth background service processing, and efficient REST API communication."
     }
   ],
 
@@ -65,7 +65,7 @@ const portfolioData = {
       degree: "BSc in Computer Science and Engineering",
       institution: "Port City International University",
       duration: "Graduated",
-      description: "Specialized in Computer Science, Software Engineering, Algorithms, and Mobile System Development."
+      description: "Completed core coursework in Software Engineering, Data Structures & Algorithms, Database Systems, Computer Networks, and Mobile Computing."
     }
   ],
 
@@ -99,6 +99,11 @@ const portfolioData = {
       icon: "bot",
       title: "AI Integration",
       description: "Smart AI assistants, LLM integration, OpenAI/Gemini APIs, prompt engineering, and intelligent features in mobile apps."
+    },
+    {
+      icon: "code",
+      title: "Object-Oriented Programming",
+      description: "Writing maintainable, scalable, and reusable code adhering to SOLID principles and OOP design patterns."
     }
   ],
 
