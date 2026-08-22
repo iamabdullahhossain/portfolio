@@ -3,8 +3,19 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Splash Screen progress update helper
+  const splashProgress = document.getElementById('splash-progress');
+  const splashStatus = document.getElementById('splash-status');
+  const updateSplash = (percent, text) => {
+    if (splashProgress) splashProgress.style.width = `${percent}%`;
+    if (splashStatus && text) splashStatus.textContent = text;
+  };
+
+  updateSplash(25, 'Loading core modules...');
+
   // Load modular HTML sections dynamically
   await loadSections();
+  updateSplash(55, 'Rendering UI components...');
 
   // Initialize Lucide Icons
   if (window.lucide) {
@@ -12,16 +23,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // Render All Dynamic Components from portfolioData
-  renderHeroStats();
-  renderPillars();
-  renderExperience();
-  renderEducation();
-  renderServices();
-  renderTechStack();
-  renderProjects('All');
-  renderTestimonials();
-  renderFaqs();
+  renderAllComponents();
   fetchAndRenderGitHubStats();
+
+  updateSplash(80, 'Configuring interactive layers...');
 
   // Setup Event Listeners
   setupHeaderScroll();
@@ -32,6 +37,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupModalEvents();
   setupPhotoSlider();
   setupThemeToggle();
+  setupLanguageToggle();
+  setupPwaInstaller();
   checkUrlPackageParam();
   setupFloatingChat();
 
@@ -43,6 +50,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Animatic Polish Effects
   setupScrollReveal();
   setupCardTilt();
+  setupHeroParticles();
+  setupSoundEffects();
+
+  updateSplash(100, 'Welcome!');
+
+  // Smoothly dismiss splash screen
+  setTimeout(() => {
+    const splashScreen = document.getElementById('splash-screen');
+    if (splashScreen) {
+      splashScreen.classList.add('hide-splash');
+      setTimeout(() => {
+        splashScreen.remove();
+      }, 750);
+    }
+  }, 450);
 });
 
 // Floating Quick Chat Widget Handler
@@ -160,6 +182,94 @@ async function loadSections() {
 /* --------------------------------------------------------------------------
    1. Dynamic Rendering Functions
    -------------------------------------------------------------------------- */
+
+// Master component renderer
+function renderAllComponents() {
+  renderStaticUITexts();
+  renderHeroStats();
+  renderPillars();
+  renderExperience();
+  renderEducation();
+  renderServices();
+  renderTechStack();
+  renderProjects('All');
+  renderTestimonials();
+  renderFaqs();
+
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+}
+
+// Update static section titles and hero text across all HTML fragments
+function renderStaticUITexts() {
+  const data = getPortfolioData();
+  if (!data) return;
+
+  // Header Nav Links
+  const navMap = {
+    '#about': data.nav.about,
+    '#experience': data.nav.experience,
+    '#services': data.nav.services,
+    '#gallery': data.nav.highlights,
+    '#tech': data.nav.tech,
+    '#github': data.nav.github,
+    '#projects': data.nav.projects,
+    '#testimonials': data.nav.reviews,
+    '#faq': data.nav.faq,
+    '#contact': data.nav.contact
+  };
+
+  document.querySelectorAll('#nav-links .nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    if (navMap[href]) link.textContent = navMap[href];
+  });
+
+  // Hero Section
+  const statusPill = document.querySelector('.hero .status-pill span:last-child');
+  if (statusPill && data.profile.statusPill) statusPill.textContent = data.profile.statusPill;
+
+  const heroHeadline = document.querySelector('.hero .hero-headline');
+  if (heroHeadline && data.profile.heroHeadline) heroHeadline.innerHTML = data.profile.heroHeadline;
+
+  const heroSub = document.querySelector('.hero .hero-subheadline');
+  if (heroSub && data.profile.heroSubheadline) heroSub.textContent = data.profile.heroSubheadline;
+
+  const pkgCta = document.getElementById('hero-packages-cta');
+  if (pkgCta && data.profile.viewPackagesCta) {
+    pkgCta.innerHTML = `${data.profile.viewPackagesCta} <i data-lucide="package"></i>`;
+  }
+
+  const projCta = document.getElementById('hero-secondary-cta');
+  if (projCta && data.profile.viewProjectsCta) {
+    projCta.innerHTML = `${data.profile.viewProjectsCta} <i data-lucide="folder-git-2"></i>`;
+  }
+
+  const profileBadge = document.querySelector('.profile-badge span');
+  if (profileBadge && data.profile.badgeExp) profileBadge.textContent = data.profile.badgeExp;
+
+  // Section Headers
+  const updateSectionHeader = (sectionId, tagKey, titleKey, subtitleKey) => {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    const tag = section.querySelector('.section-tag');
+    const title = section.querySelector('.section-title');
+    const subtitle = section.querySelector('.section-subtitle');
+    if (tag && data.sections[tagKey]) tag.textContent = data.sections[tagKey];
+    if (title && data.sections[titleKey]) title.innerHTML = data.sections[titleKey];
+    if (subtitle && data.sections[subtitleKey]) subtitle.textContent = data.sections[subtitleKey];
+  };
+
+  updateSectionHeader('about', 'aboutTag', 'aboutTitle', 'aboutSubtitle');
+  updateSectionHeader('experience', 'expTag', 'expTitle', 'expSubtitle');
+  updateSectionHeader('services', 'servicesTag', 'servicesTitle', 'servicesSubtitle');
+  updateSectionHeader('gallery', 'galleryTag', 'galleryTitle', 'gallerySubtitle');
+  updateSectionHeader('tech', 'techTag', 'techTitle', 'techSubtitle');
+  updateSectionHeader('projects', 'projectsTag', 'projectsTitle', 'projectsSubtitle');
+  updateSectionHeader('testimonials', 'testimonialsTag', 'testimonialsTitle', 'testimonialsSubtitle');
+  updateSectionHeader('faq', 'faqTag', 'faqTitle', 'faqSubtitle');
+  updateSectionHeader('contact', 'contactTag', 'contactTitle', 'contactSubtitle');
+}
 
 // Hero Stats
 function renderHeroStats() {
@@ -846,6 +956,37 @@ function setupThemeToggle() {
   });
 }
 
+// English / Bengali Language Toggle Handler
+function setupLanguageToggle() {
+  const langToggleBtn = document.getElementById('lang-toggle-btn');
+  const langIndicator = document.getElementById('lang-indicator');
+
+  function updateLangUI() {
+    if (langIndicator) {
+      langIndicator.textContent = currentLanguage === 'en' ? 'বাংলা' : 'EN';
+    }
+    if (langToggleBtn) {
+      langToggleBtn.setAttribute('title', currentLanguage === 'en' ? 'Switch to বাংলা' : 'Switch to English');
+    }
+  }
+
+  updateLangUI();
+
+  if (!langToggleBtn) return;
+
+  langToggleBtn.addEventListener('click', () => {
+    currentLanguage = currentLanguage === 'en' ? 'bn' : 'en';
+    localStorage.setItem('portfolio_language', currentLanguage);
+    updateLangUI();
+    renderAllComponents();
+
+    // Show feedback toast
+    if (typeof showToast === 'function') {
+      showToast(currentLanguage === 'bn' ? 'ভাষা বাংলায় পরিবর্তন করা হয়েছে' : 'Language switched to English');
+    }
+  });
+}
+
 // Auto-select package from URL parameter & scroll to Contact Section
 function checkUrlPackageParam() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -1066,6 +1207,537 @@ async function loadDarkGitHubHeatmap(username, container) {
   } catch (err) {
     console.warn('Could not transform GitHub SVG in client:', err);
   }
+}
+
+/* --------------------------------------------------------------------------
+   Enhanced Premium Interactive Particle & Nebula Canvas Engine for Hero
+   -------------------------------------------------------------------------- */
+function setupHeroParticles() {
+  const canvas = document.getElementById('hero-particles');
+  const heroSection = document.getElementById('hero');
+  if (!canvas || !heroSection) return;
+
+  const ctx = canvas.getContext('2d');
+  let animationFrameId;
+  let particles = [];
+  let sparkles = [];
+  let symbols = [];
+  let width = 0;
+  let height = 0;
+
+  // Mouse coordinate tracking & interaction radius
+  const mouse = {
+    x: null,
+    y: null,
+    radius: 140,
+    isHovered: false
+  };
+
+  // Resize canvas to match hero section dimensions
+  function resizeCanvas() {
+    const rect = heroSection.getBoundingClientRect();
+    width = canvas.width = rect.width;
+    height = canvas.height = rect.height;
+    initScene();
+  }
+
+  // Tech / Flutter / Code Symbols for ambient developer vibe
+  const techSymbols = ['{ }', '< / >', 'Flutter', 'Dart', '◈', '✦', '01', 'λ', '⚡'];
+
+  class FloatingSymbol {
+    constructor() {
+      this.reset();
+      this.y = Math.random() * height;
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + 20;
+      this.text = techSymbols[Math.floor(Math.random() * techSymbols.length)];
+      this.size = Math.random() * 6 + 11;
+      this.speedY = Math.random() * 0.4 + 0.2;
+      this.speedX = (Math.random() - 0.5) * 0.3;
+      this.alpha = Math.random() * 0.18 + 0.08;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.01;
+    }
+
+    update() {
+      this.y -= this.speedY;
+      this.x += this.speedX;
+      this.rotation += this.rotSpeed;
+
+      if (this.y < -30 || this.x < -30 || this.x > width + 30) {
+        this.reset();
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.font = `600 ${this.size}px 'Plus Jakarta Sans', monospace`;
+      ctx.fillStyle = `rgba(255, 199, 0, ${this.alpha})`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(this.text, 0, 0);
+      ctx.restore();
+    }
+  }
+
+  // Interactive Sparkle Particles on Mouse Trail
+  class Sparkle {
+    constructor(x, y) {
+      this.x = x + (Math.random() - 0.5) * 20;
+      this.y = y + (Math.random() - 0.5) * 20;
+      this.size = Math.random() * 2.5 + 1;
+      this.speedX = (Math.random() - 0.5) * 1.5;
+      this.speedY = (Math.random() - 0.5) * 1.5 - 0.3;
+      this.alpha = 1;
+      this.decay = Math.random() * 0.03 + 0.02;
+      this.color = Math.random() > 0.3 ? '#ffc700' : '#22c55e';
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.alpha -= this.decay;
+    }
+
+    draw() {
+      if (this.alpha <= 0) return;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = this.color;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Main Constellation Particle Class
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = Math.random() * 2.5 + 1;
+      this.speedX = (Math.random() - 0.5) * 0.65;
+      this.speedY = (Math.random() - 0.5) * 0.65;
+      this.baseAlpha = Math.random() * 0.45 + 0.35;
+      this.alpha = this.baseAlpha;
+      this.pulseSpeed = Math.random() * 0.03 + 0.015;
+      this.pulseAngle = Math.random() * Math.PI * 2;
+
+      const palette = [
+        { r: 255, g: 199, b: 0 },   // Yellow/Gold (Brand primary)
+        { r: 255, g: 225, b: 100 }, // Bright Amber Glow
+        { r: 34, g: 197, b: 94 },   // Flutter Emerald Accent
+        { r: 6, g: 182, b: 212 }    // Cyber Cyan Subtle Accent
+      ];
+      this.color = palette[Math.floor(Math.random() * palette.length)];
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      // Subtle breathing pulse effect
+      this.pulseAngle += this.pulseSpeed;
+      this.alpha = this.baseAlpha + Math.sin(this.pulseAngle) * 0.18;
+
+      // Wrap boundaries
+      if (this.x < 0) this.x = width;
+      if (this.x > width) this.x = 0;
+      if (this.y < 0) this.y = height;
+      if (this.y > height) this.y = 0;
+
+      // Interactive mouse attraction/deflection
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          const dirX = dx / dist;
+          const dirY = dy / dist;
+          this.x -= dirX * force * 3;
+          this.y -= dirY * force * 3;
+          this.alpha = Math.min(1, this.alpha + force * 0.5);
+        }
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${Math.max(0.1, this.alpha)})`;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0.6)`;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function initScene() {
+    particles = [];
+    symbols = [];
+    sparkles = [];
+
+    const isMobile = width < 768;
+    const particleCount = isMobile ? 32 : 65;
+    const symbolCount = isMobile ? 4 : 8;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    for (let i = 0; i < symbolCount; i++) {
+      symbols.push(new FloatingSymbol());
+    }
+  }
+
+  // Draw glowing constellation mesh connecting nodes
+  function drawConstellations() {
+    const isMobile = width < 768;
+    const maxDist = isMobile ? 95 : 130;
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < maxDist) {
+          const opacity = (1 - dist / maxDist) * 0.22;
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          
+          // Gradient line between nodes
+          const grad = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+          grad.addColorStop(0, `rgba(${particles[i].color.r}, ${particles[i].color.g}, ${particles[i].color.b}, ${opacity})`);
+          grad.addColorStop(1, `rgba(${particles[j].color.r}, ${particles[j].color.g}, ${particles[j].color.b}, ${opacity})`);
+
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 0.85;
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+
+      // Connect with mouse cursor when near
+      if (mouse.x !== null && mouse.y !== null) {
+        const mdx = mouse.x - particles[i].x;
+        const mdy = mouse.y - particles[i].y;
+        const mdist = Math.hypot(mdx, mdy);
+        if (mdist < mouse.radius) {
+          const mOpacity = (1 - mdist / mouse.radius) * 0.45;
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(255, 199, 0, ${mOpacity})`;
+          ctx.lineWidth = 1.1;
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    }
+  }
+
+  // Animation Loop
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    // 1. Draw floating code symbols in background
+    for (let i = 0; i < symbols.length; i++) {
+      symbols[i].update();
+      symbols[i].draw();
+    }
+
+    // 2. Draw connecting mesh & constellation links
+    drawConstellations();
+
+    // 3. Draw particles
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+    }
+
+    // 4. Update & draw sparkles from mouse trail
+    for (let i = sparkles.length - 1; i >= 0; i--) {
+      sparkles[i].update();
+      sparkles[i].draw();
+      if (sparkles[i].alpha <= 0) {
+        sparkles.splice(i, 1);
+      }
+    }
+
+    animationFrameId = requestAnimationFrame(animate);
+  }
+
+  // Mouse Trackers
+  window.addEventListener('resize', resizeCanvas);
+
+  let lastSparkleTime = 0;
+  heroSection.addEventListener('mousemove', (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+    mouse.isHovered = true;
+
+    // Spawn subtle glowing sparkles on mouse movement (throttled)
+    const now = Date.now();
+    if (now - lastSparkleTime > 40 && sparkles.length < 30) {
+      sparkles.push(new Sparkle(mouse.x, mouse.y));
+      lastSparkleTime = now;
+    }
+  });
+
+  heroSection.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
+    mouse.isHovered = false;
+  });
+
+  // Start Particle System
+  resizeCanvas();
+  animate();
+}
+
+/* --------------------------------------------------------------------------
+   Web Audio Synthesizer: UI Hover & Click Sound Engine
+   -------------------------------------------------------------------------- */
+function setupSoundEffects() {
+  let audioCtx = null;
+  let isSoundEnabled = localStorage.getItem('portfolio_sound_enabled') !== 'false';
+
+  const soundToggleBtn = document.getElementById('sound-toggle-btn');
+  const onIcon = soundToggleBtn ? soundToggleBtn.querySelector('.sound-on-icon') : null;
+  const offIcon = soundToggleBtn ? soundToggleBtn.querySelector('.sound-off-icon') : null;
+
+  function updateSoundUI() {
+    if (!soundToggleBtn) return;
+    if (isSoundEnabled) {
+      soundToggleBtn.classList.remove('muted');
+      if (onIcon) onIcon.style.display = 'block';
+      if (offIcon) offIcon.style.display = 'none';
+      soundToggleBtn.setAttribute('title', 'Sound Effects: Enabled (Click to Mute)');
+    } else {
+      soundToggleBtn.classList.add('muted');
+      if (onIcon) onIcon.style.display = 'none';
+      if (offIcon) offIcon.style.display = 'block';
+      soundToggleBtn.setAttribute('title', 'Sound Effects: Muted (Click to Enable)');
+    }
+  }
+
+  updateSoundUI();
+
+  // Lazy AudioContext initialization on first user interaction
+  function getAudioContext() {
+    if (!audioCtx) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) {
+        audioCtx = new AudioContextClass();
+      }
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  // Generate a crisp, subtle UI hover tone
+  function playHoverSound() {
+    if (!isSoundEnabled) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      // Crisp high-tech blip: quick sweep from 880Hz to 1320Hz
+      const now = ctx.currentTime;
+      osc.frequency.setValueAtTime(820, now);
+      osc.frequency.exponentialRampToValueAtTime(1280, now + 0.04);
+
+      gain.gain.setValueAtTime(0.025, now); // very soft & non-intrusive
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.05);
+    } catch (e) {
+      // Audio context error handle silently
+    }
+  }
+
+  // Generate a satisfying soft click tone
+  function playClickSound() {
+    if (!isSoundEnabled) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      const now = ctx.currentTime;
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(140, now + 0.06);
+
+      gain.gain.setValueAtTime(0.06, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.065);
+    } catch (e) {
+      // Audio context error handle silently
+    }
+  }
+
+  // Toggle sound enabled/disabled
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', () => {
+      isSoundEnabled = !isSoundEnabled;
+      localStorage.setItem('portfolio_sound_enabled', isSoundEnabled);
+      updateSoundUI();
+      if (isSoundEnabled) {
+        playClickSound();
+      }
+    });
+  }
+
+  // Attach hover & click listeners to interactive UI elements
+  function attachSoundListeners() {
+    const interactiveSelectors = [
+      'a',
+      'button',
+      '.btn',
+      '.glass-card',
+      '.project-card',
+      '.service-card',
+      '.tech-badge',
+      '.pillar-card',
+      '.gallery-slide-card',
+      '.faq-question',
+      '.filter-btn',
+      '.theme-toggle-btn',
+      '.t-dot',
+      '.gallery-dot'
+    ];
+
+    const elements = document.querySelectorAll(interactiveSelectors.join(', '));
+    elements.forEach(el => {
+      // Prevent multiple bindings
+      if (el.dataset.hasSoundEvents) return;
+      el.dataset.hasSoundEvents = 'true';
+
+      el.addEventListener('mouseenter', () => {
+        playHoverSound();
+      }, { passive: true });
+
+      el.addEventListener('click', () => {
+        playClickSound();
+      }, { passive: true });
+    });
+  }
+
+  attachSoundListeners();
+
+  // Re-attach for dynamic cards / modals whenever triggered
+  const observer = new MutationObserver(() => {
+    attachSoundListeners();
+  });
+
+  const mainContent = document.getElementById('main-content');
+  if (mainContent) {
+    observer.observe(mainContent, { childList: true, subtree: true });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   PWA (Progressive Web App) Installer & Service Worker Registration
+   -------------------------------------------------------------------------- */
+function setupPwaInstaller() {
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('pwa-install-btn');
+
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((reg) => {
+          console.log('PWA Service Worker registered successfully:', reg.scope);
+        })
+        .catch((err) => {
+          console.warn('PWA Service Worker registration skipped or failed:', err);
+        });
+    });
+  }
+
+  // Intercept beforeinstallprompt event
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent default mini-infobar from appearing on mobile
+    e.preventDefault();
+    deferredPrompt = e;
+
+    // Reveal custom PWA install button in header
+    if (installBtn) {
+      installBtn.style.display = 'inline-flex';
+      if (window.lucide) window.lucide.createIcons();
+    }
+  });
+
+  // Handle Install button click
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) {
+        // If standalone or already installed
+        if (typeof showToast === 'function') {
+          showToast('App is already installed or supported directly from browser menu.');
+        }
+        return;
+      }
+
+      // Show native install prompt
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User PWA install prompt response: ${outcome}`);
+
+      if (outcome === 'accepted') {
+        if (typeof showToast === 'function') {
+          showToast('Thank you for installing Abdullah Hossain Portfolio App! 📱');
+        }
+        installBtn.style.display = 'none';
+      }
+
+      deferredPrompt = null;
+    });
+  }
+
+  // Hide install button when app is successfully installed
+  window.addEventListener('appinstalled', () => {
+    console.log('PWA was installed successfully');
+    if (installBtn) installBtn.style.display = 'none';
+    if (typeof showToast === 'function') {
+      showToast('App installed successfully! Enjoy offline access.');
+    }
+  });
 }
 
 

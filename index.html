@@ -4,8 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Favicon -->
+  <!-- Favicon & PWA Icons -->
   <link rel="icon" type="image/png" href="asset/logo.png">
+  <link rel="apple-touch-icon" href="asset/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffc700">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Abdullah Hossain">
 
   <!-- Primary Meta Tags -->
   <title>Abdullah Hossain — Full Stack Software Engineer | Mobile App Developer</title>
@@ -35,6 +41,23 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+  <!-- Premium Developer Splash Screen / Preloader -->
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-content">
+      <div class="splash-logo-box">
+        <div class="splash-glow-ring"></div>
+        <img src="asset/logo.png" alt="Abdullah Hossain Logo" class="splash-logo">
+      </div>
+      <h2 class="splash-title">Abdullah Hossain</h2>
+      <p class="splash-subtitle">Mobile App & Full Stack Engineer</p>
+      
+      <div class="splash-loader-bar">
+        <div class="splash-loader-progress" id="splash-progress"></div>
+      </div>
+      <span class="splash-loading-text" id="splash-status">Initializing environment...</span>
+    </div>
+  </div>
 
   <!-- Dynamic Sections Loaded via js/app.js -->
   <div id="header-container"></div>
