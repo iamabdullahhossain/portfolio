@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupPhotoSlider();
   setupThemeToggle();
   setupLanguageToggle();
-  setupPwaInstaller();
   checkUrlPackageParam();
   setupFloatingChat();
 
@@ -1668,76 +1667,6 @@ function setupSoundEffects() {
   if (mainContent) {
     observer.observe(mainContent, { childList: true, subtree: true });
   }
-}
-
-/* --------------------------------------------------------------------------
-   PWA (Progressive Web App) Installer & Service Worker Registration
-   -------------------------------------------------------------------------- */
-function setupPwaInstaller() {
-  let deferredPrompt = null;
-  const installBtn = document.getElementById('pwa-install-btn');
-
-  // Register Service Worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then((reg) => {
-          console.log('PWA Service Worker registered successfully:', reg.scope);
-        })
-        .catch((err) => {
-          console.warn('PWA Service Worker registration skipped or failed:', err);
-        });
-    });
-  }
-
-  // Intercept beforeinstallprompt event
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent default mini-infobar from appearing on mobile
-    e.preventDefault();
-    deferredPrompt = e;
-
-    // Reveal custom PWA install button in header
-    if (installBtn) {
-      installBtn.style.display = 'inline-flex';
-      if (window.lucide) window.lucide.createIcons();
-    }
-  });
-
-  // Handle Install button click
-  if (installBtn) {
-    installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) {
-        // If standalone or already installed
-        if (typeof showToast === 'function') {
-          showToast('App is already installed or supported directly from browser menu.');
-        }
-        return;
-      }
-
-      // Show native install prompt
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User PWA install prompt response: ${outcome}`);
-
-      if (outcome === 'accepted') {
-        if (typeof showToast === 'function') {
-          showToast('Thank you for installing Abdullah Hossain Portfolio App! 📱');
-        }
-        installBtn.style.display = 'none';
-      }
-
-      deferredPrompt = null;
-    });
-  }
-
-  // Hide install button when app is successfully installed
-  window.addEventListener('appinstalled', () => {
-    console.log('PWA was installed successfully');
-    if (installBtn) installBtn.style.display = 'none';
-    if (typeof showToast === 'function') {
-      showToast('App installed successfully! Enjoy offline access.');
-    }
-  });
 }
 
 
