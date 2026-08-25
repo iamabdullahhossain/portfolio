@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="asset/logo.png">
+
+  <!-- Primary Meta Tags -->
+  <title>Project Proposal & Letterhead Pad Generator — Abdullah Hossain</title>
+  <meta name="title" content="Project Proposal & Letterhead Pad Generator — Abdullah Hossain">
+  <meta name="description" content="Generate high-converting, professional project proposals and letterhead memo pads with watermark and 1-click PDF download by Abdullah Hossain.">
+  <meta name="author" content="Abdullah Hossain">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Dancing Script for Signature -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Font Awesome Brands -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Markdown Parser for rich proposal text -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- High-Res HTML to PDF Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/proposal.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. Navigation Header
+       ========================================================================= -->
+  <header class="header" id="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" id="brand-logo" aria-label="Abdullah Hossain Home">
+        <img src="asset/logo.png" alt="Abdullah Hossain Logo" class="logo-img">
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="packages.html" class="nav-link">Packages</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="proposal.html" class="nav-link active">Proposal Pad</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+
+        <a href="index.html#contact" class="btn btn-primary" id="nav-cta-btn">
+          Get in Touch <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Proposal Studio & Interactive Letterhead Generator
+       ========================================================================= -->
+  <main class="proposal-page">
+    <div class="container">
+      
+      <!-- Studio Header -->
+      <div class="studio-header">
+        <div class="studio-badge">
+          <i data-lucide="file-text"></i> Official Memo & Proposal Studio
+        </div>
+        <h1 class="studio-title">Professional Project <span>Proposal Pad</span></h1>
+        <p class="studio-subtitle">
+          Customize your scope of work, project milestones, and commercials. Live-preview your official branded letterhead pad with watermark and export high-definition print-ready PDFs.
+        </p>
+      </div>
+
+      <!-- Studio Grid: Editor (Left) & Pad Preview (Right) -->
+      <div class="studio-grid">
+        
+        <!-- ================= LEFT: Proposal Editor & Controls ================= -->
+        <div class="editor-panel">
+          
+          <!-- Preset Templates -->
+          <div>
+            <div class="panel-section-title">
+              <i data-lucide="sparkles"></i> 1. Choose Proposal Preset
+            </div>
+            <div class="template-pills">
+              <button class="template-pill active" data-template="mobile">
+                <i data-lucide="smartphone"></i> Flutter Mobile App
+              </button>
+              <button class="template-pill" data-template="fullstack">
+                <i data-lucide="layers"></i> Full-Stack Web Solution
+              </button>
+              <button class="template-pill" data-template="maintenance">
+                <i data-lucide="shield-check"></i> Maintenance SLA
+              </button>
+              <button class="template-pill" data-template="blank">
+                <i data-lucide="edit-3"></i> Blank Notepad
+              </button>
+            </div>
+          </div>
+
+          <!-- Project & Client Metadata -->
+          <div>
+            <div class="panel-section-title">
+              <i data-lucide="user-check"></i> 2. Client & Project Details
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="prop-client">Client / Organization</label>
+                <input type="text" id="prop-client" class="form-input" placeholder="e.g. Acme Corporation" value="Acme Enterprises Ltd.">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="prop-title">Project Title</label>
+                <input type="text" id="prop-title" class="form-input" placeholder="e.g. Mobile E-Commerce App" value="Cross-Platform Mobile App (Flutter & Riverpod)">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="prop-ref">Proposal Ref #</label>
+                <input type="text" id="prop-ref" class="form-input" placeholder="e.g. AH-PROP-2026-01" value="AH-PROP-2026-MOB">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="prop-date">Proposal Date</label>
+                <input type="date" id="prop-date" class="form-input">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="prop-timeline">Estimated Timeline</label>
+                <input type="text" id="prop-timeline" class="form-input" placeholder="e.g. 6 - 8 Weeks" value="6 - 8 Weeks">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="prop-budget">Estimated Investment</label>
+                <input type="text" id="prop-budget" class="form-input" placeholder="e.g. $2,800 USD" value="$2,800 - $3,500 USD">
+              </div>
+            </div>
+          </div>
+
+          <!-- Rich Proposal Content Editor -->
+          <div>
+            <div class="panel-section-title">
+              <i data-lucide="file-edit"></i> 3. Proposal Scope & Markdown Content
+            </div>
+
+            <div class="textarea-wrapper">
+              <!-- Toolbar -->
+              <div class="editor-toolbar">
+                <div class="toolbar-group">
+                  <button type="button" class="tool-btn" data-insert="h2" title="Add Section Heading">
+                    <i data-lucide="heading"></i> Section
+                  </button>
+                  <button type="button" class="tool-btn" data-insert="bullet" title="Add Bullet List">
+                    <i data-lucide="list"></i> Bullet
+                  </button>
+                  <button type="button" class="tool-btn" data-insert="milestone" title="Add Milestone Table">
+                    <i data-lucide="table"></i> Milestone Table
+                  </button>
+                  <button type="button" class="tool-btn" data-insert="highlight" title="Add Callout Box">
+                    <i data-lucide="bookmark"></i> Note
+                  </button>
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Markdown supported</span>
+              </div>
+
+              <!-- Main Textarea -->
+              <textarea id="prop-content" class="form-textarea" placeholder="Write your proposal text, milestones, and deliverables here..."></textarea>
+            </div>
+          </div>
+
+          <!-- Notepad Watermark & Print Settings -->
+          <div>
+            <div class="panel-section-title">
+              <i data-lucide="sliders"></i> 4. Watermark & Letterhead Settings
+            </div>
+            
+            <div class="pad-options-box">
+              <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <label class="form-label" for="watermark-opacity">Watermark Opacity (asset/logo.png)</label>
+                  <span class="range-val" id="watermark-val">8%</span>
+                </div>
+                <div class="range-control">
+                  <input type="range" id="watermark-opacity" min="0" max="30" value="8" step="1">
+                </div>
+              </div>
+
+              <div class="checkbox-row">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="toggle-watermark" checked>
+                  <span>Show Centered Logo Watermark</span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="toggle-signature" checked>
+                  <span>Include Digital Signature Block</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Export & Action Controls -->
+          <div class="studio-actions">
+            <button type="button" id="btn-download-pdf" class="btn-export-pdf">
+              <i data-lucide="download"></i> Download Professional PDF
+            </button>
+            <button type="button" id="btn-print-pad" class="btn-secondary-action">
+              <i data-lucide="printer"></i> Print / Save
+            </button>
+          </div>
+
+        </div>
+
+
+        <!-- ================= RIGHT: Live Official Letterhead Pad Preview ================= -->
+        <div class="preview-container">
+          
+          <div class="preview-header-bar">
+            <div class="preview-tag">
+              <span class="pulse-dot"></span> Live Pad Preview
+            </div>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">A4 Document Format</span>
+          </div>
+
+          <div class="paper-wrapper">
+            <!-- Target A4 Paper Sheet for PDF Generation -->
+            <div id="letterhead-sheet" class="letterhead-sheet">
+              
+              <!-- 1. Background Watermark (asset/logo.png) -->
+              <div id="pad-watermark" class="pad-watermark">
+                <img src="asset/logo.png" alt="Abdullah Hossain Watermark">
+              </div>
+
+              <!-- 2. Main Content Layer -->
+              <div class="pad-content-layer">
+                
+                <!-- Official Letterhead Header -->
+                <header class="pad-header">
+                  <div class="pad-brand">
+                    <img src="asset/logo.png" alt="Abdullah Hossain" class="pad-brand-logo">
+                    <div class="pad-brand-info">
+                      <h1>Abdullah Hossain</h1>
+                      <p>Full Stack Software Engineer & Mobile App Developer</p>
+                      <span class="pad-brand-badge">Official Project Proposal & Statement of Work</span>
+                    </div>
+                  </div>
+
+                  <div class="pad-contact">
+                    <div class="pad-contact-item">
+                      <i data-lucide="mail"></i>
+                      <a href="mailto:iamabdullahhossain@gmail.com">iamabdullahhossain@gmail.com</a>
+                    </div>
+                    <div class="pad-contact-item">
+                      <i data-lucide="phone"></i>
+                      <span>+880 1624-563436</span>
+                    </div>
+                    <div class="pad-contact-item">
+                      <i data-lucide="map-pin"></i>
+                      <span>Dhaka, Bangladesh</span>
+                    </div>
+                    <div class="pad-contact-item">
+                      <i data-lucide="globe"></i>
+                      <span>iamabdullahhossain.vercel.app</span>
+                    </div>
+                  </div>
+                </header>
+
+                <!-- Pad Metadata Card -->
+                <div class="pad-meta-bar">
+                  <div class="pad-meta-block">
+                    <span class="pad-meta-label">PREPARED FOR</span>
+                    <span class="pad-meta-val" id="preview-client">Acme Enterprises Ltd.</span>
+                    <span style="font-size: 0.75rem; color: #475569; margin-top: 2px;" id="preview-title">Cross-Platform Mobile App (Flutter & Riverpod)</span>
+                  </div>
+                  
+                  <div class="pad-meta-right">
+                    <div class="pad-meta-block">
+                      <span class="pad-meta-label">PROPOSAL REF</span>
+                      <span class="pad-meta-val" id="preview-ref" style="font-size: 0.78rem;">AH-PROP-2026-MOB</span>
+                    </div>
+                    <div class="pad-meta-block">
+                      <span class="pad-meta-label">DATE</span>
+                      <span class="pad-meta-val" id="preview-date" style="font-size: 0.78rem;">25 Aug 2026</span>
+                    </div>
+                    <div class="pad-meta-block">
+                      <span class="pad-meta-label">TIMELINE</span>
+                      <span class="pad-meta-val" id="preview-timeline" style="font-size: 0.78rem;">6 - 8 Weeks</span>
+                    </div>
+                    <div class="pad-meta-block">
+                      <span class="pad-meta-label">EST. BUDGET</span>
+                      <span class="pad-meta-val" id="preview-budget" style="font-size: 0.78rem; color: #0284c7;">$2,800 - $3,500</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dynamic Proposal Body -->
+                <div id="preview-body" class="pad-body">
+                  <!-- Injected by js/proposal.js -->
+                </div>
+
+                <!-- Official Signature Block -->
+                <div id="pad-signatures" class="pad-signature-section">
+                  <div class="signature-box">
+                    <div class="sig-line">
+                      <span class="sig-sign-text">Abdullah Hossain</span>
+                    </div>
+                    <span class="sig-name">Abdullah Hossain</span>
+                    <span class="sig-title">Lead Engineer & Consultant</span>
+                    <span class="sig-date">Date: <span id="preview-sig-date">25 Aug 2026</span></span>
+                  </div>
+
+                  <div class="signature-box">
+                    <div class="sig-line"></div>
+                    <span class="sig-name">Authorized Client Acceptance</span>
+                    <span class="sig-title">Representative Name & Signature</span>
+                    <span class="sig-date">Date: ________________________</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Pad Footer -->
+              <footer class="pad-footer">
+                <div class="pad-footer-left">
+                  <span>Abdullah Hossain</span> &bull; Engineering Scalable Digital Experiences
+                </div>
+                <div class="pad-footer-right">
+                  Confidential Document &bull; All Rights Reserved
+                </div>
+              </footer>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- PDF Generation Loading Overlay -->
+  <div id="pdf-loading-overlay" class="pdf-loading-overlay">
+    <div class="pdf-loading-spinner"></div>
+    <p class="pdf-loading-text">Rendering High-Resolution Letterhead PDF...</p>
+    <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 6px;">Preparing watermark and vector print formatting</p>
+  </div>
+
+  <!-- Application Script -->
+  <script src="js/proposal.js"></script>
+</body>
+</html>

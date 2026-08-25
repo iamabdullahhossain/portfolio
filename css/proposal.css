@@ -1,0 +1,834 @@
+/* ==========================================================================
+   Proposal Studio & Professional Letterhead Memo Pad Stylesheet
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Page Layout & Studio Container
+   -------------------------------------------------------------------------- */
+.proposal-page {
+  padding-top: calc(var(--nav-height) + 24px);
+  padding-bottom: 80px;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.studio-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.studio-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 199, 0, 0.1);
+  border: 1px solid rgba(255, 199, 0, 0.25);
+  color: var(--accent-yellow);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.studio-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.studio-title span {
+  background: linear-gradient(135deg, var(--accent-yellow) 0%, #ffdf70 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.studio-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   2. Studio Grid (Split Layout)
+   -------------------------------------------------------------------------- */
+.studio-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .studio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Editor Panel / Controls
+   -------------------------------------------------------------------------- */
+.editor-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.panel-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.panel-section-title i {
+  color: var(--accent-yellow);
+}
+
+/* Presets & Templates */
+.template-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.template-pill {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.template-pill:hover,
+.template-pill.active {
+  background: rgba(255, 199, 0, 0.12);
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+/* Form Fields */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: 0.92rem;
+  padding: 10px 14px;
+  transition: var(--transition-fast);
+  width: 100%;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--accent-yellow);
+  box-shadow: 0 0 0 3px rgba(255, 199, 0, 0.15);
+}
+
+.form-textarea {
+  min-height: 280px;
+  resize: vertical;
+  line-height: 1.6;
+  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.88rem;
+}
+
+/* Editor Toolbar */
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-bottom: none;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  padding: 8px 12px;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tool-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tool-btn:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.textarea-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea-wrapper .form-textarea {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Pad Customizer Controls */
+.pad-options-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.range-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.range-control input[type="range"] {
+  flex: 1;
+  accent-color: var(--accent-yellow);
+  cursor: pointer;
+}
+
+.range-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-yellow);
+  min-width: 40px;
+}
+
+.checkbox-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox input {
+  accent-color: var(--accent-yellow);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Actions Group */
+.studio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-export-pdf {
+  background: linear-gradient(135deg, var(--accent-yellow) 0%, #e6b400 100%);
+  color: #0a0a0d;
+  font-weight: 700;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex: 1;
+  box-shadow: 0 4px 18px var(--accent-yellow-glow);
+  transition: var(--transition-fast);
+}
+
+.btn-export-pdf:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 199, 0, 0.4);
+}
+
+.btn-export-pdf:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary-action {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-fast);
+}
+
+.btn-secondary-action:hover {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+/* --------------------------------------------------------------------------
+   4. Live Letterhead Memo Pad (Right Column)
+   -------------------------------------------------------------------------- */
+.preview-container {
+  position: sticky;
+  top: calc(var(--nav-height) + 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.preview-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.preview-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-emerald);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.preview-tag .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+  box-shadow: 0 0 8px var(--accent-emerald);
+  animation: pulseLive 2s infinite;
+}
+
+@keyframes pulseLive {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.paper-wrapper {
+  background: #20202c;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   5. The Official A4 Letterhead Document (Print & Export Target)
+   -------------------------------------------------------------------------- */
+.letterhead-sheet {
+  width: 210mm;
+  min-height: 297mm;
+  background: #ffffff;
+  color: #1e293b;
+  position: relative;
+  padding: 18mm 18mm 16mm 18mm;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  user-select: text;
+}
+
+/* Notepad Background Watermark */
+.pad-watermark {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-10deg);
+  width: 340px;
+  height: 340px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.08;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.pad-watermark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) contrast(150%);
+}
+
+/* Foreground Content (Above Watermark) */
+.pad-content-layer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Letterhead Top Header */
+.pad-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2.5px solid #0f172a;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.pad-header::after {
+  content: '';
+  position: absolute;
+  bottom: -5.5px;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: #ffc700;
+}
+
+.pad-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pad-brand-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  background: #0f172a;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.pad-brand-info h1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 2px 0;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.pad-brand-info p {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #475569;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.pad-brand-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  background: #e2e8f0;
+  color: #0f172a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.pad-contact {
+  text-align: right;
+  font-size: 0.76rem;
+  color: #334155;
+  line-height: 1.45;
+}
+
+.pad-contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.pad-contact-item svg,
+.pad-contact-item i {
+  width: 13px;
+  height: 13px;
+  color: #d97706;
+}
+
+.pad-contact a {
+  color: #0f172a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Pad Meta Bar (Client & Proposal ID) */
+.pad-meta-bar {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #0f172a;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.pad-meta-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.pad-meta-label {
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.pad-meta-val {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.pad-meta-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* Document Body / Proposal Main Content */
+.pad-body {
+  flex: 1;
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: #334155;
+}
+
+.pad-body h2 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 16px 0 8px 0;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pad-body h2:first-child {
+  margin-top: 0;
+}
+
+.pad-body h3 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 12px 0 4px 0;
+}
+
+.pad-body p {
+  margin: 0 0 10px 0;
+}
+
+.pad-body ul,
+.pad-body ol {
+  margin: 6px 0 12px 0;
+  padding-left: 20px;
+}
+
+.pad-body li {
+  margin-bottom: 4px;
+}
+
+.pad-body strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.pad-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 16px 0;
+  font-size: 0.82rem;
+}
+
+.pad-body th {
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: left;
+  padding: 7px 10px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pad-body td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 8px 10px;
+  color: #334155;
+}
+
+.pad-body tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.pad-body .highlight-box {
+  background: #fffbeb;
+  border-left: 3px solid #f59e0b;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 0.82rem;
+  color: #78350f;
+}
+
+/* Pad Signatures & Footer */
+.pad-signature-section {
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px dashed #cbd5e1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.signature-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.sig-line {
+  border-bottom: 1.5px solid #0f172a;
+  height: 40px;
+  margin-bottom: 6px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 4px;
+}
+
+.sig-sign-text {
+  font-family: 'Brush Script MT', 'Dancing Script', cursive, sans-serif;
+  font-size: 1.3rem;
+  color: #1e3a8a;
+}
+
+.sig-name {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.sig-title {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.sig-date {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.pad-footer {
+  margin-top: 18px;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: #64748b;
+}
+
+.pad-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pad-footer-left span {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.pad-footer-right {
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   6. PDF & Print Specific Rules
+   -------------------------------------------------------------------------- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .header,
+  .editor-panel,
+  .studio-header,
+  .preview-header-bar,
+  .footer,
+  #theme-toggle-btn {
+    display: none !important;
+  }
+  .proposal-page {
+    padding: 0 !important;
+    background: transparent !important;
+  }
+  .paper-wrapper {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .letterhead-sheet,
+  .letterhead-sheet * {
+    visibility: visible;
+  }
+  .letterhead-sheet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    min-height: 100vh !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 15mm 15mm 15mm 15mm !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Loading Modal for PDF Generation */
+.pdf-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 13, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.pdf-loading-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.pdf-loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 199, 0, 0.2);
+  border-top-color: var(--accent-yellow);
+  border-radius: 50%;
+  animation: spinnerRotate 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spinnerRotate {
+  to { transform: rotate(360deg); }
+}
+
+.pdf-loading-text {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
