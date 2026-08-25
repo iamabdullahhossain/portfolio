@@ -50,6 +50,7 @@
         <li><a href="index.html#about" class="nav-link">About</a></li>
         <li><a href="index.html#services" class="nav-link">Services</a></li>
         <li><a href="packages.html" class="nav-link">Packages</a></li>
+        <li><a href="proposal.html" class="nav-link active">Proposal</a></li>
         <li><a href="index.html#projects" class="nav-link">Projects</a></li>
         <li><a href="index.html#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -111,7 +112,10 @@
               <i data-lucide="sparkles"></i> Choose Proposal Preset
             </div>
             <div class="template-pills">
-              <button type="button" class="template-pill active" data-template="mobile">
+              <button type="button" class="template-pill active" data-template="business">
+                <i data-lucide="building-2"></i> Business & Accounting System
+              </button>
+              <button type="button" class="template-pill" data-template="mobile">
                 <i data-lucide="smartphone"></i> Flutter Mobile App
               </button>
               <button type="button" class="template-pill" data-template="fullstack">
@@ -123,6 +127,36 @@
               <button type="button" class="template-pill" data-template="blank">
                 <i data-lucide="edit-3"></i> Blank Custom
               </button>
+            </div>
+          </div>
+
+          <!-- Document Layout Style Selector -->
+          <div class="editor-card">
+            <div class="panel-section-title">
+              <i data-lucide="layout"></i> Document Layout Style
+            </div>
+            <div class="layout-mode-selector">
+              <label class="layout-mode-option active" data-style="executive">
+                <input type="radio" name="doc-style" value="executive" checked>
+                <div class="layout-mode-card">
+                  <div class="layout-icon"><i data-lucide="file-check-2"></i></div>
+                  <div class="layout-info">
+                    <span class="layout-title">Executive Proposal</span>
+                    <span class="layout-desc">Clean minimalist design with top-right logo, crisp typography & dividers</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="layout-mode-option" data-style="letterhead">
+                <input type="radio" name="doc-style" value="letterhead">
+                <div class="layout-mode-card">
+                  <div class="layout-icon"><i data-lucide="stamp"></i></div>
+                  <div class="layout-info">
+                    <span class="layout-title">Branded Letterhead</span>
+                    <span class="layout-desc">Includes full contact header banner, metadata grid & digital signature block</span>
+                  </div>
+                </div>
+              </label>
             </div>
           </div>
 
@@ -405,7 +439,7 @@
 
           <div class="paper-wrapper" id="paper-wrapper">
             <!-- Target A4 Paper Sheet for PDF Generation -->
-            <div id="letterhead-sheet" class="letterhead-sheet">
+            <div id="letterhead-sheet" class="letterhead-sheet style-executive">
               
               <!-- 1. Background Watermark (asset/logo.png) -->
               <div id="pad-watermark" class="pad-watermark">
@@ -415,8 +449,22 @@
               <!-- 2. Main Content Layer -->
               <div class="pad-content-layer">
                 
-                <!-- Official Letterhead Header -->
-                <header class="pad-header">
+                <!-- A. Clean Executive Document Header (Matching User PDF) -->
+                <div class="pad-executive-header" id="pad-executive-header">
+                  <div class="exec-header-top">
+                    <div class="exec-top-space"></div>
+                    <div class="exec-logo-wrap">
+                      <img src="asset/logo.png" alt="IAH Logo" class="exec-header-logo">
+                    </div>
+                  </div>
+                  <div class="exec-title-block">
+                    <h1 class="exec-doc-title">Project Proposal</h1>
+                    <h2 class="exec-project-title" id="exec-preview-title">Business Management &amp; Accounting System</h2>
+                  </div>
+                </div>
+
+                <!-- B. Official Letterhead Header (For Letterhead Mode) -->
+                <header class="pad-header" id="pad-letterhead-header">
                   <div class="pad-brand">
                     <img src="asset/logo.png" alt="Abdullah Hossain" class="pad-brand-logo">
                     <div class="pad-brand-info">
@@ -446,8 +494,8 @@
                   </div>
                 </header>
 
-                <!-- Pad Metadata Card -->
-                <div class="pad-meta-bar">
+                <!-- Pad Metadata Card (Used in Letterhead Mode) -->
+                <div class="pad-meta-bar" id="pad-meta-bar">
                   <div class="pad-meta-block">
                     <span class="pad-meta-label">PREPARED FOR</span>
                     <span class="pad-meta-val" id="preview-client">Acme Enterprises Ltd.</span>
@@ -469,7 +517,7 @@
                     </div>
                     <div class="pad-meta-block">
                       <span class="pad-meta-label">EST. BUDGET</span>
-                      <span class="pad-meta-val" id="preview-budget" style="font-size: 0.78rem; color: #0284c7;">$2,800 - $3,500</span>
+                      <span class="pad-meta-val" id="preview-budget" style="font-size: 0.78rem; color: #0284c7;">100,000 BDT</span>
                     </div>
                   </div>
                 </div>
