@@ -116,6 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setupTheme();
+  setupMobileNav();
+  setupMobileViewTabs();
+  setupPreviewScale();
   setupFormBindings();
   setupTemplatePills();
   setupToolbarShortcuts();
@@ -135,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   1. Theme Management
+   1. Theme Management & Mobile Navigation
    -------------------------------------------------------------------------- */
 function setupTheme() {
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -155,6 +158,120 @@ function setupTheme() {
       if (window.lucide) window.lucide.createIcons();
     });
   }
+}
+
+function setupMobileNav() {
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const isOpen = navLinks.classList.contains('active');
+    mobileToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Mobile View Switcher (Editor vs Live Pad Preview)
+   -------------------------------------------------------------------------- */
+function setupMobileViewTabs() {
+  const tabs = document.querySelectorAll('.mobile-view-tab');
+  const studioGrid = document.getElementById('studio-grid');
+
+  if (!tabs.length || !studioGrid) return;
+
+  // Set default view on mobile
+  if (window.innerWidth <= 992) {
+    studioGrid.classList.add('show-editor');
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const target = tab.getAttribute('data-tab');
+      if (target === 'editor') {
+        studioGrid.classList.remove('show-preview');
+        studioGrid.classList.add('show-editor');
+      } else {
+        studioGrid.classList.remove('show-editor');
+        studioGrid.classList.add('show-preview');
+        if (window.applyPadScale) window.applyPadScale();
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 992) {
+      studioGrid.classList.remove('show-editor', 'show-preview');
+    } else if (!studioGrid.classList.contains('show-editor') && !studioGrid.classList.contains('show-preview')) {
+      studioGrid.classList.add('show-editor');
+    }
+    if (window.applyPadScale) window.applyPadScale();
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Live Preview Scaling / Zoom for Mobile Screens
+   -------------------------------------------------------------------------- */
+let isFitViewActive = true;
+
+function setupPreviewScale() {
+  const scaleBtn = document.getElementById('btn-scale-toggle');
+  const paperWrapper = document.getElementById('paper-wrapper');
+  const sheet = document.getElementById('letterhead-sheet');
+
+  if (!paperWrapper || !sheet) return;
+
+  function updateScale() {
+    if (!sheet || !paperWrapper) return;
+    if (document.body.classList.contains('exporting-pdf')) return;
+
+    const availableWidth = paperWrapper.clientWidth - (window.innerWidth <= 600 ? 16 : 32);
+    const unscaledWidth = 794; // approx 210mm in px standard
+
+    if (isFitViewActive && availableWidth < unscaledWidth && availableWidth > 0) {
+      const scale = Math.min(1, availableWidth / unscaledWidth);
+      sheet.style.transform = `scale(${scale})`;
+      sheet.style.transformOrigin = 'top center';
+      paperWrapper.style.minHeight = `${Math.round(sheet.offsetHeight * scale + 30)}px`;
+      if (scaleBtn) {
+        scaleBtn.classList.add('active');
+        const textSpan = scaleBtn.querySelector('.scale-mode-text');
+        if (textSpan) textSpan.textContent = '100% Zoom';
+      }
+    } else {
+      sheet.style.transform = '';
+      sheet.style.transformOrigin = 'top center';
+      paperWrapper.style.minHeight = '';
+      if (scaleBtn) {
+        scaleBtn.classList.remove('active');
+        const textSpan = scaleBtn.querySelector('.scale-mode-text');
+        if (textSpan) textSpan.textContent = 'Fit View';
+      }
+    }
+  }
+
+  window.applyPadScale = updateScale;
+
+  if (scaleBtn) {
+    scaleBtn.addEventListener('click', () => {
+      isFitViewActive = !isFitViewActive;
+      updateScale();
+    });
+  }
+
+  setTimeout(updateScale, 350);
 }
 
 /* --------------------------------------------------------------------------
@@ -367,9 +484,14 @@ function setupPdfExport() {
   if (!exportBtn || !sheet) return;
 
   exportBtn.addEventListener('click', async () => {
+    const paperWrapper = document.getElementById('paper-wrapper');
     try {
       exportBtn.disabled = true;
       if (loadingOverlay) loadingOverlay.classList.add('active');
+
+      document.body.classList.add('exporting-pdf');
+      sheet.style.transform = '';
+      if (paperWrapper) paperWrapper.style.minHeight = '';
 
       const clientName = document.getElementById('prop-client')?.value || 'Client';
       const projectTitle = document.getElementById('prop-title')?.value || 'Proposal';
@@ -407,6 +529,8 @@ function setupPdfExport() {
       alert('PDF generation encountered an issue. Opening print dialog as fallback.');
       window.print();
     } finally {
+      document.body.classList.remove('exporting-pdf');
+      if (window.applyPadScale) window.applyPadScale();
       exportBtn.disabled = false;
       if (loadingOverlay) loadingOverlay.classList.remove('active');
     }

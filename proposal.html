@@ -64,6 +64,10 @@
         <a href="index.html#contact" class="btn btn-primary" id="nav-cta-btn">
           Get in Touch <i data-lucide="arrow-right"></i>
         </a>
+
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
       </div>
     </div>
   </header>
@@ -83,10 +87,20 @@
         <p class="studio-subtitle">
           Customize your scope of work, project milestones, and commercials. Live-preview your official branded letterhead pad with watermark and export high-definition print-ready PDFs.
         </p>
+
+        <!-- Mobile View Mode Switcher (Visible on Mobile & Tablets) -->
+        <div class="mobile-view-tabs" id="mobile-view-tabs">
+          <button type="button" class="mobile-view-tab active" data-tab="editor">
+            <i data-lucide="edit-3"></i> Edit Proposal
+          </button>
+          <button type="button" class="mobile-view-tab" data-tab="preview">
+            <i data-lucide="file-check"></i> Live Pad Preview
+          </button>
+        </div>
       </div>
 
       <!-- Studio Grid: Editor (Left) & Pad Preview (Right) -->
-      <div class="studio-grid">
+      <div class="studio-grid" id="studio-grid">
         
         <!-- ================= LEFT: Proposal Editor & Controls ================= -->
         <div class="editor-panel">
@@ -227,16 +241,22 @@
 
 
         <!-- ================= RIGHT: Live Official Letterhead Pad Preview ================= -->
-        <div class="preview-container">
+        <div class="preview-container" id="preview-container">
           
           <div class="preview-header-bar">
             <div class="preview-tag">
               <span class="pulse-dot"></span> Live Pad Preview
             </div>
-            <span style="font-size: 0.8rem; color: var(--text-secondary);">A4 Document Format</span>
+            
+            <div class="preview-controls-group">
+              <button type="button" class="preview-scale-btn" id="btn-scale-toggle" title="Toggle Scale Fit Mode">
+                <i data-lucide="maximize-2"></i> <span class="scale-mode-text">Fit View</span>
+              </button>
+              <span class="preview-format-badge">A4 Format</span>
+            </div>
           </div>
 
-          <div class="paper-wrapper">
+          <div class="paper-wrapper" id="paper-wrapper">
             <!-- Target A4 Paper Sheet for PDF Generation -->
             <div id="letterhead-sheet" class="letterhead-sheet">
               
