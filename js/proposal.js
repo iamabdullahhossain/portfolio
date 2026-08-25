@@ -1,115 +1,119 @@
 /* ==========================================================================
    Proposal Studio & Professional Letterhead Memo Pad JavaScript Logic
+   Structured 11-Section Proposal Generator with Dynamic Milestones & PDF
    ========================================================================== */
 
-// Built-in Industry-Standard Proposal Templates
+// Available technology catalog from expertise arsenal
+const ALL_TECH_CATALOG = [
+  "Flutter", "Dart", "Riverpod", "Clean Architecture", "GetX", "Provider",
+  "Android (Kotlin/Java)", "iOS (Swift)", "Offline-First (Hive)", "SQLite",
+  "PHP & Laravel", "MySQL Database", "REST API & Dio", "Firebase (Auth/Firestore)",
+  "FCM Push Notifications", "Real-Time Pusher & WebSockets", "Google Maps & GPS",
+  "In-App Purchases", "Stripe Gateway", "SSLCommerz", "Node.js", "Next.js",
+  "PostgreSQL", "Docker", "CI/CD & Git", "Postman", "Linux VPS"
+];
+
+// Active selected technologies set
+let selectedTechs = new Set(["Flutter", "Dart", "Riverpod", "Clean Architecture", "REST API & Dio", "Firebase (Auth/Firestore)", "Offline-First (Hive)", "FCM Push Notifications"]);
+
+// Dynamic Milestones data store
+let milestoneItems = [
+  { week: "Week 1 - 2", desc: "Architecture Blueprint, UI/UX Design System, Auth & State Management Setup", amount: "$900" },
+  { week: "Week 3 - 5", desc: "Core Feature Engineering, REST API Endpoints Integration & Offline Sync", amount: "$1,400" },
+  { week: "Week 6 - 7", desc: "Comprehensive QA, Stress Testing, Edge-case Bug Fixes & Profiling", amount: "$800" },
+  { week: "Week 8", desc: "Google Play Store & Apple App Store Production Release, Handover & Docs", amount: "$400" }
+];
+
+// Built-in Industry-Standard Structured Presets
 const PROPOSAL_TEMPLATES = {
   mobile: {
     clientName: "Acme Enterprises Ltd.",
     projectTitle: "Cross-Platform Mobile App (Flutter & Riverpod)",
     refNo: "AH-PROP-2026-MOB",
-    timeline: "6 - 8 Weeks",
-    budget: "$2,800 - $3,500 USD",
-    content: `## 1. Executive Summary
-This proposal outlines the end-to-end engineering roadmap for designing, architecting, and launching a high-performance cross-platform mobile application for **Android and iOS**. Leveraging **Flutter**, **Riverpod State Management**, and **Clean Architecture**, the application will deliver 60 FPS fluid interactions, offline caching, and real-time backend synchronization.
-
-## 2. Scope of Deliverables
-- **Cross-Platform Application**: Fully responsive native-compiled apps for iOS & Android.
-- **State Management & Architecture**: Scalable Riverpod architecture with modular separation of concerns.
-- **Backend & REST APIs**: Secure token-based authentication, real-time WebSocket events, and optimized REST endpoints.
-- **Offline First**: Local storage with Hive / SQLite for instantaneous data access during network dropouts.
-- **Push Notifications & Analytics**: Integrated Firebase Cloud Messaging (FCM) and crash monitoring.
-
-## 3. Milestones & Implementation Roadmap
-| Phase | Scope & Milestones | Est. Duration |
-| :--- | :--- | :--- |
-| **Phase 1** | Architecture Blueprint, Wireframing & Design System | Week 1 - 2 |
-| **Phase 2** | Core Feature Engineering & API Integrations | Week 3 - 5 |
-| **Phase 3** | QA, Stress Testing, Performance Profiling & Bug Fixes | Week 6 - 7 |
-| **Phase 4** | App Store (iOS) & Google Play Store Production Release | Week 8 |
-
-## 4. Investment & Payment Terms
-- **Upfront Milestone (Kickoff)**: 30% upon signing and roadmap finalization.
-- **Sprint Delivery (Beta Build)**: 40% upon staging build deployment.
-- **Final Launch & Store Handover**: 30% post production store verification.
-
-## 5. Warranty & Post-Launch Support
-Includes **30 Days of Dedicated Bug-Fix Guarantee** and source code ownership handover with comprehensive documentation.`
+    cost: "$3,500 USD",
+    timeline: "6 - 8 Weeks (Sprint-Based)",
+    techs: ["Flutter", "Dart", "Riverpod", "Clean Architecture", "REST API & Dio", "Firebase (Auth/Firestore)", "Offline-First (Hive)", "FCM Push Notifications"],
+    milestones: [
+      { week: "Week 1 - 2", desc: "Architecture Blueprint, UI/UX Design System, Auth & State Management Setup", amount: "$900" },
+      { week: "Week 3 - 5", desc: "Core Feature Engineering, REST API Endpoints Integration & Offline Sync", amount: "$1,400" },
+      { week: "Week 6 - 7", desc: "Comprehensive QA, Stress Testing, Edge-case Bug Fixes & Profiling", amount: "$800" },
+      { week: "Week 8", desc: "Google Play Store & Apple App Store Production Release, Handover & Docs", amount: "$400" }
+    ],
+    overview: `This proposal outlines the end-to-end engineering roadmap for designing, architecting, and launching a high-performance cross-platform mobile application for Android and iOS. Leveraging Flutter, Riverpod State Management, and Clean Architecture, the application will deliver 60 FPS fluid interactions, offline caching, and real-time backend synchronization.`,
+    features: `• Responsive cross-platform UI compatible with Android 8.0+ and iOS 14+\n• Secure token-based authentication (JWT, Biometrics & Social Login)\n• Offline-first synchronization engine with Hive local database\n• Real-time push notifications via Firebase Cloud Messaging (FCM)\n• In-App payment gateway integration (Stripe / Local Gateways)\n• Automated crash reporting and performance telemetry with Sentry`,
+    revision: `Includes up to 2 rounds of design & feature iteration reviews per development sprint, followed by formal staging milestone signoff.`,
+    maintenance: `30 Days of dedicated post-launch warranty including critical bug fixes, OS compatibility updates, and performance monitoring support.`,
+    deliverables: `1. Complete, clean Flutter & Dart source code repository with modular architecture\n2. Production release packages: Android APK/AAB & iOS IPA TestFlight build\n3. Technical architecture documentation & Postman API collection\n4. App Store & Google Play Store submission management`,
+    summary: `Commercial agreement structured into 4 milestones. Initial 30% deposit upon kickoff, 40% upon beta staging release, and 30% upon final store release. 100% intellectual property ownership transfers upon completion.`,
+    comments: `Client will provide store developer console accounts (Google Play & Apple Developer), branding vectors, and third-party API credentials prior to sprint kickoff.`
   },
 
   fullstack: {
     clientName: "NextGen Logistics Inc.",
-    projectTitle: "Full-Stack Web & Real-Time Dashboard Solution",
+    projectTitle: "Full-Stack Web Application & Real-Time Management System",
     refNo: "AH-PROP-2026-WEB",
-    timeline: "4 - 6 Weeks",
-    budget: "$2,200 - $2,900 USD",
-    content: `## 1. Executive Summary
-This proposal covers the design, development, and cloud deployment of a modern **Full-Stack Web Application** equipped with real-time operational analytics, role-based access control (RBAC), and automated reporting.
-
-## 2. Core Technical Architecture
-- **Frontend**: Modern SPA with responsive design, dynamic data tables, and interactive dashboards.
-- **Backend & Database**: High-throughput REST / GraphQL APIs with PostgreSQL database indexing.
-- **Security & Compliance**: JWT authentication, rate limiting, and encrypted credential storage.
-- **DevOps**: Automated CI/CD pipelines, Dockerized containers, and cloud deployment on Vercel / AWS.
-
-## 3. Project Milestones
-| Milestone | Description | Timeline |
-| :--- | :--- | :--- |
-| **Milestone 1** | Database Schema, Auth Flow & Core UI Mockups | Week 1 |
-| **Milestone 2** | Dashboard Features, Real-Time Streams & API Integration | Week 2 - 3 |
-| **Milestone 3** | Analytics Reporting, CSV/PDF Export & User Permissions | Week 4 |
-| **Milestone 4** | Staging Testing, Security Audit & Cloud Launch | Week 5 - 6 |
-
-## 4. Commercial Terms
-Standard 40% initial commitment, 30% at beta milestone, and 30% upon production deployment.`
+    cost: "$2,900 USD",
+    timeline: "5 - 7 Weeks",
+    techs: ["PHP & Laravel", "MySQL Database", "REST API & Dio", "Real-Time Pusher & WebSockets", "Docker", "CI/CD & Git", "Postman", "Linux VPS"],
+    milestones: [
+      { week: "Week 1 - 2", desc: "Database Schema Design, Role-Based Access Control (RBAC) & API Architecture", amount: "$800" },
+      { week: "Week 3 - 4", desc: "Operational Dashboards, Data Tables, Real-Time Streams & Business Logic", amount: "$1,200" },
+      { week: "Week 5 - 6", desc: "Automated Reporting, PDF/CSV Export, Security Audit & Penetration Testing", amount: "$600" },
+      { week: "Week 7", desc: "Production Cloud Server Deployment, CI/CD Pipeline & Final Handover", amount: "$300" }
+    ],
+    overview: `This proposal covers the custom architectural engineering and cloud deployment of a modern Full-Stack Web Application equipped with real-time operational analytics, role-based access control, and automated reporting systems.`,
+    features: `• High-throughput RESTful API architecture with optimized MySQL database indexing\n• Role-based authentication (Admin, Manager, Operator) with audit logs\n• Real-time event broadcasting and WebSockets integration\n• Automated analytics dashboard with dynamic charts and PDF/Excel export\n• Dockerized container setup with automated CI/CD deployment pipelines`,
+    revision: `Sprint-end sprint reviews with 2 iterations included for UI dashboards and data workflow adjustments.`,
+    maintenance: `45 Days of dedicated server health monitoring, security patch management, and bug fix warranty.`,
+    deliverables: `1. Production web application codebase with full documentation\n2. SQL database migrations, seeders, and ER diagrams\n3. Docker compose configuration and deployment scripts\n4. User training manual and admin walkthrough video`,
+    summary: `Engagement with 40% upfront kickoff, 30% beta staging milestone, and 30% upon cloud production deployment. Full source code and IP rights transferred upon final settlement.`,
+    comments: `Client will provide target VPS/Cloud hosting infrastructure access (AWS, DigitalOcean, or Linux VPS) and domain DNS access.`
   },
 
   maintenance: {
     clientName: "Horizon Digital Services",
-    projectTitle: "Dedicated Mobile & Web Maintenance Agreement (SLA)",
+    projectTitle: "Dedicated Mobile & Web Engineering Maintenance Agreement (SLA)",
     refNo: "AH-PROP-2026-SLA",
-    timeline: "Monthly Retainer (6 Months)",
-    budget: "$650 / Month",
-    content: `## 1. Overview & Objectives
-A dedicated Service Level Agreement (SLA) providing continuous maintenance, OS compatibility upgrades (iOS & Android SDKs), critical security patches, and on-demand feature improvements for your production software.
-
-## 2. Guaranteed Service Inclusions
-- **40 Dedicated Engineering Hours / Month** for bug fixes, code refactoring, or UI tweaks.
-- **Guaranteed Response Time**: Within 2 to 4 hours for high-priority incidents.
-- **Monthly Performance & Dependency Audits**: Keeping Flutter packages, npm modules, and server dependencies up to date.
-- **Backup & Server Health Monitoring**: Proactive error monitoring via Sentry / Firebase Crashlytics.
-
-## 3. Retainer Terms
-Monthly billing at the start of each service cycle. Unused hours roll over up to 10 hours into the consecutive month.`
+    cost: "$650 / Month",
+    timeline: "Monthly Retainer (6 Months Agreement)",
+    techs: ["Flutter", "Dart", "PHP & Laravel", "MySQL Database", "Firebase (Auth/Firestore)", "CI/CD & Git", "Linux VPS"],
+    milestones: [
+      { week: "Month 1 - 2", desc: "Comprehensive Dependency Audit, Security Patching & OS SDK Upgrades", amount: "$1,300" },
+      { week: "Month 3 - 4", desc: "Feature Enhancements, Performance Profiling & Database Optimization", amount: "$1,300" },
+      { week: "Month 5 - 6", desc: "Continuous 24/7 Error Telemetry, Cloud Backups & Monthly Health Reports", amount: "$1,300" }
+    ],
+    overview: `A structured Service Level Agreement (SLA) providing continuous maintenance, OS compatibility upgrades (iOS & Android SDKs), critical security patches, and on-demand feature improvements for your production software.`,
+    features: `• 40 Dedicated engineering hours per month for feature tweaks and bug fixes\n• Guaranteed SLA response time within 2 to 4 hours for high-priority incidents\n• Routine dependency updates (Flutter packages, npm modules, Laravel packages)\n• Proactive crash monitoring with Sentry & Firebase Crashlytics\n• Automated weekly database backups and cloud health diagnostics`,
+    revision: `Unlimited review and feedback cycles for all tasks completed within the monthly engineering hours.`,
+    maintenance: `Continuous monthly SLA coverage with priority queue dispatching throughout the retainer period.`,
+    deliverables: `1. Monthly engineering activity timesheet and accomplishment reports\n2. Pull requests and deployment changelogs\n3. Updated application store builds when required`,
+    summary: `Monthly retainer billed at the commencement of each 30-day service cycle. Unused hours (up to 10 hours) rollover to the subsequent month.`,
+    comments: `Communication via dedicated Slack/WhatsApp channel with weekly async sprint standups.`
   },
 
   blank: {
     clientName: "Valued Client / Company",
     projectTitle: "Custom Project Proposal & Statement of Work",
     refNo: "AH-PROP-2026-CUSTOM",
+    cost: "$0.00 USD",
     timeline: "TBD",
-    budget: "TBD",
-    content: `## 1. Project Overview
-Write your project overview, background, and objectives here...
-
-## 2. Deliverables & Specifications
-- Deliverable 1: High quality engineered modules
-- Deliverable 2: Clean code, testing, and technical documentation
-- Deliverable 3: Deployment and production configuration
-
-## 3. Timeline & Milestone Schedule
-| Milestone | Description | Target Date |
-| :--- | :--- | :--- |
-| **Phase 1** | Requirement analysis and architectural planning | Week 1 |
-| **Phase 2** | Implementation and integration | Week 2 - 3 |
-| **Phase 3** | Review, QA, and final signoff | Week 4 |
-
-## 4. Terms & Signature
-Work begins upon agreement sign-off and initial deposit.`
+    techs: ["Flutter", "Dart", "PHP & Laravel", "MySQL Database"],
+    milestones: [
+      { week: "Phase 1", desc: "Discovery, Requirements Analysis & Architectural Wireframing", amount: "TBD" },
+      { week: "Phase 2", desc: "Core Implementation, Feature Modules & API Integration", amount: "TBD" },
+      { week: "Phase 3", desc: "Final QA Testing, Verification, Cloud Deployment & Handover", amount: "TBD" }
+    ],
+    overview: `Write project overview and business goals here...`,
+    features: `• Feature 1\n• Feature 2\n• Feature 3`,
+    revision: `Revision policy description...`,
+    maintenance: `Maintenance & warranty terms...`,
+    deliverables: `1. Deliverable 1\n2. Deliverable 2`,
+    summary: `Commercial terms and agreement conditions...`,
+    comments: `Special prerequisites or notes...`
   }
 };
 
-// Initialize Application
+// Application Initialization
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) {
     window.lucide.createIcons();
@@ -119,13 +123,16 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileNav();
   setupMobileViewTabs();
   setupPreviewScale();
-  setupFormBindings();
+  setupTechChipsPicker();
+  setupMilestonesBuilder();
+  setupSectionInputsBinding();
+  setupPageBreakCheckboxes();
   setupTemplatePills();
-  setupToolbarShortcuts();
   setupWatermarkControls();
+  setupCostSyncButton();
   setupPdfExport();
   setupPrintButton();
-  
+
   // Set default current date
   const dateInput = document.getElementById('prop-date');
   if (dateInput && !dateInput.value) {
@@ -180,16 +187,12 @@ function setupMobileNav() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   Mobile View Switcher (Editor vs Live Pad Preview)
-   -------------------------------------------------------------------------- */
 function setupMobileViewTabs() {
   const tabs = document.querySelectorAll('.mobile-view-tab');
   const studioGrid = document.getElementById('studio-grid');
 
   if (!tabs.length || !studioGrid) return;
 
-  // Set default view on mobile
   if (window.innerWidth <= 992) {
     studioGrid.classList.add('show-editor');
   }
@@ -222,7 +225,7 @@ function setupMobileViewTabs() {
 }
 
 /* --------------------------------------------------------------------------
-   Live Preview Scaling / Zoom for Mobile Screens
+   2. Live Preview Scaling / Zoom for Mobile Screens
    -------------------------------------------------------------------------- */
 let isFitViewActive = true;
 
@@ -275,125 +278,469 @@ function setupPreviewScale() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Live Form Field Bindings to Pad Preview
+   3. Technology Chips Picker (Section 3)
    -------------------------------------------------------------------------- */
-function setupFormBindings() {
-  const inputs = {
-    clientName: document.getElementById('prop-client'),
-    projectTitle: document.getElementById('prop-title'),
-    refNo: document.getElementById('prop-ref'),
-    date: document.getElementById('prop-date'),
-    timeline: document.getElementById('prop-timeline'),
-    budget: document.getElementById('prop-budget'),
-    content: document.getElementById('prop-content')
-  };
+function setupTechChipsPicker() {
+  const container = document.getElementById('tech-chips-picker');
+  const customInput = document.getElementById('input-custom-tech');
+  const addBtn = document.getElementById('btn-add-custom-tech');
 
-  const previewElements = {
-    clientName: document.getElementById('preview-client'),
-    projectTitle: document.getElementById('preview-title'),
-    refNo: document.getElementById('preview-ref'),
-    date: document.getElementById('preview-date'),
-    sigDate: document.getElementById('preview-sig-date'),
-    timeline: document.getElementById('preview-timeline'),
-    budget: document.getElementById('preview-budget'),
-    body: document.getElementById('preview-body')
-  };
+  if (!container) return;
 
-  function updatePreview() {
-    if (previewElements.clientName) previewElements.clientName.textContent = inputs.clientName.value || 'Client Name';
-    if (previewElements.projectTitle) previewElements.projectTitle.textContent = inputs.projectTitle.value || 'Project Title';
-    if (previewElements.refNo) previewElements.refNo.textContent = inputs.refNo.value || 'AH-PROP-2026';
-    
-    // Format Date nicely (e.g. 25 Aug 2026)
-    if (inputs.date.value) {
-      try {
-        const d = new Date(inputs.date.value);
-        const formatted = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-        if (previewElements.date) previewElements.date.textContent = formatted;
-        if (previewElements.sigDate) previewElements.sigDate.textContent = formatted;
-      } catch (e) {
-        if (previewElements.date) previewElements.date.textContent = inputs.date.value;
-      }
-    }
+  function renderChips() {
+    container.innerHTML = '';
+    ALL_TECH_CATALOG.forEach(tech => {
+      const isSelected = selectedTechs.has(tech);
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = `tech-chip ${isSelected ? 'selected' : ''}`;
+      chip.innerHTML = `<i data-lucide="${isSelected ? 'check' : 'code'}"></i> <span>${escapeHtml(tech)}</span>`;
+      
+      chip.addEventListener('click', () => {
+        if (selectedTechs.has(tech)) {
+          selectedTechs.delete(tech);
+        } else {
+          selectedTechs.add(tech);
+        }
+        renderChips();
+        updatePadPreview();
+      });
 
-    if (previewElements.timeline) previewElements.timeline.textContent = inputs.timeline.value || 'TBD';
-    if (previewElements.budget) previewElements.budget.textContent = inputs.budget.value || 'TBD';
+      container.appendChild(chip);
+    });
 
-    // Render Markdown / HTML Content
-    if (previewElements.body) {
-      const rawText = inputs.content.value || '';
-      previewElements.body.innerHTML = parseMarkdownToHtml(rawText);
-    }
+    if (window.lucide) window.lucide.createIcons();
   }
 
-  // Bind input listeners
-  Object.values(inputs).forEach(input => {
-    if (input) {
-      input.addEventListener('input', updatePreview);
-      input.addEventListener('change', updatePreview);
+  if (addBtn && customInput) {
+    const handleAdd = () => {
+      const val = customInput.value.trim();
+      if (val) {
+        if (!ALL_TECH_CATALOG.includes(val)) {
+          ALL_TECH_CATALOG.push(val);
+        }
+        selectedTechs.add(val);
+        customInput.value = '';
+        renderChips();
+        updatePadPreview();
+      }
+    };
+
+    addBtn.addEventListener('click', handleAdd);
+    customInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleAdd();
+      }
+    });
+  }
+
+  window.renderTechChips = renderChips;
+  renderChips();
+}
+
+/* --------------------------------------------------------------------------
+   4. Dynamic Milestones Table Builder (Section 4)
+   -------------------------------------------------------------------------- */
+function setupMilestonesBuilder() {
+  const container = document.getElementById('milestones-rows-container');
+  const addBtn = document.getElementById('btn-add-milestone-row');
+
+  if (!container || !addBtn) return;
+
+  function renderRows() {
+    container.innerHTML = '';
+    milestoneItems.forEach((item, index) => {
+      const row = document.createElement('div');
+      row.className = 'milestone-builder-row';
+      row.innerHTML = `
+        <input type="text" class="form-input ms-week" placeholder="Week 1" value="${escapeHtml(item.week)}">
+        <input type="text" class="form-input ms-desc" placeholder="Scope / Deliverable" value="${escapeHtml(item.desc)}">
+        <input type="text" class="form-input ms-amt" placeholder="$500" value="${escapeHtml(item.amount)}">
+        <button type="button" class="btn-del-milestone" title="Delete Milestone Row">
+          <i data-lucide="trash-2"></i>
+        </button>
+      `;
+
+      // Inputs change listeners
+      const weekInp = row.querySelector('.ms-week');
+      const descInp = row.querySelector('.ms-desc');
+      const amtInp = row.querySelector('.ms-amt');
+      const delBtn = row.querySelector('.btn-del-milestone');
+
+      weekInp.addEventListener('input', () => {
+        item.week = weekInp.value;
+        updatePadPreview();
+      });
+      descInp.addEventListener('input', () => {
+        item.desc = descInp.value;
+        updatePadPreview();
+      });
+      amtInp.addEventListener('input', () => {
+        item.amount = amtInp.value;
+        calculateMilestonesSum();
+        updatePadPreview();
+      });
+
+      delBtn.addEventListener('click', () => {
+        milestoneItems.splice(index, 1);
+        renderRows();
+        calculateMilestonesSum();
+        updatePadPreview();
+      });
+
+      container.appendChild(row);
+    });
+
+    if (window.lucide) window.lucide.createIcons();
+    calculateMilestonesSum();
+  }
+
+  addBtn.addEventListener('click', () => {
+    milestoneItems.push({
+      week: `Phase ${milestoneItems.length + 1}`,
+      desc: "New project deliverable and milestone description",
+      amount: "$500"
+    });
+    renderRows();
+    calculateMilestonesSum();
+    updatePadPreview();
+  });
+
+  window.renderMilestonesRows = renderRows;
+  renderRows();
+}
+
+function calculateMilestonesSum() {
+  const sumDisplay = document.getElementById('milestone-sum-display');
+  if (!sumDisplay) return 0;
+
+  let totalNumeric = 0;
+  let currencySymbol = '$';
+
+  milestoneItems.forEach(item => {
+    const raw = item.amount || '';
+    const match = raw.match(/([^\d.,\s]+)?\s*([\d,.]+)/);
+    if (match) {
+      if (match[1]) currencySymbol = match[1].trim();
+      const num = parseFloat(match[2].replace(/,/g, ''));
+      if (!isNaN(num)) totalNumeric += num;
     }
   });
 
-  // Expose update for templates
-  window.updatePadPreview = updatePreview;
+  const formatted = totalNumeric.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  sumDisplay.textContent = `Sum: ${currencySymbol}${formatted}`;
+  return `${currencySymbol}${formatted}`;
+}
+
+function setupCostSyncButton() {
+  const btnSync = document.getElementById('btn-sync-cost');
+  const costInput = document.getElementById('prop-sec-cost');
+  if (!btnSync || !costInput) return;
+
+  btnSync.addEventListener('click', () => {
+    const sum = calculateMilestonesSum();
+    if (sum) {
+      costInput.value = `${sum} USD`;
+      updatePadPreview();
+    }
+  });
 }
 
 /* --------------------------------------------------------------------------
-   3. Markdown to Clean HTML Parser
+   5. Section Inputs Binding & Live Pad Preview
    -------------------------------------------------------------------------- */
-function parseMarkdownToHtml(markdown) {
-  if (window.marked && typeof window.marked.parse === 'function') {
-    return window.marked.parse(markdown);
+function setupSectionInputsBinding() {
+  const inputIds = [
+    'prop-client', 'prop-title', 'prop-ref', 'prop-date',
+    'prop-sec-overview', 'prop-sec-features', 'prop-sec-cost',
+    'prop-sec-timeline', 'prop-sec-revision', 'prop-sec-maintenance',
+    'prop-sec-deliverables', 'prop-sec-summary', 'prop-sec-comments'
+  ];
+
+  inputIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', updatePadPreview);
+      el.addEventListener('change', updatePadPreview);
+    }
+  });
+}
+
+function setupPageBreakCheckboxes() {
+  for (let i = 1; i <= 11; i++) {
+    const check = document.getElementById(`break-sec-${i}`);
+    if (check) {
+      check.addEventListener('change', updatePadPreview);
+    }
+  }
+}
+
+// Global updatePadPreview
+function updatePadPreview() {
+  const clientName = document.getElementById('prop-client')?.value || 'Client / Organization';
+  const projectTitle = document.getElementById('prop-title')?.value || 'Project Title';
+  const refNo = document.getElementById('prop-ref')?.value || 'AH-PROP-2026';
+  const dateVal = document.getElementById('prop-date')?.value || '';
+  const totalCost = document.getElementById('prop-sec-cost')?.value || 'TBD';
+  const timeline = document.getElementById('prop-sec-timeline')?.value || 'TBD';
+
+  // Update header metadata cards
+  const prevClient = document.getElementById('preview-client');
+  const prevTitle = document.getElementById('preview-title');
+  const prevRef = document.getElementById('preview-ref');
+  const prevDate = document.getElementById('preview-date');
+  const prevSigDate = document.getElementById('preview-sig-date');
+  const prevTimeline = document.getElementById('preview-timeline');
+  const prevBudget = document.getElementById('preview-budget');
+
+  if (prevClient) prevClient.textContent = clientName;
+  if (prevTitle) prevTitle.textContent = projectTitle;
+  if (prevRef) prevRef.textContent = refNo;
+  if (prevTimeline) prevTimeline.textContent = timeline;
+  if (prevBudget) prevBudget.textContent = totalCost;
+
+  if (dateVal) {
+    try {
+      const d = new Date(dateVal);
+      const formatted = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      if (prevDate) prevDate.textContent = formatted;
+      if (prevSigDate) prevSigDate.textContent = formatted;
+    } catch (e) {
+      if (prevDate) prevDate.textContent = dateVal;
+    }
   }
 
-  // Fallback lightweight parser if marked.js isn't ready
-  let html = markdown
-    // Headings
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    // Bold & Italic
-    .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/gim, '<em>$1</em>')
-    // Tables
-    .replace(/\|(.+)\|/gim, (match) => {
-      const cells = match.split('|').filter(c => c.trim() !== '');
-      if (cells.some(c => c.includes('---'))) return '';
-      const cellTags = cells.map(c => `<td>${c.trim()}</td>`).join('');
-      return `<tr>${cellTags}</tr>`;
-    })
-    // Bullet lists
-    .replace(/^\s*-\s+(.*$)/gim, '<li>$1</li>')
-    // Paragraphs
-    .replace(/\n\n+/g, '</p><p>');
+  // Render 11 Sections into #preview-body
+  const previewBody = document.getElementById('preview-body');
+  if (!previewBody) return;
 
-  return `<p>${html}</p>`;
+  const getPageBreakHtml = (secNum) => {
+    const check = document.getElementById(`break-sec-${secNum}`);
+    return (check && check.checked) ? '<div class="html2pdf__page-break pad-page-break"></div>' : '';
+  };
+
+  let html = '';
+
+  // 1. Overview
+  const overviewVal = document.getElementById('prop-sec-overview')?.value?.trim() || '';
+  if (overviewVal) {
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">1</span> Project Overview</h2>
+        <div class="pad-sec-content">${escapeHtml(overviewVal)}</div>
+      </div>
+      ${getPageBreakHtml(1)}
+    `;
+  }
+
+  // 2. Key Features
+  const featuresVal = document.getElementById('prop-sec-features')?.value?.trim() || '';
+  if (featuresVal) {
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">2</span> Key Features & Scope</h2>
+        <div class="pad-sec-content">${formatBullets(featuresVal)}</div>
+      </div>
+      ${getPageBreakHtml(2)}
+    `;
+  }
+
+  // 3. Technology Stack
+  if (selectedTechs.size > 0) {
+    const techTags = Array.from(selectedTechs).map(t => `<span class="pad-tech-tag"><i data-lucide="check-circle-2"></i> ${escapeHtml(t)}</span>`).join('');
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">3</span> Technology Stack & Architecture</h2>
+        <div class="pad-tech-pills">${techTags}</div>
+      </div>
+      ${getPageBreakHtml(3)}
+    `;
+  }
+
+  // 4. Project Milestones & Payment Schedule
+  if (milestoneItems.length > 0) {
+    let tableRows = '';
+    milestoneItems.forEach(item => {
+      tableRows += `
+        <tr>
+          <td style="font-weight: 700; width: 110px; color: #0f172a;">${escapeHtml(item.week)}</td>
+          <td>${escapeHtml(item.desc)}</td>
+          <td style="font-weight: 700; width: 100px; text-align: right; color: #0f172a;">${escapeHtml(item.amount)}</td>
+        </tr>
+      `;
+    });
+
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">4</span> Milestones & Payment Schedule</h2>
+        <table class="pad-milestones-tbl">
+          <thead>
+            <tr>
+              <th>Timeline</th>
+              <th>Milestone Scope & Deliverables</th>
+              <th style="text-align: right;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRows}
+          </tbody>
+        </table>
+      </div>
+      ${getPageBreakHtml(4)}
+    `;
+  }
+
+  // 5 & 6. Commercials: Total Cost & Estimated Timeline
+  if (totalCost || timeline) {
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">5</span> Commercial Investment & Delivery Schedule</h2>
+        <div class="pad-commercials-grid">
+          <div class="pad-comm-item">
+            <span class="pad-comm-label">TOTAL PROJECT INVESTMENT</span>
+            <span class="pad-comm-val" style="color: #0284c7;">${escapeHtml(totalCost)}</span>
+          </div>
+          <div class="pad-comm-item">
+            <span class="pad-comm-label">ESTIMATED DELIVERY TIMELINE</span>
+            <span class="pad-comm-val">${escapeHtml(timeline)}</span>
+          </div>
+        </div>
+      </div>
+      ${getPageBreakHtml(5)}
+      ${getPageBreakHtml(6)}
+    `;
+  }
+
+  // 7. Review and Revision
+  const revisionVal = document.getElementById('prop-sec-revision')?.value?.trim() || '';
+  if (revisionVal) {
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">7</span> Review & Revision Policy</h2>
+        <div class="pad-sec-content">${escapeHtml(revisionVal)}</div>
+      </div>
+      ${getPageBreakHtml(7)}
+    `;
+  }
+
+  // 8. Maintenance & Warranty
+  const maintenanceVal = document.getElementById('prop-sec-maintenance')?.value?.trim() || '';
+  if (maintenanceVal) {
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">8</span> Maintenance & Warranty Support</h2>
+        <div class="pad-sec-content">${escapeHtml(maintenanceVal)}</div>
+      </div>
+      ${getPageBreakHtml(8)}
+    `;
+  }
+
+  // 9. Final Deliverables
+  const deliverablesVal = document.getElementById('prop-sec-deliverables')?.value?.trim() || '';
+  if (deliverablesVal) {
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">9</span> Final Deliverables</h2>
+        <div class="pad-sec-content">${formatBullets(deliverablesVal)}</div>
+      </div>
+      ${getPageBreakHtml(9)}
+    `;
+  }
+
+  // 10. Proposal Summary
+  const summaryVal = document.getElementById('prop-sec-summary')?.value?.trim() || '';
+  if (summaryVal) {
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">10</span> Proposal Summary & Commercial Terms</h2>
+        <div class="pad-sec-content">${escapeHtml(summaryVal)}</div>
+      </div>
+      ${getPageBreakHtml(10)}
+    `;
+  }
+
+  // 11. Comments / Notes
+  const commentsVal = document.getElementById('prop-sec-comments')?.value?.trim() || '';
+  if (commentsVal) {
+    html += `
+      <div class="pad-sec-block">
+        <h2 class="pad-sec-title"><span class="pad-sec-badge">11</span> Comments & Special Notes</h2>
+        <div class="pad-sec-content">${escapeHtml(commentsVal)}</div>
+      </div>
+      ${getPageBreakHtml(11)}
+    `;
+  }
+
+  previewBody.innerHTML = html;
+  if (window.lucide) window.lucide.createIcons();
+
+  // Re-adjust mobile scaling if active
+  if (window.applyPadScale) window.applyPadScale();
+}
+
+function formatBullets(text) {
+  if (!text) return '';
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  return lines.map(l => {
+    const isBullet = l.startsWith('•') || l.startsWith('-') || l.startsWith('*') || /^\d+[\.\)]/.test(l);
+    const clean = l.replace(/^[•\-\*]\s*/, '').replace(/^\d+[\.\)]\s*/, '');
+    if (isBullet) {
+      return `
+        <div class="pad-feature-item">
+          <span class="pad-feature-bullet">▸</span>
+          <span>${escapeHtml(clean)}</span>
+        </div>
+      `;
+    }
+    return `<p style="margin-bottom: 5px;">${escapeHtml(l)}</p>`;
+  }).join('');
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.toString()
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
 /* --------------------------------------------------------------------------
-   4. Template Loader
+   6. Preset Template Loader
    -------------------------------------------------------------------------- */
 function loadTemplate(key) {
   const tmpl = PROPOSAL_TEMPLATES[key];
   if (!tmpl) return;
 
-  const inputs = {
-    clientName: document.getElementById('prop-client'),
-    projectTitle: document.getElementById('prop-title'),
-    refNo: document.getElementById('prop-ref'),
-    timeline: document.getElementById('prop-timeline'),
-    budget: document.getElementById('prop-budget'),
-    content: document.getElementById('prop-content')
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val || '';
   };
 
-  if (inputs.clientName) inputs.clientName.value = tmpl.clientName;
-  if (inputs.projectTitle) inputs.projectTitle.value = tmpl.projectTitle;
-  if (inputs.refNo) inputs.refNo.value = tmpl.refNo;
-  if (inputs.timeline) inputs.timeline.value = tmpl.timeline;
-  if (inputs.budget) inputs.budget.value = tmpl.budget;
-  if (inputs.content) inputs.content.value = tmpl.content;
+  setVal('prop-client', tmpl.clientName);
+  setVal('prop-title', tmpl.projectTitle);
+  setVal('prop-ref', tmpl.refNo);
+  setVal('prop-sec-cost', tmpl.cost);
+  setVal('prop-sec-timeline', tmpl.timeline);
+  setVal('prop-sec-overview', tmpl.overview);
+  setVal('prop-sec-features', tmpl.features);
+  setVal('prop-sec-revision', tmpl.revision);
+  setVal('prop-sec-maintenance', tmpl.maintenance);
+  setVal('prop-sec-deliverables', tmpl.deliverables);
+  setVal('prop-sec-summary', tmpl.summary);
+  setVal('prop-sec-comments', tmpl.comments);
 
-  if (window.updatePadPreview) window.updatePadPreview();
+  // Set techs
+  selectedTechs = new Set(tmpl.techs || []);
+  if (window.renderTechChips) window.renderTechChips();
+
+  // Set milestones
+  milestoneItems = JSON.parse(JSON.stringify(tmpl.milestones || []));
+  if (window.renderMilestonesRows) window.renderMilestonesRows();
+
+  updatePadPreview();
 }
 
 function setupTemplatePills() {
@@ -402,60 +749,27 @@ function setupTemplatePills() {
     pill.addEventListener('click', () => {
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-      const templateKey = pill.getAttribute('data-template');
-      loadTemplate(templateKey);
+      const key = pill.getAttribute('data-template');
+      loadTemplate(key);
     });
   });
 }
 
 /* --------------------------------------------------------------------------
-   5. Toolbar Shortcuts (Append to Textbox)
-   -------------------------------------------------------------------------- */
-function setupToolbarShortcuts() {
-  const textarea = document.getElementById('prop-content');
-  if (!textarea) return;
-
-  function insertText(snippet) {
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const text = textarea.value;
-    textarea.value = text.substring(0, start) + snippet + text.substring(end);
-    textarea.selectionStart = textarea.selectionEnd = start + snippet.length;
-    textarea.focus();
-    if (window.updatePadPreview) window.updatePadPreview();
-  }
-
-  document.querySelectorAll('[data-insert]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const type = btn.getAttribute('data-insert');
-      if (type === 'milestone') {
-        insertText('\n| Milestone | Description | Duration |\n| :--- | :--- | :--- |\n| **Phase X** | Description of scope | 2 Weeks |\n');
-      } else if (type === 'h2') {
-        insertText('\n## Section Title\n');
-      } else if (type === 'bullet') {
-        insertText('\n- High-performance feature deliverable\n- Clean architecture and unit testing\n');
-      } else if (type === 'highlight') {
-        insertText('\n> **Special Note:** Project starts immediately upon agreement signing.\n');
-      }
-    });
-  });
-}
-
-/* --------------------------------------------------------------------------
-   6. Watermark & Pad Customizer Controls
+   7. Watermark & Document Customization
    -------------------------------------------------------------------------- */
 function setupWatermarkControls() {
-  const watermarkEl = document.getElementById('pad-watermark');
-  const opacityRange = document.getElementById('watermark-opacity');
-  const opacityValText = document.getElementById('watermark-val');
+  const watermarkRange = document.getElementById('watermark-opacity');
+  const watermarkVal = document.getElementById('watermark-val');
   const toggleWatermark = document.getElementById('toggle-watermark');
   const toggleSignature = document.getElementById('toggle-signature');
+  const watermarkEl = document.getElementById('pad-watermark');
   const signatureSection = document.getElementById('pad-signatures');
 
-  if (opacityRange && watermarkEl && opacityValText) {
-    opacityRange.addEventListener('input', () => {
-      const val = opacityRange.value;
-      opacityValText.textContent = `${val}%`;
+  if (watermarkRange && watermarkVal && watermarkEl) {
+    watermarkRange.addEventListener('input', () => {
+      const val = watermarkRange.value;
+      watermarkVal.textContent = `${val}%`;
       watermarkEl.style.opacity = (val / 100).toString();
     });
   }
@@ -474,7 +788,7 @@ function setupWatermarkControls() {
 }
 
 /* --------------------------------------------------------------------------
-   7. PDF Generation Engine (html2pdf.js)
+   8. High-Resolution PDF Export Engine
    -------------------------------------------------------------------------- */
 function setupPdfExport() {
   const exportBtn = document.getElementById('btn-download-pdf');
@@ -497,30 +811,35 @@ function setupPdfExport() {
       const projectTitle = document.getElementById('prop-title')?.value || 'Proposal';
       const cleanFileName = `${clientName.replace(/[^a-zA-Z0-9]/g, '_')}_${projectTitle.replace(/[^a-zA-Z0-9]/g, '_')}_Proposal.pdf`;
 
-      // Wait a tick for DOM rendering
+      // Allow DOM repaint
       await new Promise(r => setTimeout(r, 200));
 
       const opt = {
-        margin: [10, 10, 10, 10], // mm
+        margin: [10, 10, 12, 10], // mm
         filename: cleanFileName,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
-          scale: 2, // 2x resolution for crisp high-density print
+          scale: 2.5, // Ultra-crisp vector-grade resolution
           useCORS: true,
           logging: false,
-          scrollY: 0
+          scrollY: 0,
+          letterRendering: true
         },
         jsPDF: {
           unit: 'mm',
           format: 'a4',
-          orientation: 'portrait'
+          orientation: 'portrait',
+          compress: true
+        },
+        pagebreak: {
+          mode: ['css', 'legacy'],
+          avoid: ['.pad-sec-block', '.pad-signature-section', '.pad-milestones-tbl', '.pad-commercials-grid', '.pad-header', '.pad-meta-bar']
         }
       };
 
       if (window.html2pdf) {
         await window.html2pdf().set(opt).from(sheet).save();
       } else {
-        // Fallback to print dialog if library failed to load
         window.print();
       }
 
@@ -537,9 +856,6 @@ function setupPdfExport() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   8. Print Dialog Trigger
-   -------------------------------------------------------------------------- */
 function setupPrintButton() {
   const printBtn = document.getElementById('btn-print-pad');
   if (printBtn) {

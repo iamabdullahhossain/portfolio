@@ -274,60 +274,316 @@
 }
 
 .form-textarea {
-  min-height: 280px;
+  min-height: 180px;
   resize: vertical;
   line-height: 1.6;
-  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
-  font-size: 0.88rem;
+  font-family: inherit;
+  font-size: 0.92rem;
 }
 
-/* Editor Toolbar */
-.editor-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+.form-textarea-sm {
+  min-height: 100px;
+}
+
+.form-textarea-xs {
+  min-height: 70px;
+}
+
+/* Editor Cards & Section Blocks */
+.editor-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  border-bottom: none;
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color var(--transition-fast);
 }
 
-.toolbar-group {
+.editor-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.section-card {
+  border-left: 3.5px solid var(--accent-yellow);
+}
+
+.section-card-header {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.tool-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: var(--transition-fast);
+.sec-num {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--accent-yellow);
+  color: #0a0a0d;
+  font-size: 0.76rem;
+  font-weight: 800;
+  border-radius: 50%;
+  margin-right: 4px;
 }
 
-.tool-btn:hover {
-  background: var(--bg-card);
+.pagebreak-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+
+.pagebreak-toggle-label:hover {
+  border-color: rgba(217, 119, 6, 0.4);
   color: var(--text-primary);
 }
 
-.textarea-wrapper {
-  display: flex;
-  flex-direction: column;
+.pagebreak-toggle-label input {
+  accent-color: var(--accent-yellow);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
 }
 
-.textarea-wrapper .form-textarea {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.pagebreak-toggle-label:has(input:checked) {
+  background: rgba(217, 119, 6, 0.15);
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+.section-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: -4px;
+}
+
+/* Technology Chips Picker */
+.tech-chips-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 4px 2px;
+}
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.tech-chip:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.tech-chip.selected {
+  background: rgba(255, 199, 0, 0.15);
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+  box-shadow: 0 0 10px rgba(255, 199, 0, 0.12);
+  font-weight: 700;
+}
+
+.tech-chip i,
+.tech-chip svg {
+  width: 14px;
+  height: 14px;
+}
+
+.custom-tech-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-tech-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.btn-tech-add:hover {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+/* Dynamic Milestone Table Builder */
+.milestones-table-builder {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.milestones-table-header {
+  display: grid;
+  grid-template-columns: 100px 1fr 110px 36px;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.milestone-builder-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 110px 36px;
+  gap: 8px;
+  align-items: center;
+}
+
+.milestone-builder-row .form-input {
+  font-size: 0.85rem;
+  padding: 8px 10px;
+}
+
+.btn-del-milestone {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-sm);
+  color: #f87171;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-del-milestone:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+}
+
+.milestones-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-add-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 199, 0, 0.1);
+  border: 1px solid rgba(255, 199, 0, 0.3);
+  color: var(--accent-yellow);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-add-row:hover {
+  background: var(--accent-yellow);
+  color: #0a0a0d;
+}
+
+.milestone-sum-badge {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--accent-emerald);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+/* Cost Input & Sync */
+.cost-input-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-sync-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.btn-sync-cost:hover {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+@media (max-width: 600px) {
+  .milestones-table-header {
+    display: none;
+  }
+
+  .milestone-builder-row {
+    grid-template-columns: 1fr;
+    background: var(--bg-secondary);
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .btn-del-milestone {
+    width: 100%;
+    height: 30px;
+  }
 }
 
 /* Pad Customizer Controls */
@@ -552,7 +808,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. The Official A4 Letterhead Document (Print & Export Target)
+   5. The Official A4 Letterhead Document (Executive Clean Design)
    -------------------------------------------------------------------------- */
 .letterhead-sheet {
   width: 210mm;
@@ -560,10 +816,10 @@
   background: #ffffff;
   color: #1e293b;
   position: relative;
-  padding: 18mm 18mm 16mm 18mm;
+  padding: 16mm 18mm 16mm 18mm;
   box-sizing: border-box;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -572,19 +828,20 @@
   transform-origin: top center;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
+  border-radius: 4px;
 }
 
 /* Notepad Background Watermark */
 .pad-watermark {
   position: absolute;
-  top: 52%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(-10deg);
-  width: 340px;
-  height: 340px;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  width: 380px;
+  height: 380px;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.08;
+  opacity: 0.06;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -595,7 +852,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: grayscale(100%) contrast(150%);
+  filter: grayscale(100%) contrast(160%);
 }
 
 /* Foreground Content (Above Watermark) */
@@ -614,18 +871,19 @@
   align-items: center;
   border-bottom: 2.5px solid #0f172a;
   padding-bottom: 14px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   position: relative;
 }
 
 .pad-header::after {
   content: '';
   position: absolute;
-  bottom: -5.5px;
+  bottom: -4px;
   left: 0;
-  width: 80px;
+  width: 90px;
   height: 3px;
-  background: #ffc700;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  border-radius: 2px;
 }
 
 .pad-brand {
@@ -635,16 +893,17 @@
 }
 
 .pad-brand-logo {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   background: #0f172a;
   padding: 6px;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
 }
 
 .pad-brand-info h1 {
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #0f172a;
   margin: 0 0 2px 0;
@@ -657,25 +916,27 @@
   font-weight: 600;
   color: #475569;
   margin: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 .pad-brand-badge {
   display: inline-block;
-  font-size: 0.68rem;
-  background: #e2e8f0;
+  font-size: 0.66rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   color: #0f172a;
-  padding: 2px 6px;
+  padding: 2px 8px;
   border-radius: 4px;
   font-weight: 700;
-  margin-top: 3px;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
 }
 
 .pad-contact {
   text-align: right;
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   color: #334155;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .pad-contact-item {
@@ -688,8 +949,8 @@
 
 .pad-contact-item svg,
 .pad-contact-item i {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   color: #d97706;
 }
 
@@ -702,14 +963,15 @@
 /* Pad Meta Bar (Client & Proposal ID) */
 .pad-meta-bar {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1.4fr 1fr;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-left: 4px solid #0f172a;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 12px 16px;
-  margin-bottom: 20px;
-  gap: 12px;
+  margin-bottom: 18px;
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 .pad-meta-block {
@@ -718,7 +980,7 @@
 }
 
 .pad-meta-label {
-  font-size: 0.66rem;
+  font-size: 0.64rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -728,114 +990,241 @@
 
 .pad-meta-val {
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #0f172a;
 }
 
 .pad-meta-right {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 8px 12px;
 }
 
 /* Document Body / Proposal Main Content */
 .pad-body {
   flex: 1;
-  font-size: 0.86rem;
+  font-size: 0.85rem;
   line-height: 1.65;
   color: #334155;
 }
 
-.pad-body h2 {
-  font-size: 1.05rem;
+.pad-sec-block {
+  margin-bottom: 15px;
+  position: relative;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.pad-sec-title {
+  font-size: 0.92rem;
   font-weight: 800;
   color: #0f172a;
-  margin: 16px 0 8px 0;
-  border-bottom: 1px solid #e2e8f0;
+  margin: 12px 0 6px 0;
+  border-bottom: 1.5px solid #e2e8f0;
   padding-bottom: 4px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   display: flex;
   align-items: center;
+  gap: 7px;
+}
+
+.pad-sec-title .pad-sec-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #0f172a;
+  color: #ffc700;
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.pad-sec-content {
+  font-size: 0.84rem;
+  color: #334155;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.pad-sec-content p {
+  margin-bottom: 5px;
+}
+
+.pad-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 5px;
+  font-size: 0.84rem;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.pad-feature-bullet {
+  color: #d97706;
+  font-weight: 800;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+/* Rendered Tech Stack Pills in Letterhead */
+.pad-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
+  margin-top: 6px;
 }
 
-.pad-body h2:first-child {
-  margin-top: 0;
-}
-
-.pad-body h3 {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin: 12px 0 4px 0;
-}
-
-.pad-body p {
-  margin: 0 0 10px 0;
-}
-
-.pad-body ul,
-.pad-body ol {
-  margin: 6px 0 12px 0;
-  padding-left: 20px;
-}
-
-.pad-body li {
-  margin-bottom: 4px;
-}
-
-.pad-body strong {
+.pad-tech-tag {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
   color: #0f172a;
+  font-size: 0.74rem;
   font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
-.pad-body table {
+.pad-tech-tag svg,
+.pad-tech-tag i {
+  width: 11px;
+  height: 11px;
+  color: #d97706;
+}
+
+/* Rendered Milestones Table in Letterhead */
+.pad-milestones-tbl {
   width: 100%;
   border-collapse: collapse;
-  margin: 12px 0 16px 0;
-  font-size: 0.82rem;
+  margin: 8px 0 12px 0;
+  font-size: 0.8rem;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
 }
 
-.pad-body th {
+.pad-milestones-tbl th {
   background: #0f172a;
   color: #ffffff;
   font-weight: 700;
   text-align: left;
-  padding: 7px 10px;
-  font-size: 0.76rem;
+  padding: 7px 12px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pad-milestones-tbl td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  color: #334155;
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.pad-milestones-tbl tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.pad-milestones-tbl tr.total-row td {
+  background: #f1f5f9;
+  font-weight: 800;
+  color: #0f172a;
+  border-top: 2px solid #0f172a;
+  border-bottom: none;
+}
+
+/* Commercial Highlights Grid */
+.pad-commercials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #d97706;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-top: 6px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.pad-comm-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.pad-comm-label {
+  font-size: 0.64rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.pad-comm-val {
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 2px;
+}
+
+/* PDF Page Breaker in Preview & Print */
+.pad-page-break {
+  height: 0;
+  margin: 14px 0;
+  padding: 0;
+  border-top: 1.5px dashed rgba(217, 119, 6, 0.5);
+  position: relative;
+  page-break-after: always !important;
+  break-after: page !important;
+}
+
+.pad-page-break::before {
+  content: '✂️ PDF Page Break';
+  position: absolute;
+  top: -9px;
+  right: 12px;
+  font-size: 9px;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  color: #b45309;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
-.pad-body td {
-  border-bottom: 1px solid #e2e8f0;
-  padding: 8px 10px;
-  color: #334155;
-}
-
-.pad-body tr:nth-child(even) {
-  background: #f8fafc;
-}
-
-.pad-body .highlight-box {
-  background: #fffbeb;
-  border-left: 3px solid #f59e0b;
-  padding: 8px 12px;
-  border-radius: 4px;
-  margin: 10px 0;
-  font-size: 0.82rem;
-  color: #78350f;
+@media print {
+  .pad-page-break {
+    border-top: none !important;
+    margin: 0 !important;
+  }
+  .pad-page-break::before {
+    display: none !important;
+  }
 }
 
 /* Pad Signatures & Footer */
 .pad-signature-section {
-  margin-top: 24px;
+  margin-top: 22px;
   padding-top: 14px;
   border-top: 1px dashed #cbd5e1;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 32px;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .signature-box {
@@ -845,7 +1234,7 @@
 
 .sig-line {
   border-bottom: 1.5px solid #0f172a;
-  height: 40px;
+  height: 38px;
   margin-bottom: 6px;
   position: relative;
   display: flex;
@@ -854,13 +1243,14 @@
 }
 
 .sig-sign-text {
-  font-family: 'Brush Script MT', 'Dancing Script', cursive, sans-serif;
-  font-size: 1.3rem;
+  font-family: 'Dancing Script', cursive, sans-serif;
+  font-size: 1.4rem;
   color: #1e3a8a;
+  font-weight: 700;
 }
 
 .sig-name {
-  font-size: 0.84rem;
+  font-size: 0.85rem;
   font-weight: 800;
   color: #0f172a;
 }
@@ -877,7 +1267,7 @@
 }
 
 .pad-footer {
-  margin-top: 18px;
+  margin-top: 16px;
   padding-top: 8px;
   border-top: 1px solid #e2e8f0;
   display: flex;
@@ -885,6 +1275,8 @@
   align-items: center;
   font-size: 0.68rem;
   color: #64748b;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .pad-footer-left {
@@ -894,13 +1286,14 @@
 }
 
 .pad-footer-left span {
-  font-weight: 600;
+  font-weight: 700;
   color: #0f172a;
 }
 
 .pad-footer-right {
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 /* --------------------------------------------------------------------------
