@@ -1400,7 +1400,7 @@
 
 /* Style Toggles */
 .letterhead-sheet.style-executive {
-  padding: 22mm 24mm 22mm 24mm;
+  padding: 20mm 20mm 20mm 20mm;
   color: #111827;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.55;
@@ -1441,6 +1441,8 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 30px;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .exec-top-space {
@@ -1460,6 +1462,8 @@
 
 .exec-title-block {
   margin-bottom: 20px;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .exec-doc-title {
@@ -1483,7 +1487,9 @@
 /* Executive Sections & Blocks */
 .exec-block {
   margin-bottom: 16px;
-  page-break-inside: auto;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 
 .exec-sec-title {
@@ -1492,6 +1498,8 @@
   color: #000000;
   margin: 16px 0 10px 0;
   letter-spacing: 0;
+  break-after: avoid;
+  page-break-after: avoid;
 }
 
 .exec-sec-content {
@@ -1507,7 +1515,10 @@
 }
 
 .exec-feature-group {
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 
 .exec-feature-group-title {
@@ -1515,6 +1526,8 @@
   font-weight: 700;
   color: #000000;
   margin: 12px 0 6px 0;
+  break-after: avoid;
+  page-break-after: avoid;
 }
 
 .exec-bullet-row {
@@ -1525,6 +1538,8 @@
   color: #111827;
   line-height: 1.55;
   margin-bottom: 3px;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .exec-bullet {
@@ -2463,7 +2478,104 @@
 /* --------------------------------------------------------------------------
    6. PDF & Print Specific Rules
    -------------------------------------------------------------------------- */
+/* Dedicated PDF Export State for html2pdf (Pixel-Perfect A4 & Anti-Clipping) */
+body.exporting-pdf {
+  overflow: visible !important;
+  background: #ffffff !important;
+}
+
+body.exporting-pdf .paper-wrapper {
+  background: #ffffff !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  width: 210mm !important;
+}
+
+body.exporting-pdf .letterhead-sheet {
+  width: 210mm !important;
+  max-width: 210mm !important;
+  min-width: 210mm !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+body.exporting-pdf .letterhead-sheet.style-executive {
+  padding: 20mm 20mm 20mm 20mm !important;
+}
+
+body.exporting-pdf .letterhead-sheet.style-letterhead {
+  padding: 16mm 18mm 16mm 18mm !important;
+}
+
+/* Strict page-break protection for individual units during PDF conversion */
+body.exporting-pdf .exec-block,
+body.exporting-pdf .pad-sec-block,
+body.exporting-pdf .exec-feature-group,
+body.exporting-pdf .exec-features-container,
+body.exporting-pdf .exec-bullet-row,
+body.exporting-pdf .exec-timeline-item,
+body.exporting-pdf .exec-timeline-breakdown,
+body.exporting-pdf .exec-tech-list,
+body.exporting-pdf .exec-payment-sched,
+body.exporting-pdf .exec-summary-card,
+body.exporting-pdf .exec-header-top,
+body.exporting-pdf .exec-title-block,
+body.exporting-pdf .pad-feature-module,
+body.exporting-pdf .pad-feature-item,
+body.exporting-pdf .pad-commercials-grid,
+body.exporting-pdf .pad-signature-section,
+body.exporting-pdf .pad-header,
+body.exporting-pdf .pad-meta-bar,
+body.exporting-pdf table,
+body.exporting-pdf tr,
+body.exporting-pdf td,
+body.exporting-pdf th,
+body.exporting-pdf p,
+body.exporting-pdf h1,
+body.exporting-pdf h2,
+body.exporting-pdf h3,
+body.exporting-pdf h4 {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+  -webkit-column-break-inside: avoid !important;
+}
+
+body.exporting-pdf .exec-sec-title,
+body.exporting-pdf .pad-sec-title,
+body.exporting-pdf .exec-feature-group-title,
+body.exporting-pdf .exec-doc-title,
+body.exporting-pdf .exec-project-title,
+body.exporting-pdf h1,
+body.exporting-pdf h2,
+body.exporting-pdf h3 {
+  break-after: avoid !important;
+  page-break-after: avoid !important;
+}
+
+.html2pdf__page-break,
+.pad-page-break {
+  page-break-before: always !important;
+  break-before: page !important;
+  height: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
   body * {
     visibility: hidden;
   }
@@ -2477,13 +2589,14 @@
   }
   .proposal-page {
     padding: 0 !important;
-    background: transparent !important;
+    background: #ffffff !important;
   }
   .paper-wrapper {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
+    margin: 0 !important;
     overflow: visible !important;
   }
   .letterhead-sheet,
@@ -2491,17 +2604,36 @@
     visibility: visible;
   }
   .letterhead-sheet {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100% !important;
-    min-height: 100vh !important;
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
     box-shadow: none !important;
     border: none !important;
-    margin: 0 !important;
-    padding: 15mm 15mm 15mm 15mm !important;
+    margin: 0 auto !important;
+    padding: 20mm 20mm 20mm 20mm !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    box-sizing: border-box !important;
+  }
+
+  .exec-block,
+  .pad-sec-block,
+  .exec-feature-group,
+  .exec-timeline-item,
+  .exec-milestones-tbl tr,
+  .pad-milestones-tbl tr,
+  table, tr, p, h1, h2, h3 {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .exec-sec-title,
+  .pad-sec-title,
+  h1, h2, h3 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
   }
 }
 

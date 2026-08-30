@@ -1693,15 +1693,17 @@ function setupPdfExport() {
       await new Promise(r => setTimeout(r, 200));
 
       const opt = {
-        margin: [10, 10, 12, 10], // mm
+        margin: [0, 0, 0, 0], // mm - 0 margins because sheet has exact, balanced padding
         filename: cleanFileName,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
-          scale: 2.5, // Ultra-crisp vector-grade resolution
+          scale: 2, // Crisp 300 DPI vector clarity
           useCORS: true,
           logging: false,
           scrollY: 0,
-          letterRendering: true
+          scrollX: 0,
+          letterRendering: true,
+          windowWidth: 794 // Exact standard A4 width in px (210mm)
         },
         jsPDF: {
           unit: 'mm',
@@ -1710,8 +1712,35 @@ function setupPdfExport() {
           compress: true
         },
         pagebreak: {
-          mode: ['css', 'legacy'],
-          avoid: ['.pad-sec-block', '.pad-signature-section', '.pad-milestones-tbl', '.pad-commercials-grid', '.pad-header', '.pad-meta-bar']
+          mode: ['avoid-all', 'css', 'legacy'],
+          avoid: [
+            '.exec-block',
+            '.exec-feature-group',
+            '.exec-features-container',
+            '.exec-bullet-row',
+            '.exec-timeline-item',
+            '.exec-timeline-breakdown',
+            '.exec-tech-list',
+            '.exec-milestones-tbl',
+            '.exec-milestones-tbl tr',
+            '.exec-payment-sched',
+            '.exec-summary-card',
+            '.exec-header-top',
+            '.exec-title-block',
+            '.pad-sec-block',
+            '.pad-feature-module',
+            '.pad-feature-item',
+            '.pad-milestones-tbl',
+            '.pad-milestones-tbl tr',
+            '.pad-commercials-grid',
+            '.pad-signature-section',
+            '.pad-header',
+            '.pad-meta-bar',
+            'table',
+            'tr',
+            'p',
+            'h1', 'h2', 'h3', 'h4'
+          ]
         }
       };
 
