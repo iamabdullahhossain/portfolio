@@ -1666,8 +1666,10 @@ function setupWatermarkControls() {
 }
 
 /* --------------------------------------------------------------------------
-   8. High-Resolution PDF Export Engine (Isolated Clone & Anti-Cut Geometry)
+   8. High-Resolution PDF Export Engine (Isolated Clone & Single-Save Pipeline)
    -------------------------------------------------------------------------- */
+let isExportingPdf = false;
+
 function setupPdfExport() {
   const exportBtns = [
     document.getElementById('btn-download-pdf'),
@@ -1679,7 +1681,16 @@ function setupPdfExport() {
 
   if (exportBtns.length === 0 || !sheet) return;
 
-  const handleExport = async () => {
+  const handleExport = async (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    // Mutex lock to prevent duplicate concurrent triggers
+    if (isExportingPdf) return;
+    isExportingPdf = true;
+
     let exportContainer = null;
     try {
       exportBtns.forEach(b => b.disabled = true);
@@ -1763,7 +1774,19 @@ function setupPdfExport() {
       };
 
       if (window.html2pdf) {
-        await window.html2pdf().set(opt).from(clone).save();
+        // Use single-save Promise pipeline to avoid html2pdf Worker.then() double-download bug
+        await new Promise((resolve, reject) => {
+          window.html2pdf()
+            .set(opt)
+            .from(clone)
+            .toPdf()
+            .get('pdf')
+            .then((pdf) => {
+              pdf.save(cleanFileName);
+              resolve();
+            })
+            .catch(reject);
+        });
       } else {
         window.print();
       }
@@ -1778,6 +1801,7 @@ function setupPdfExport() {
       }
       exportBtns.forEach(b => b.disabled = false);
       if (loadingOverlay) loadingOverlay.classList.remove('active');
+      isExportingPdf = false;
     }
   };
 
