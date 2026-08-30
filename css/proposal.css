@@ -2483,7 +2483,7 @@
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
-  width: 210mm !important;
+  width: 175mm !important;
   background: #ffffff !important;
   z-index: -99999 !important;
   margin: 0 !important;
@@ -2491,13 +2491,13 @@
   overflow: visible !important;
 }
 
-#pdf-export-sheet,
-body.exporting-pdf .letterhead-sheet {
-  width: 210mm !important;
-  max-width: 210mm !important;
-  min-width: 210mm !important;
+#pdf-export-sheet {
+  width: 175mm !important;
+  max-width: 175mm !important;
+  min-width: 175mm !important;
   box-sizing: border-box !important;
   margin: 0 !important;
+  padding: 0 !important;
   box-shadow: none !important;
   border: none !important;
   border-radius: 0 !important;
@@ -2506,14 +2506,12 @@ body.exporting-pdf .letterhead-sheet {
   background: #ffffff !important;
 }
 
-#pdf-export-sheet.style-executive,
-body.exporting-pdf .letterhead-sheet.style-executive {
-  padding: 20mm 20mm 20mm 20mm !important;
+#pdf-export-sheet.style-executive {
+  padding: 0 !important;
 }
 
-#pdf-export-sheet.style-letterhead,
-body.exporting-pdf .letterhead-sheet.style-letterhead {
-  padding: 16mm 18mm 16mm 18mm !important;
+#pdf-export-sheet.style-letterhead {
+  padding: 0 !important;
 }
 
 /* Strict page-break protection for individual units during PDF conversion */

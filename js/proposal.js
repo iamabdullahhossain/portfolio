@@ -1706,7 +1706,7 @@ function setupPdfExport() {
       exportContainer.style.position = 'fixed';
       exportContainer.style.top = '0';
       exportContainer.style.left = '0';
-      exportContainer.style.width = '210mm';
+      exportContainer.style.width = '175mm';
       exportContainer.style.zIndex = '-99999';
       exportContainer.style.background = '#ffffff';
       exportContainer.style.margin = '0';
@@ -1720,10 +1720,11 @@ function setupPdfExport() {
       clone.style.position = 'static';
       clone.style.transform = 'none';
       clone.style.transformOrigin = 'top left';
-      clone.style.width = '210mm';
-      clone.style.maxWidth = '210mm';
-      clone.style.minWidth = '210mm';
+      clone.style.width = '175mm';
+      clone.style.maxWidth = '175mm';
+      clone.style.minWidth = '175mm';
       clone.style.margin = '0';
+      clone.style.padding = '0';
       clone.style.boxShadow = 'none';
       clone.style.border = 'none';
       clone.style.borderRadius = '0';
@@ -1742,7 +1743,7 @@ function setupPdfExport() {
       await new Promise(r => setTimeout(r, 300));
 
       const opt = {
-        margin: [0, 0, 0, 0], // mm - 0 margins because sheet has exact internal 20mm padding
+        margin: [16, 17.5, 16, 17.5], // mm: [top, right, bottom, left] uniform margins on EVERY page
         filename: cleanFileName,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
