@@ -1198,7 +1198,7 @@ function updatePadPreview() {
         let backend = techList.filter(t => ['Laravel', 'PHP', 'Node.js', 'Express', 'Django'].some(k => t.includes(k))).join(', ') || 'Laravel';
         let database = techList.filter(t => ['MySQL', 'PostgreSQL', 'MongoDB', 'SQLite', 'Hive'].some(k => t.includes(k))).join(', ') || 'MySQL';
         let api = techList.filter(t => ['REST', 'Dio', 'GraphQL', 'WebSockets', 'Pusher'].some(k => t.includes(k))).join(', ') || 'RESTful API';
-        let report = techList.filter(t => ['PDF', 'Excel', 'CSV', 'Export'].some(k => t.includes(k))).join(', ') || 'PDF';
+        let report = techList.filter(t => ['PDF', 'Excel', 'CSV', 'Export'].some(k => t.includes(k))).join(', ') || '';
 
         techItemsHtml = `
           <div class="exec-tech-list">
@@ -1206,7 +1206,7 @@ function updatePadPreview() {
             <div><strong>Backend:</strong> ${escapeHtml(backend)}</div>
             <div><strong>Database:</strong> ${escapeHtml(database)}</div>
             <div><strong>API:</strong> ${escapeHtml(api)}</div>
-            <div><strong>Report Export:</strong> ${escapeHtml(report)}</div>
+            ${report ? `<div><strong>Report Export:</strong> ${escapeHtml(report)}</div>` : ''}
           </div>
         `;
       } else {
@@ -1299,26 +1299,7 @@ function updatePadPreview() {
         <div class="pad-sec-block exec-block">
           <h2 class="exec-sec-title">6. Estimated Delivery Timeline</h2>
           <div class="exec-sec-content">
-            <p style="margin-bottom: 12px;">The complete project will be delivered within <strong>${escapeHtml(timeline)}</strong>.</p>
-            <p style="margin-bottom: 10px;">The development process will include:</p>
-            <div class="exec-timeline-breakdown">
-              <div class="exec-timeline-item">
-                <strong>Week 1–2:</strong>
-                <p>Project setup, database architecture, authentication, core UI and module development.</p>
-              </div>
-              <div class="exec-timeline-item">
-                <strong>Week 3–4:</strong>
-                <p>Complete UI implementation, Laravel backend/API development and database integration.</p>
-              </div>
-              <div class="exec-timeline-item">
-                <strong>Week 5:</strong>
-                <p>Flutter–Laravel integration, business logic, stock, sales, imports and financial calculations.</p>
-              </div>
-              <div class="exec-timeline-item">
-                <strong>Week 6:</strong>
-                <p>Testing, bug fixing, client review, requested adjustments and final delivery.</p>
-              </div>
-            </div>
+            <p style="margin-bottom: 0;">The complete project will be delivered within <strong>${escapeHtml(timeline)}</strong>.</p>
           </div>
         </div>
         ${getPageBreakHtml(6)}
