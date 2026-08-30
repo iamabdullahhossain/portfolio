@@ -161,7 +161,7 @@
                   <div class="layout-icon"><i data-lucide="file-check-2"></i></div>
                   <div class="layout-info">
                     <span class="layout-title">Executive Proposal</span>
-                    <span class="layout-desc">Clean minimalist design with top-right logo, crisp typography & dividers</span>
+                    <span class="layout-desc">Clean minimalist design with top-right logo, crisp typography &amp; dividers</span>
                   </div>
                 </div>
               </label>
@@ -172,17 +172,43 @@
                   <div class="layout-icon"><i data-lucide="stamp"></i></div>
                   <div class="layout-info">
                     <span class="layout-title">Branded Letterhead</span>
-                    <span class="layout-desc">Includes full contact header banner, metadata grid & digital signature block</span>
+                    <span class="layout-desc">Includes full contact header banner, metadata grid &amp; digital signature block</span>
                   </div>
                 </div>
               </label>
             </div>
           </div>
 
+          <!-- Currency Selection System (BDT / USD) -->
+          <div class="editor-card">
+            <div class="panel-section-title">
+              <i data-lucide="coins"></i> Proposal Currency (BDT / USD)
+            </div>
+            <div class="currency-selector-grid">
+              <button type="button" class="currency-option-btn active" data-currency="BDT" id="cur-btn-bdt">
+                <div class="cur-flag-icon">🇧🇩</div>
+                <div class="cur-details">
+                  <span class="cur-symbol">BDT (৳)</span>
+                  <span class="cur-title">Bangladeshi Taka</span>
+                </div>
+                <i data-lucide="check-circle-2" class="cur-check-icon"></i>
+              </button>
+
+              <button type="button" class="currency-option-btn" data-currency="USD" id="cur-btn-usd">
+                <div class="cur-flag-icon">🇺🇸</div>
+                <div class="cur-details">
+                  <span class="cur-symbol">USD ($)</span>
+                  <span class="cur-title">United States Dollar</span>
+                </div>
+                <i data-lucide="check-circle-2" class="cur-check-icon"></i>
+              </button>
+            </div>
+          </div>
+
           <!-- Document & Client Info -->
           <div class="editor-card">
             <div class="panel-section-title">
-              <i data-lucide="user-check"></i> Document & Client Header Info
+              <i data-lucide="user-check"></i> Document &amp; Client Header Info
             </div>
             
             <div class="form-row">
@@ -265,7 +291,7 @@
           <div class="editor-card section-card">
             <div class="section-card-header">
               <div class="panel-section-title">
-                <span class="sec-num">4</span> Project Milestones & Payment Schedule
+                <span class="sec-num">4</span> Project Milestones &amp; Payment Schedule
               </div>
               <label class="pagebreak-toggle-label" title="Insert PDF Page Break after this section">
                 <input type="checkbox" id="break-sec-4" class="pagebreak-check" data-section="4">
@@ -274,18 +300,18 @@
             </div>
 
             <div class="milestones-table-builder">
-              <div class="milestones-table-header">
-                <span class="col-week">Week / Duration</span>
-                <span class="col-desc">Milestone Scope & Deliverables</span>
-                <span class="col-amt">Amount</span>
-                <span class="col-del"></span>
+              <div class="milestones-builder-intro">
+                <i data-lucide="sparkles"></i>
+                <span>Configure clear project phases, milestone deliverables, and payment breakdowns with generous spacing.</span>
               </div>
+
               <div class="milestones-rows-container" id="milestones-rows-container">
-                <!-- Dynamic Milestone Rows Injected Here -->
+                <!-- Dynamic Milestone Cards Injected Here -->
               </div>
+
               <div class="milestones-actions-row">
                 <button type="button" id="btn-add-milestone-row" class="btn-add-row">
-                  <i data-lucide="plus-circle"></i> + Add Milestone Row
+                  <i data-lucide="plus-circle"></i> + Add New Milestone Phase
                 </button>
                 <div class="milestone-sum-badge" id="milestone-sum-display">
                   Sum: $0.00
@@ -306,7 +332,10 @@
               </label>
             </div>
             <div class="cost-input-wrapper">
-              <input type="text" id="prop-sec-cost" class="form-input" placeholder="e.g. $3,200 USD (or auto-calculated from milestones)" value="$2,800 - $3,500 USD">
+              <div class="currency-tag-indicator" id="cost-currency-indicator" title="Current proposal currency">
+                <i data-lucide="coins"></i> <span>BDT (৳)</span>
+              </div>
+              <input type="text" id="prop-sec-cost" class="form-input" placeholder="e.g. 100,000 BDT or $3,500 USD" value="100,000 BDT">
               <button type="button" id="btn-sync-cost" class="btn-sync-cost" title="Auto-fill from milestone table sum">
                 <i data-lucide="refresh-cw"></i> Sync from Milestones
               </button>

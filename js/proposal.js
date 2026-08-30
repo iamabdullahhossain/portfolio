@@ -16,12 +16,15 @@ const ALL_TECH_CATALOG = [
 // Active selected technologies set
 let selectedTechs = new Set(["Flutter", "Dart", "PHP & Laravel", "MySQL Database", "REST API & Dio", "PDF Export"]);
 
+// Proposal Pricing Currency State ('BDT' or 'USD')
+let currentCurrency = 'BDT';
+
 // Dynamic Milestones data store
 let milestoneItems = [
-  { week: "Milestone 1 — Project Start", desc: "Project setup, architecture, database planning and initial development", amount: "30% — 30,000 BDT" },
-  { week: "Milestone 2 — UI Implementation", desc: "Complete Flutter UI implementation for all agreed modules/screens", amount: "20% — 20,000 BDT" },
-  { week: "Milestone 3 — Backend Integration", desc: "Laravel backend, API development, database integration and Flutter API integration", amount: "20% — 20,000 BDT" },
-  { week: "Milestone 4 — Final Delivery", desc: "Testing, bug fixing, reviews, final adjustments and production-ready delivery", amount: "30% — 30,000 BDT" }
+  { week: "Milestone 1 — Project Start", percent: "30%", amount: "30,000 BDT", desc: "Project setup, architecture, database planning and initial development" },
+  { week: "Milestone 2 — UI Implementation", percent: "20%", amount: "20,000 BDT", desc: "Complete Flutter UI implementation for all agreed modules/screens" },
+  { week: "Milestone 3 — Backend Integration", percent: "20%", amount: "20,000 BDT", desc: "Laravel backend, API development, database integration and Flutter API integration" },
+  { week: "Milestone 4 — Final Delivery", percent: "30%", amount: "30,000 BDT", desc: "Testing, bug fixing, reviews, final adjustments and production-ready delivery" }
 ];
 
 // Built-in Industry-Standard Structured Presets
@@ -34,10 +37,10 @@ const PROPOSAL_TEMPLATES = {
     timeline: "Within 1.5 Months (approx. 6 weeks)",
     techs: ["Flutter", "Dart", "PHP & Laravel", "MySQL Database", "REST API & Dio", "PDF Export"],
     milestones: [
-      { week: "Milestone 1 — Project Start", desc: "Project setup, architecture, database planning and initial development", amount: "30% — 30,000 BDT" },
-      { week: "Milestone 2 — UI Implementation", desc: "Complete Flutter UI implementation for all agreed modules/screens", amount: "20% — 20,000 BDT" },
-      { week: "Milestone 3 — Backend Integration", desc: "Laravel backend, API development, database integration and Flutter API integration", amount: "20% — 20,000 BDT" },
-      { week: "Milestone 4 — Final Delivery", desc: "Testing, bug fixing, reviews, final adjustments and production-ready delivery", amount: "30% — 30,000 BDT" }
+      { week: "Milestone 1 — Project Start", percent: "30%", amount: "30,000 BDT", desc: "Project setup, architecture, database planning and initial development" },
+      { week: "Milestone 2 — UI Implementation", percent: "20%", amount: "20,000 BDT", desc: "Complete Flutter UI implementation for all agreed modules/screens" },
+      { week: "Milestone 3 — Backend Integration", percent: "20%", amount: "20,000 BDT", desc: "Laravel backend, API development, database integration and Flutter API integration" },
+      { week: "Milestone 4 — Final Delivery", percent: "30%", amount: "30,000 BDT", desc: "Testing, bug fixing, reviews, final adjustments and production-ready delivery" }
     ],
     overview: `This project will develop a complete Business Management & Accounting System to manage imports, inventory, sales, customers, suppliers, cash/bank transactions, expenses, and financial reporting from a centralized platform.\n\nThe system will provide real-time visibility into the business’s financial position, stock status, receivables, payables, import costs, sales performance, and profitability.`,
     features: `Authentication
@@ -173,10 +176,10 @@ Based on the nature of this system, the following approach is recommended for ho
     timeline: "6 - 8 Weeks (Sprint-Based)",
     techs: ["Flutter", "Dart", "Riverpod", "Clean Architecture", "REST API & Dio", "Firebase (Auth/Firestore)", "Offline-First (Hive)", "FCM Push Notifications"],
     milestones: [
-      { week: "Week 1 - 2", desc: "Architecture Blueprint, UI/UX Design System, Auth & State Management Setup", amount: "$900" },
-      { week: "Week 3 - 5", desc: "Core Feature Engineering, REST API Endpoints Integration & Offline Sync", amount: "$1,400" },
-      { week: "Week 6 - 7", desc: "Comprehensive QA, Stress Testing, Edge-case Bug Fixes & Profiling", amount: "$800" },
-      { week: "Week 8", desc: "Google Play Store & Apple App Store Production Release, Handover & Docs", amount: "$400" }
+      { week: "Week 1 - 2", percent: "25%", amount: "$900 USD", desc: "Architecture Blueprint, UI/UX Design System, Auth & State Management Setup" },
+      { week: "Week 3 - 5", percent: "40%", amount: "$1,400 USD", desc: "Core Feature Engineering, REST API Endpoints Integration & Offline Sync" },
+      { week: "Week 6 - 7", percent: "25%", amount: "$800 USD", desc: "Comprehensive QA, Stress Testing, Edge-case Bug Fixes & Profiling" },
+      { week: "Week 8", percent: "10%", amount: "$400 USD", desc: "Google Play Store & Apple App Store Production Release, Handover & Docs" }
     ],
     overview: `This proposal outlines the end-to-end engineering roadmap for designing, architecting, and launching a high-performance cross-platform mobile application for Android and iOS. Leveraging Flutter, Riverpod State Management, and Clean Architecture, the application will deliver 60 FPS fluid interactions, offline caching, and real-time backend synchronization.`,
     features: `• Responsive cross-platform UI compatible with Android 8.0+ and iOS 14+\n• Secure token-based authentication (JWT, Biometrics & Social Login)\n• Offline-first synchronization engine with Hive local database\n• Real-time push notifications via Firebase Cloud Messaging (FCM)\n• In-App payment gateway integration (Stripe / Local Gateways)\n• Automated crash reporting and performance telemetry with Sentry`,
@@ -195,10 +198,10 @@ Based on the nature of this system, the following approach is recommended for ho
     timeline: "5 - 7 Weeks",
     techs: ["PHP & Laravel", "MySQL Database", "REST API & Dio", "Real-Time Pusher & WebSockets", "Docker", "CI/CD & Git", "Postman", "Linux VPS"],
     milestones: [
-      { week: "Week 1 - 2", desc: "Database Schema Design, Role-Based Access Control (RBAC) & API Architecture", amount: "$800" },
-      { week: "Week 3 - 4", desc: "Operational Dashboards, Data Tables, Real-Time Streams & Business Logic", amount: "$1,200" },
-      { week: "Week 5 - 6", desc: "Automated Reporting, PDF/CSV Export, Security Audit & Penetration Testing", amount: "$600" },
-      { week: "Week 7", desc: "Production Cloud Server Deployment, CI/CD Pipeline & Final Handover", amount: "$300" }
+      { week: "Week 1 - 2", percent: "30%", amount: "$800 USD", desc: "Database Schema Design, Role-Based Access Control (RBAC) & API Architecture" },
+      { week: "Week 3 - 4", percent: "40%", amount: "$1,200 USD", desc: "Operational Dashboards, Data Tables, Real-Time Streams & Business Logic" },
+      { week: "Week 5 - 6", percent: "20%", amount: "$600 USD", desc: "Automated Reporting, PDF/CSV Export, Security Audit & Penetration Testing" },
+      { week: "Week 7", percent: "10%", amount: "$300 USD", desc: "Production Cloud Server Deployment, CI/CD Pipeline & Final Handover" }
     ],
     overview: `This proposal covers the custom architectural engineering and cloud deployment of a modern Full-Stack Web Application equipped with real-time operational analytics, role-based access control, and automated reporting systems.`,
     features: `• High-throughput RESTful API architecture with optimized MySQL database indexing\n• Role-based authentication (Admin, Manager, Operator) with audit logs\n• Real-time event broadcasting and WebSockets integration\n• Automated analytics dashboard with dynamic charts and PDF/Excel export\n• Dockerized container setup with automated CI/CD deployment pipelines`,
@@ -217,9 +220,9 @@ Based on the nature of this system, the following approach is recommended for ho
     timeline: "Monthly Retainer (6 Months Agreement)",
     techs: ["Flutter", "Dart", "PHP & Laravel", "MySQL Database", "Firebase (Auth/Firestore)", "CI/CD & Git", "Linux VPS"],
     milestones: [
-      { week: "Month 1 - 2", desc: "Comprehensive Dependency Audit, Security Patching & OS SDK Upgrades", amount: "$1,300" },
-      { week: "Month 3 - 4", desc: "Feature Enhancements, Performance Profiling & Database Optimization", amount: "$1,300" },
-      { week: "Month 5 - 6", desc: "Continuous 24/7 Error Telemetry, Cloud Backups & Monthly Health Reports", amount: "$1,300" }
+      { week: "Month 1 - 2", percent: "33%", amount: "$1,300 USD", desc: "Comprehensive Dependency Audit, Security Patching & OS SDK Upgrades" },
+      { week: "Month 3 - 4", percent: "33%", amount: "$1,300 USD", desc: "Feature Enhancements, Performance Profiling & Database Optimization" },
+      { week: "Month 5 - 6", percent: "34%", amount: "$1,300 USD", desc: "Continuous 24/7 Error Telemetry, Cloud Backups & Monthly Health Reports" }
     ],
     overview: `A structured Service Level Agreement (SLA) providing continuous maintenance, OS compatibility upgrades (iOS & Android SDKs), critical security patches, and on-demand feature improvements for your production software.`,
     features: `• 40 Dedicated engineering hours per month for feature tweaks and bug fixes\n• Guaranteed SLA response time within 2 to 4 hours for high-priority incidents\n• Routine dependency updates (Flutter packages, npm modules, Laravel packages)\n• Proactive crash monitoring with Sentry & Firebase Crashlytics\n• Automated weekly database backups and cloud health diagnostics`,
@@ -238,10 +241,10 @@ Based on the nature of this system, the following approach is recommended for ho
     timeline: "6 - 8 Weeks",
     techs: ["Flutter", "Dart", "PHP & Laravel", "MySQL Database"],
     milestones: [
-      { week: "Milestone 1 — Project Start", desc: "Project setup, architecture, database planning and initial development", amount: "30,000 BDT" },
-      { week: "Milestone 2 — UI Implementation", desc: "Complete Flutter UI implementation for all agreed modules/screens", amount: "20,000 BDT" },
-      { week: "Milestone 3 — Backend Integration", desc: "Laravel backend, API development, database integration and Flutter API integration", amount: "20,000 BDT" },
-      { week: "Milestone 4 — Final Delivery", desc: "Testing, bug fixing, reviews, final adjustments and production-ready delivery", amount: "30,000 BDT" }
+      { week: "Milestone 1 — Project Start", percent: "30%", amount: "30,000 BDT", desc: "Project setup, architecture, database planning and initial development" },
+      { week: "Milestone 2 — UI Implementation", percent: "20%", amount: "20,000 BDT", desc: "Complete Flutter UI implementation for all agreed modules/screens" },
+      { week: "Milestone 3 — Backend Integration", percent: "20%", amount: "20,000 BDT", desc: "Laravel backend, API development, database integration and Flutter API integration" },
+      { week: "Milestone 4 — Final Delivery", percent: "30%", amount: "30,000 BDT", desc: "Testing, bug fixing, reviews, final adjustments and production-ready delivery" }
     ],
     overview: `Write project overview and business goals here...`,
     features: `Authentication\n● Username/password login\n● Secure logout\n\nDashboard\n● Key metrics\n● Activity logs`,
@@ -263,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileNav();
   setupStudioTabs();
   setupPreviewScale();
+  setupCurrencySelector();
   setupTechChipsPicker();
   setupMilestonesBuilder();
   setupSectionInputsBinding();
@@ -512,6 +516,29 @@ function setupTechChipsPicker() {
   renderChips();
 }
 
+function formatMilestonePayment(item) {
+  let p = (item.percent || '').trim();
+  let a = (item.amount || '').trim();
+
+  // If amount already has percent embedded (e.g. legacy data)
+  if (!p && a && a.includes('%')) {
+    return a;
+  }
+
+  if (p) {
+    if (!p.endsWith('%') && !isNaN(parseFloat(p))) {
+      p = `${p}%`;
+    }
+  }
+
+  if (p && a) {
+    if (a.startsWith(p)) return a;
+    return `${p} — ${a}`;
+  }
+
+  return a || p || '';
+}
+
 /* --------------------------------------------------------------------------
    4. Dynamic Milestones Table Builder (Section 4)
    -------------------------------------------------------------------------- */
@@ -524,34 +551,77 @@ function setupMilestonesBuilder() {
   function renderRows() {
     container.innerHTML = '';
     milestoneItems.forEach((item, index) => {
-      const row = document.createElement('div');
-      row.className = 'milestone-builder-row';
-      row.innerHTML = `
-        <input type="text" class="form-input ms-week" placeholder="Week 1" value="${escapeHtml(item.week)}">
-        <input type="text" class="form-input ms-desc" placeholder="Scope / Deliverable" value="${escapeHtml(item.desc)}">
-        <input type="text" class="form-input ms-amt" placeholder="$500" value="${escapeHtml(item.amount)}">
-        <button type="button" class="btn-del-milestone" title="Delete Milestone Row">
-          <i data-lucide="trash-2"></i>
-        </button>
+      const card = document.createElement('div');
+      card.className = 'milestone-builder-card';
+      card.innerHTML = `
+        <div class="ms-card-top">
+          <div class="ms-card-badge">
+            <i data-lucide="flag"></i>
+            <span>Milestone Phase #${index + 1}</span>
+          </div>
+          <button type="button" class="btn-del-milestone" title="Delete Milestone Phase">
+            <i data-lucide="trash-2"></i>
+            <span>Delete</span>
+          </button>
+        </div>
+
+        <div class="ms-card-grid ms-card-grid-3col">
+          <div class="form-group ms-field-title">
+            <label class="form-label-sm">
+              <i data-lucide="calendar"></i> Milestone Phase / Title
+            </label>
+            <input type="text" class="form-input ms-week" placeholder="e.g. Milestone 1 — Project Start" value="${escapeHtml(item.week || '')}">
+          </div>
+
+          <div class="form-group ms-field-percent">
+            <label class="form-label-sm">
+              <i data-lucide="percent"></i> Share (%)
+            </label>
+            <input type="text" class="form-input ms-percent" placeholder="e.g. 30%" value="${escapeHtml(item.percent || '')}">
+          </div>
+
+          <div class="form-group ms-field-amount">
+            <label class="form-label-sm">
+              <i data-lucide="dollar-sign"></i> Amount (${currentCurrency})
+            </label>
+            <input type="text" class="form-input ms-amt" placeholder="${currentCurrency === 'BDT' ? 'e.g. 30,000 BDT' : 'e.g. $900 USD'}" value="${escapeHtml(item.amount || '')}">
+          </div>
+        </div>
+
+        <div class="form-group ms-desc-group">
+          <label class="form-label-sm">
+            <i data-lucide="file-text"></i> Scope &amp; Deliverables
+          </label>
+          <textarea class="form-textarea form-textarea-xs ms-desc" rows="2" placeholder="Detail the scope of work, modules, and handover for this milestone...">${escapeHtml(item.desc || '')}</textarea>
+        </div>
       `;
 
       // Inputs change listeners
-      const weekInp = row.querySelector('.ms-week');
-      const descInp = row.querySelector('.ms-desc');
-      const amtInp = row.querySelector('.ms-amt');
-      const delBtn = row.querySelector('.btn-del-milestone');
+      const weekInp = card.querySelector('.ms-week');
+      const percentInp = card.querySelector('.ms-percent');
+      const amtInp = card.querySelector('.ms-amt');
+      const descInp = card.querySelector('.ms-desc');
+      const delBtn = card.querySelector('.btn-del-milestone');
 
       weekInp.addEventListener('input', () => {
         item.week = weekInp.value;
         updatePadPreview();
       });
-      descInp.addEventListener('input', () => {
-        item.desc = descInp.value;
+
+      percentInp.addEventListener('input', () => {
+        item.percent = percentInp.value;
+        calculateMilestonesSum();
         updatePadPreview();
       });
+
       amtInp.addEventListener('input', () => {
         item.amount = amtInp.value;
         calculateMilestonesSum();
+        updatePadPreview();
+      });
+
+      descInp.addEventListener('input', () => {
+        item.desc = descInp.value;
         updatePadPreview();
       });
 
@@ -562,7 +632,7 @@ function setupMilestonesBuilder() {
         updatePadPreview();
       });
 
-      container.appendChild(row);
+      container.appendChild(card);
     });
 
     if (window.lucide) window.lucide.createIcons();
@@ -570,10 +640,12 @@ function setupMilestonesBuilder() {
   }
 
   addBtn.addEventListener('click', () => {
+    const defaultAmount = currentCurrency === 'BDT' ? '25,000 BDT' : '$750 USD';
     milestoneItems.push({
-      week: `Phase ${milestoneItems.length + 1}`,
-      desc: "New project deliverable and milestone description",
-      amount: "$500"
+      week: `Milestone ${milestoneItems.length + 1} — Deliverable Phase`,
+      percent: '25%',
+      amount: defaultAmount,
+      desc: "New project deliverable, feature implementation and handover"
     });
     renderRows();
     calculateMilestonesSum();
@@ -586,24 +658,41 @@ function setupMilestonesBuilder() {
 
 function calculateMilestonesSum() {
   const sumDisplay = document.getElementById('milestone-sum-display');
-  if (!sumDisplay) return 0;
+  if (!sumDisplay) return '';
 
   let totalNumeric = 0;
-  let currencySymbol = '$';
+  let totalPercent = 0;
 
   milestoneItems.forEach(item => {
-    const raw = item.amount || '';
-    const match = raw.match(/([^\d.,\s]+)?\s*([\d,.]+)/);
-    if (match) {
-      if (match[1]) currencySymbol = match[1].trim();
-      const num = parseFloat(match[2].replace(/,/g, ''));
-      if (!isNaN(num)) totalNumeric += num;
+    // Sum percent
+    const rawPercent = (item.percent || '').trim();
+    const pMatch = rawPercent.match(/([\d]+(?:\.\d+)?)/);
+    if (pMatch) {
+      const pNum = parseFloat(pMatch[1]);
+      if (!isNaN(pNum)) totalPercent += pNum;
+    }
+
+    // Sum amount
+    const rawAmount = (item.amount || '').trim();
+    const aMatch = rawAmount.match(/([\d,]+(?:\.\d+)?)/);
+    if (aMatch) {
+      const aNum = parseFloat(aMatch[1].replace(/,/g, ''));
+      if (!isNaN(aNum)) totalNumeric += aNum;
     }
   });
 
   const formatted = totalNumeric.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-  sumDisplay.textContent = `Sum: ${currencySymbol}${formatted}`;
-  return `${currencySymbol}${formatted}`;
+  const percentTag = totalPercent > 0 
+    ? `<span class="percent-total-badge ${totalPercent === 100 ? 'is-complete' : ''}">${totalPercent}% Total</span>` 
+    : '';
+
+  if (currentCurrency === 'BDT') {
+    sumDisplay.innerHTML = `${percentTag}<span style="font-weight:700; color:var(--text-muted);">Sum:</span> ৳${formatted} BDT`;
+    return `${formatted} BDT`;
+  } else {
+    sumDisplay.innerHTML = `${percentTag}<span style="font-weight:700; color:var(--text-muted);">Sum:</span> $${formatted} USD`;
+    return `$${formatted} USD`;
+  }
 }
 
 function setupCostSyncButton() {
@@ -614,9 +703,102 @@ function setupCostSyncButton() {
   btnSync.addEventListener('click', () => {
     const sum = calculateMilestonesSum();
     if (sum) {
-      costInput.value = `${sum} USD`;
+      costInput.value = sum;
       updatePadPreview();
     }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   4b. Currency Switcher System (BDT / USD)
+   -------------------------------------------------------------------------- */
+function setCurrency(targetCurrency, autoConvert = true) {
+  const prevCurrency = currentCurrency;
+  currentCurrency = targetCurrency;
+
+  // 1. Update UI Toggle Buttons
+  const curButtons = document.querySelectorAll('.currency-option-btn');
+  curButtons.forEach(btn => {
+    if (btn.getAttribute('data-currency') === targetCurrency) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  // 2. Update Section 5 Indicator & Placeholder
+  const costIndicator = document.getElementById('cost-currency-indicator');
+  const costInput = document.getElementById('prop-sec-cost');
+
+  if (costIndicator) {
+    costIndicator.innerHTML = targetCurrency === 'BDT'
+      ? `<i data-lucide="coins"></i> <span>BDT (৳)</span>`
+      : `<i data-lucide="coins"></i> <span>USD ($)</span>`;
+  }
+
+  if (costInput) {
+    costInput.placeholder = targetCurrency === 'BDT'
+      ? 'e.g. 100,000 BDT'
+      : 'e.g. $3,500 USD';
+  }
+
+  // 3. Smart Conversion of Existing Values
+  if (autoConvert && prevCurrency !== targetCurrency) {
+    const USD_TO_BDT = 120;
+
+    if (targetCurrency === 'BDT') {
+      // USD -> BDT
+      if (costInput && costInput.value) {
+        costInput.value = costInput.value.replace(/\$([\d,]+(?:\.\d+)?)\s*(?:USD)?/gi, (m, val) => {
+          const num = parseFloat(val.replace(/,/g, ''));
+          return `${Math.round(num * USD_TO_BDT).toLocaleString('en-US')} BDT`;
+        });
+      }
+
+      milestoneItems.forEach(item => {
+        if (item.amount) {
+          item.amount = item.amount.replace(/\$([\d,]+(?:\.\d+)?)\s*(?:USD)?/gi, (m, val) => {
+            const num = parseFloat(val.replace(/,/g, ''));
+            return `${Math.round(num * USD_TO_BDT).toLocaleString('en-US')} BDT`;
+          });
+        }
+      });
+    } else {
+      // BDT -> USD
+      if (costInput && costInput.value) {
+        costInput.value = costInput.value.replace(/([\d,]+(?:\.\d+)?)\s*(?:BDT|৳|Tk)/gi, (m, val) => {
+          const num = parseFloat(val.replace(/,/g, ''));
+          return `$${Math.round(num / USD_TO_BDT).toLocaleString('en-US')} USD`;
+        });
+      }
+
+      milestoneItems.forEach(item => {
+        if (item.amount) {
+          item.amount = item.amount.replace(/([\d,]+(?:\.\d+)?)\s*(?:BDT|৳|Tk)/gi, (m, val) => {
+            const num = parseFloat(val.replace(/,/g, ''));
+            return `$${Math.round(num / USD_TO_BDT).toLocaleString('en-US')}`;
+          });
+        }
+      });
+    }
+
+    if (window.renderMilestonesRows) window.renderMilestonesRows();
+  }
+
+  calculateMilestonesSum();
+  updatePadPreview();
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function setupCurrencySelector() {
+  const curButtons = document.querySelectorAll('.currency-option-btn');
+  curButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-currency');
+      if (target && target !== currentCurrency) {
+        setCurrency(target, true);
+      }
+    });
   });
 }
 
@@ -817,11 +999,12 @@ function updatePadPreview() {
     if (milestoneItems.length > 0) {
       let tableRows = '';
       milestoneItems.forEach(item => {
+        const paymentFormatted = formatMilestonePayment(item);
         tableRows += `
           <tr>
             <td class="exec-td-milestone">${escapeHtml(item.week)}</td>
             <td class="exec-td-desc">${escapeHtml(item.desc)}</td>
-            <td class="exec-td-payment">${escapeHtml(item.amount)}</td>
+            <td class="exec-td-payment">${escapeHtml(paymentFormatted)}</td>
           </tr>
         `;
       });
@@ -854,12 +1037,15 @@ function updatePadPreview() {
         paymentScheduleHtml = `
           <div class="exec-payment-sched">
             <p style="margin-bottom: 6px; font-weight: 500;">Payment schedule:</p>
-            ${milestoneItems.map(m => `
-              <div class="exec-bullet-row">
-                <span class="exec-bullet">●</span>
-                <span>${escapeHtml(m.amount.includes('—') ? m.amount.replace('—', ':') : m.amount)}</span>
-              </div>
-            `).join('')}
+            ${milestoneItems.map(m => {
+              const pStr = formatMilestonePayment(m);
+              return `
+                <div class="exec-bullet-row">
+                  <span class="exec-bullet">●</span>
+                  <span>${escapeHtml(pStr.includes('—') ? pStr.replace('—', ':') : pStr)}</span>
+                </div>
+              `;
+            }).join('')}
           </div>
         `;
       }
@@ -1022,11 +1208,12 @@ function updatePadPreview() {
     if (milestoneItems.length > 0) {
       let tableRows = '';
       milestoneItems.forEach(item => {
+        const paymentFormatted = formatMilestonePayment(item);
         tableRows += `
           <tr>
             <td class="pad-td-timeline">${escapeHtml(item.week)}</td>
             <td class="pad-td-desc">${escapeHtml(item.desc)}</td>
-            <td class="pad-td-amt">${escapeHtml(item.amount)}</td>
+            <td class="pad-td-amt">${escapeHtml(paymentFormatted)}</td>
           </tr>
         `;
       });
@@ -1415,7 +1602,12 @@ function loadTemplate(key) {
   setVal('prop-sec-maintenance', tmpl.maintenance);
   setVal('prop-sec-deliverables', tmpl.deliverables);
   setVal('prop-sec-summary', tmpl.summary);
-  setVal('prop-sec-comments', tmpl.comments);
+  // Set active currency according to preset template
+  if ((tmpl.cost && (tmpl.cost.includes('BDT') || tmpl.cost.includes('৳'))) || key === 'business' || key === 'blank') {
+    setCurrency('BDT', false);
+  } else {
+    setCurrency('USD', false);
+  }
 
   // Set techs
   selectedTechs = new Set(tmpl.techs || []);
@@ -1425,6 +1617,7 @@ function loadTemplate(key) {
   milestoneItems = JSON.parse(JSON.stringify(tmpl.milestones || []));
   if (window.renderMilestonesRows) window.renderMilestonesRows();
 
+  calculateMilestonesSum();
   updatePadPreview();
 }
 
