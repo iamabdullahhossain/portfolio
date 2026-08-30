@@ -252,14 +252,86 @@
           <div class="editor-card section-card">
             <div class="section-card-header">
               <div class="panel-section-title">
-                <span class="sec-num">2</span> Key Features
+                <span class="sec-num">2</span> Key Features Box
               </div>
               <label class="pagebreak-toggle-label" title="Insert PDF Page Break after this section">
                 <input type="checkbox" id="break-sec-2" class="pagebreak-check" data-section="2">
                 <span><i data-lucide="scissors"></i> Page Break After</span>
               </label>
             </div>
-            <textarea id="prop-sec-features" class="form-textarea form-textarea-sm" placeholder="List all major functional features (bullet points or numbered list)..."></textarea>
+
+            <!-- Rich Text Editor Container -->
+            <div class="rich-editor-container">
+              <div class="rich-editor-toolbar">
+                <div class="editor-tb-group">
+                  <button type="button" class="editor-tb-btn" id="tb-feature-header" title="Add Module/Section Header">
+                    <i data-lucide="heading-1"></i> <span>Header</span>
+                  </button>
+                  <button type="button" class="editor-tb-btn" id="tb-feature-bullet-dot" title="Add Bullet Point (●)">
+                    <i data-lucide="disc"></i> <span>Bullet (●)</span>
+                  </button>
+                  <button type="button" class="editor-tb-btn" id="tb-feature-bullet-dash" title="Add Dash Point (•)">
+                    <i data-lucide="minus"></i> <span>Dash (•)</span>
+                  </button>
+                  <button type="button" class="editor-tb-btn" id="tb-feature-list-num" title="Add Numbered List (1.)">
+                    <i data-lucide="list-ordered"></i> <span>Numbered</span>
+                  </button>
+                </div>
+
+                <div class="editor-tb-group">
+                  <button type="button" class="editor-tb-btn" id="tb-feature-bold" title="Bold Selected Text">
+                    <i data-lucide="bold"></i>
+                  </button>
+                  <button type="button" class="editor-tb-btn" id="tb-feature-italic" title="Italic Selected Text">
+                    <i data-lucide="italic"></i>
+                  </button>
+                </div>
+
+                <div class="editor-tb-group">
+                  <select id="tb-feature-snippet-select" class="editor-tb-select" title="Insert Preset Feature Module">
+                    <option value="" disabled selected>⚡ Insert Module Preset...</option>
+                    <option value="auth">Authentication & Security</option>
+                    <option value="dashboard">User Dashboard & Analytics</option>
+                    <option value="payment">Payment & Checkout Gateway</option>
+                    <option value="notifications">Push Notifications & Alerts</option>
+                    <option value="admin">Admin Control Panel</option>
+                    <option value="api">API & Backend Infrastructure</option>
+                  </select>
+                </div>
+
+                <div class="editor-tb-group editor-tb-actions">
+                  <button type="button" class="editor-tb-btn editor-tb-btn-ghost" id="tb-feature-clean" title="Auto Format & Clean Up Lines">
+                    <i data-lucide="wand-2"></i> <span>Format</span>
+                  </button>
+                  <button type="button" class="editor-tb-btn editor-tb-btn-danger" id="tb-feature-clear" title="Clear All Text">
+                    <i data-lucide="trash-2"></i>
+                  </button>
+                </div>
+              </div>
+
+              <textarea id="prop-sec-features" class="form-textarea rich-editor-textarea" placeholder="List all major functional features (bullet points, headers or numbered list)...
+Example:
+Authentication & Security
+● Username/password & Social login
+● Role-based access control (RBAC)
+
+User Dashboard
+● Real-time analytics & reporting
+● Export data to PDF / Excel"></textarea>
+
+              <div class="rich-editor-footer">
+                <div class="editor-stats">
+                  <span class="editor-stat-item" id="feature-char-count">0 characters</span>
+                  <span class="editor-stat-sep">•</span>
+                  <span class="editor-stat-item" id="feature-line-count">0 lines</span>
+                  <span class="editor-stat-sep">•</span>
+                  <span class="editor-stat-item" id="feature-group-count">0 modules</span>
+                </div>
+                <div class="editor-tip">
+                  <i data-lucide="sparkles"></i> <span>Tip: Lines without bullets automatically become Module Headers</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Section 3: Technology Stack -->

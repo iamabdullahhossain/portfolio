@@ -270,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupTechChipsPicker();
   setupMilestonesBuilder();
   setupSectionInputsBinding();
+  setupFeatureEditorToolbar();
   setupPageBreakCheckboxes();
   setupTemplatePills();
   setupLayoutStyleSwitcher();
@@ -829,6 +830,236 @@ function setupPageBreakCheckboxes() {
       check.addEventListener('change', updatePadPreview);
     }
   }
+}
+
+/* --------------------------------------------------------------------------
+   Feature Text Editor Toolbar & Interactive Formatting
+   -------------------------------------------------------------------------- */
+function setupFeatureEditorToolbar() {
+  const textarea = document.getElementById('prop-sec-features');
+  if (!textarea) return;
+
+  const btnHeader = document.getElementById('tb-feature-header');
+  const btnBulletDot = document.getElementById('tb-feature-bullet-dot');
+  const btnBulletDash = document.getElementById('tb-feature-bullet-dash');
+  const btnListNum = document.getElementById('tb-feature-list-num');
+  const btnBold = document.getElementById('tb-feature-bold');
+  const btnItalic = document.getElementById('tb-feature-italic');
+  const selectSnippet = document.getElementById('tb-feature-snippet-select');
+  const btnClean = document.getElementById('tb-feature-clean');
+  const btnClear = document.getElementById('tb-feature-clear');
+
+  const charCountEl = document.getElementById('feature-char-count');
+  const lineCountEl = document.getElementById('feature-line-count');
+  const groupCountEl = document.getElementById('feature-group-count');
+
+  window.updateFeatureEditorStats = () => {
+    const val = textarea.value || '';
+    const charCount = val.length;
+    const lines = val.split('\n').filter(l => l.trim().length > 0);
+    const lineCount = lines.length;
+    const modules = lines.filter(line => {
+      const trimmed = line.trim();
+      const isBullet = trimmed.startsWith('●') || trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*') || /^\d+[\.\)]/.test(trimmed);
+      return !isBullet;
+    }).length;
+
+    if (charCountEl) charCountEl.textContent = `${charCount} character${charCount === 1 ? '' : 's'}`;
+    if (lineCountEl) lineCountEl.textContent = `${lineCount} line${lineCount === 1 ? '' : 's'}`;
+    if (groupCountEl) groupCountEl.textContent = `${modules} module${modules === 1 ? '' : 's'}`;
+  };
+
+  const insertPrefixToSelectedLines = (prefixFn) => {
+    textarea.focus();
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const val = textarea.value;
+
+    const lineStart = val.lastIndexOf('\n', start - 1) + 1;
+    let lineEnd = val.indexOf('\n', end);
+    if (lineEnd === -1) lineEnd = val.length;
+
+    const targetSection = val.substring(lineStart, lineEnd);
+    const lines = targetSection.split('\n');
+
+    const modifiedLines = lines.map((line, idx) => prefixFn(line, idx));
+    const newSection = modifiedLines.join('\n');
+
+    textarea.value = val.substring(0, lineStart) + newSection + val.substring(lineEnd);
+    textarea.selectionStart = lineStart;
+    textarea.selectionEnd = lineStart + newSection.length;
+
+    window.updateFeatureEditorStats();
+    updatePadPreview();
+  };
+
+  const wrapSelectedText = (before, after) => {
+    textarea.focus();
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const val = textarea.value;
+    const selected = val.substring(start, end);
+
+    if (selected) {
+      const wrapped = before + selected + after;
+      textarea.value = val.substring(0, start) + wrapped + val.substring(end);
+      textarea.selectionStart = start;
+      textarea.selectionEnd = start + wrapped.length;
+    } else {
+      const inserted = before + 'text' + after;
+      textarea.value = val.substring(0, start) + inserted + val.substring(end);
+      textarea.selectionStart = start + before.length;
+      textarea.selectionEnd = start + before.length + 4;
+    }
+
+    window.updateFeatureEditorStats();
+    updatePadPreview();
+  };
+
+  // Header Button
+  btnHeader?.addEventListener('click', () => {
+    insertPrefixToSelectedLines(line => {
+      let clean = line.replace(/^[●•\-\*·]\s*/, '').replace(/^\d+[\.\)]\s*/, '').trim();
+      return clean ? clean : 'Module Title';
+    });
+  });
+
+  // Bullet Dot Button (●)
+  btnBulletDot?.addEventListener('click', () => {
+    insertPrefixToSelectedLines(line => {
+      let clean = line.replace(/^[●•\-\*·]\s*/, '').replace(/^\d+[\.\)]\s*/, '').trim();
+      return `● ${clean}`;
+    });
+  });
+
+  // Bullet Dash Button (•)
+  btnBulletDash?.addEventListener('click', () => {
+    insertPrefixToSelectedLines(line => {
+      let clean = line.replace(/^[●•\-\*·]\s*/, '').replace(/^\d+[\.\)]\s*/, '').trim();
+      return `• ${clean}`;
+    });
+  });
+
+  // Numbered List Button (1.)
+  btnListNum?.addEventListener('click', () => {
+    insertPrefixToSelectedLines((line, idx) => {
+      let clean = line.replace(/^[●•\-\*·]\s*/, '').replace(/^\d+[\.\)]\s*/, '').trim();
+      return `${idx + 1}. ${clean}`;
+    });
+  });
+
+  // Bold & Italic
+  btnBold?.addEventListener('click', () => wrapSelectedText('**', '**'));
+  btnItalic?.addEventListener('click', () => wrapSelectedText('*', '*'));
+
+  // Feature Module Snippets Presets
+  const featureSnippets = {
+    auth: "Authentication & Security\n● Username/password & Social OAuth 2.0 (Google, Apple)\n● Secure JWT Token management & Session persistence\n● Role-Based Access Control (RBAC) & Audit logs",
+    dashboard: "User Dashboard & Analytics\n● Interactive KPI statistics overview\n● Real-time dynamic charts and data filtering\n● Automated PDF & Excel report export",
+    payment: "Payment & Billing Gateway\n● Stripe & local gateway checkout integration\n● Dynamic invoice generation & receipt delivery\n● Automated recurring subscription billing",
+    notifications: "Real-Time Notifications\n● Firebase Cloud Messaging (FCM) push notifications\n● In-app notification bell center & history\n● Automated email & SMS alert triggers",
+    admin: "Admin Control Panel\n● Comprehensive user management & permissions\n● System activity audit trail & monitoring\n● Configurable platform parameters",
+    api: "API & Backend Infrastructure\n● High-performance RESTful API with rate limiting\n● Cloud database indexing & automated daily backups\n● Sentry error logging & performance telemetry"
+  };
+
+  selectSnippet?.addEventListener('change', () => {
+    const val = selectSnippet.value;
+    if (val && featureSnippets[val]) {
+      textarea.focus();
+      const current = textarea.value.trim();
+      const newSnippet = featureSnippets[val];
+      textarea.value = current ? `${current}\n\n${newSnippet}` : newSnippet;
+      selectSnippet.value = "";
+      window.updateFeatureEditorStats();
+      updatePadPreview();
+    }
+  });
+
+  // Auto Format & Clean Up Lines
+  btnClean?.addEventListener('click', () => {
+    const val = textarea.value;
+    if (!val) return;
+
+    const cleanedLines = val.split('\n').map(line => {
+      let trimmed = line.trim();
+      if (!trimmed) return '';
+      if (trimmed.startsWith('●')) {
+        return `● ${trimmed.substring(1).trim()}`;
+      } else if (trimmed.startsWith('•')) {
+        return `• ${trimmed.substring(1).trim()}`;
+      } else if (trimmed.startsWith('-')) {
+        return `● ${trimmed.substring(1).trim()}`;
+      } else if (trimmed.startsWith('*')) {
+        return `● ${trimmed.substring(1).trim()}`;
+      }
+      return trimmed;
+    });
+
+    textarea.value = cleanedLines.join('\n').replace(/\n{3,}/g, '\n\n');
+    window.updateFeatureEditorStats();
+    updatePadPreview();
+  });
+
+  // Clear Text Button
+  btnClear?.addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear the Key Features text box?')) {
+      textarea.value = '';
+      window.updateFeatureEditorStats();
+      updatePadPreview();
+    }
+  });
+
+  // Smart Enter (continue bullet / list on Enter)
+  textarea.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const cursor = textarea.selectionStart;
+      const val = textarea.value;
+      const lineStart = val.lastIndexOf('\n', cursor - 1) + 1;
+      const currentLine = val.substring(lineStart, cursor);
+
+      const dotBulletMatch = currentLine.match(/^(●\s*|•\s*|-\s*|\*\s*)/);
+      const numBulletMatch = currentLine.match(/^(\d+)[\.\)]\s*/);
+
+      if (dotBulletMatch) {
+        const bulletPrefix = dotBulletMatch[0];
+        if (currentLine.trim() === bulletPrefix.trim()) {
+          // Empty bullet line -> press enter to exit bullet mode
+          e.preventDefault();
+          textarea.value = val.substring(0, lineStart) + val.substring(cursor);
+          textarea.selectionStart = textarea.selectionEnd = lineStart;
+        } else {
+          // Continue bullet list
+          e.preventDefault();
+          const nextBullet = dotBulletMatch[1].startsWith('•') ? '• ' : '● ';
+          const insertText = '\n' + nextBullet;
+          textarea.value = val.substring(0, cursor) + insertText + val.substring(cursor);
+          textarea.selectionStart = textarea.selectionEnd = cursor + insertText.length;
+        }
+        window.updateFeatureEditorStats();
+        updatePadPreview();
+      } else if (numBulletMatch) {
+        const num = parseInt(numBulletMatch[1], 10);
+        const fullPrefix = numBulletMatch[0];
+        if (currentLine.trim() === fullPrefix.trim()) {
+          // Empty numbered line -> press enter to exit list mode
+          e.preventDefault();
+          textarea.value = val.substring(0, lineStart) + val.substring(cursor);
+          textarea.selectionStart = textarea.selectionEnd = lineStart;
+        } else {
+          // Continue numbered list
+          e.preventDefault();
+          const insertText = `\n${num + 1}. `;
+          textarea.value = val.substring(0, cursor) + insertText + val.substring(cursor);
+          textarea.selectionStart = textarea.selectionEnd = cursor + insertText.length;
+        }
+        window.updateFeatureEditorStats();
+        updatePadPreview();
+      }
+    }
+  });
+
+  textarea.addEventListener('input', window.updateFeatureEditorStats);
+  window.updateFeatureEditorStats();
 }
 
 let currentDocStyle = 'executive'; // 'executive' or 'letterhead'
@@ -1618,6 +1849,7 @@ function loadTemplate(key) {
   if (window.renderMilestonesRows) window.renderMilestonesRows();
 
   calculateMilestonesSum();
+  if (window.updateFeatureEditorStats) window.updateFeatureEditorStats();
   updatePadPreview();
 }
 
