@@ -89,22 +89,41 @@
           Customize your scope of work, project milestones, and commercials. Live-preview your official branded letterhead pad with watermark and export high-definition print-ready PDFs.
         </p>
 
-        <!-- Mobile View Mode Switcher (Visible on Mobile & Tablets) -->
-        <div class="mobile-view-tabs" id="mobile-view-tabs">
-          <button type="button" class="mobile-view-tab active" data-tab="editor">
-            <i data-lucide="edit-3"></i> Edit Proposal
+        <!-- Studio Tab Switcher (Universal for Desktop & Mobile) -->
+        <div class="studio-tab-bar" id="studio-tab-bar">
+          <button type="button" class="studio-tab-btn active" data-tab="editor" id="tab-btn-editor">
+            <i data-lucide="edit-3"></i>
+            <span class="tab-btn-text">
+              <span class="tab-label">Proposal Writer</span>
+              <span class="tab-sub">11 Structured Sections</span>
+            </span>
           </button>
-          <button type="button" class="mobile-view-tab" data-tab="preview">
-            <i data-lucide="file-check"></i> Live Pad Preview
+          <button type="button" class="studio-tab-btn" data-tab="preview" id="tab-btn-preview">
+            <i data-lucide="eye"></i>
+            <span class="tab-btn-text">
+              <span class="tab-label">Live Pad Preview</span>
+              <span class="tab-sub">A4 Print &amp; PDF Export</span>
+            </span>
           </button>
         </div>
       </div>
 
-      <!-- Studio Grid: Editor (Left) & Pad Preview (Right) -->
-      <div class="studio-grid" id="studio-grid">
+      <!-- Studio Container: Switches between Editor and Preview tabs -->
+      <div class="studio-grid tab-editor-active" id="studio-grid">
         
-        <!-- ================= LEFT: Structured Proposal Editor & Controls ================= -->
-        <div class="editor-panel">
+        <!-- ================= PROPOSAL WRITER & EDITOR PANEL ================= -->
+        <div class="editor-panel" id="editor-panel">
+          
+          <!-- Editor Top Navigation Helper -->
+          <div class="editor-top-bar">
+            <div class="editor-status-badge">
+              <span class="pulse-dot"></span>
+              <span>11 Proposal Sections &bull; Live Real-Time Document Sync</span>
+            </div>
+            <button type="button" class="btn-quick-preview" id="btn-quick-preview">
+              <i data-lucide="eye"></i> <span>View Live Preview</span> <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
           
           <!-- Preset Templates -->
           <div class="editor-card">
@@ -410,6 +429,9 @@
 
           <!-- Export & Action Controls -->
           <div class="studio-actions">
+            <button type="button" id="btn-view-preview-bottom" class="btn-primary-preview">
+              <i data-lucide="eye"></i> <span>View Live Letterhead Preview</span> <i data-lucide="arrow-right"></i>
+            </button>
             <button type="button" id="btn-download-pdf" class="btn-export-pdf">
               <i data-lucide="download"></i> Download Professional PDF
             </button>
@@ -421,17 +443,28 @@
         </div>
 
 
-        <!-- ================= RIGHT: Live Official Letterhead Pad Preview ================= -->
+        <!-- ================= LIVE OFFICIAL LETTERHEAD PAD PREVIEW TAB ================= -->
         <div class="preview-container" id="preview-container">
           
           <div class="preview-header-bar">
-            <div class="preview-tag">
-              <span class="pulse-dot"></span> Live Pad Preview
+            <div class="preview-tag-group">
+              <button type="button" class="btn-back-editor" id="btn-back-editor">
+                <i data-lucide="arrow-left"></i> <span>Back to Proposal Editor</span>
+              </button>
+              <div class="preview-tag">
+                <span class="pulse-dot"></span> Live Pad Preview
+              </div>
             </div>
             
             <div class="preview-controls-group">
               <button type="button" class="preview-scale-btn" id="btn-scale-toggle" title="Toggle Scale Fit Mode">
                 <i data-lucide="maximize-2"></i> <span class="scale-mode-text">Fit View</span>
+              </button>
+              <button type="button" id="btn-print-pad-preview" class="btn-preview-action" title="Print Document">
+                <i data-lucide="printer"></i> <span>Print</span>
+              </button>
+              <button type="button" id="btn-download-pdf-preview" class="btn-preview-export" title="Download Official PDF">
+                <i data-lucide="download"></i> <span>Download PDF</span>
               </button>
               <span class="preview-format-badge">A4 Format</span>
             </div>
@@ -463,61 +496,73 @@
                   </div>
                 </div>
 
-                <!-- B. Official Letterhead Header (For Letterhead Mode) -->
+                <!-- B. Official Branded Letterhead Header (For Letterhead Mode) -->
                 <header class="pad-header" id="pad-letterhead-header">
-                  <div class="pad-brand">
-                    <img src="asset/logo.png" alt="Abdullah Hossain" class="pad-brand-logo">
-                    <div class="pad-brand-info">
-                      <h1>Abdullah Hossain</h1>
-                      <p>Full Stack Software Engineer & Mobile App Developer</p>
-                      <span class="pad-brand-badge">Official Project Proposal & Statement of Work</span>
+                  <div class="pad-header-top-accent"></div>
+                  <div class="pad-brand-row">
+                    <div class="pad-brand">
+                      <div class="pad-logo-box">
+                        <img src="asset/logo.png" alt="Abdullah Hossain" class="pad-brand-logo">
+                      </div>
+                      <div class="pad-brand-info">
+                        <div class="pad-brand-title-wrap">
+                          <h1 class="pad-brand-name">Abdullah Hossain</h1>
+                          <span class="pad-brand-verified"><i data-lucide="check-circle-2"></i> Verified Consultant</span>
+                        </div>
+                        <p class="pad-brand-subtitle">Lead Mobile App &amp; Full Stack Software Engineer</p>
+                        <div class="pad-brand-badges">
+                          <span class="pad-brand-badge"><i data-lucide="file-check-2"></i> Official Statement of Work &amp; Proposal</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="pad-contact">
-                    <div class="pad-contact-item">
-                      <i data-lucide="mail"></i>
-                      <a href="mailto:iamabdullahhossain@gmail.com">iamabdullahhossain@gmail.com</a>
-                    </div>
-                    <div class="pad-contact-item">
-                      <i data-lucide="phone"></i>
-                      <span>+880 1624-563436</span>
-                    </div>
-                    <div class="pad-contact-item">
-                      <i data-lucide="map-pin"></i>
-                      <span>Dhaka, Bangladesh</span>
-                    </div>
-                    <div class="pad-contact-item">
-                      <i data-lucide="globe"></i>
-                      <span>iamabdullahhossain.vercel.app</span>
+                    <div class="pad-contact-grid">
+                      <div class="pad-contact-item">
+                        <i data-lucide="mail"></i>
+                        <a href="mailto:iamabdullahhossain@gmail.com">iamabdullahhossain@gmail.com</a>
+                      </div>
+                      <div class="pad-contact-item">
+                        <i data-lucide="phone"></i>
+                        <span>+880 1624-563436</span>
+                      </div>
+                      <div class="pad-contact-item">
+                        <i data-lucide="map-pin"></i>
+                        <span>Dhaka, Bangladesh</span>
+                      </div>
+                      <div class="pad-contact-item">
+                        <i data-lucide="globe"></i>
+                        <span>iamabdullahhossain.vercel.app</span>
+                      </div>
                     </div>
                   </div>
                 </header>
 
                 <!-- Pad Metadata Card (Used in Letterhead Mode) -->
                 <div class="pad-meta-bar" id="pad-meta-bar">
-                  <div class="pad-meta-block">
-                    <span class="pad-meta-label">PREPARED FOR</span>
-                    <span class="pad-meta-val" id="preview-client">Acme Enterprises Ltd.</span>
-                    <span style="font-size: 0.75rem; color: #475569; margin-top: 2px;" id="preview-title">Cross-Platform Mobile App (Flutter & Riverpod)</span>
+                  <div class="pad-meta-client-card">
+                    <div class="pad-meta-client-tag">
+                      <i data-lucide="user-check"></i> PROPOSAL PREPARED FOR
+                    </div>
+                    <div class="pad-meta-val" id="preview-client">Acme Enterprises Ltd.</div>
+                    <div class="pad-meta-project-badge" id="preview-title">Cross-Platform Mobile App (Flutter &amp; Riverpod)</div>
                   </div>
                   
-                  <div class="pad-meta-right">
-                    <div class="pad-meta-block">
-                      <span class="pad-meta-label">PROPOSAL REF</span>
-                      <span class="pad-meta-val" id="preview-ref" style="font-size: 0.78rem;">AH-PROP-2026-MOB</span>
+                  <div class="pad-meta-tiles">
+                    <div class="pad-meta-tile">
+                      <span class="pad-meta-label"><i data-lucide="hash"></i> REFERENCE #</span>
+                      <span class="pad-meta-tile-val" id="preview-ref">AH-PROP-2026-MOB</span>
                     </div>
-                    <div class="pad-meta-block">
-                      <span class="pad-meta-label">DATE</span>
-                      <span class="pad-meta-val" id="preview-date" style="font-size: 0.78rem;">25 Aug 2026</span>
+                    <div class="pad-meta-tile">
+                      <span class="pad-meta-label"><i data-lucide="calendar"></i> ISSUED DATE</span>
+                      <span class="pad-meta-tile-val" id="preview-date">25 Aug 2026</span>
                     </div>
-                    <div class="pad-meta-block">
-                      <span class="pad-meta-label">TIMELINE</span>
-                      <span class="pad-meta-val" id="preview-timeline" style="font-size: 0.78rem;">6 - 8 Weeks</span>
+                    <div class="pad-meta-tile">
+                      <span class="pad-meta-label"><i data-lucide="clock"></i> TIMELINE</span>
+                      <span class="pad-meta-tile-val" id="preview-timeline">6 - 8 Weeks</span>
                     </div>
-                    <div class="pad-meta-block">
-                      <span class="pad-meta-label">EST. BUDGET</span>
-                      <span class="pad-meta-val" id="preview-budget" style="font-size: 0.78rem; color: #0284c7;">100,000 BDT</span>
+                    <div class="pad-meta-tile pad-meta-tile-highlight">
+                      <span class="pad-meta-label"><i data-lucide="dollar-sign"></i> TOTAL INVESTMENT</span>
+                      <span class="pad-meta-tile-val pad-cost-highlight" id="preview-budget">100,000 BDT</span>
                     </div>
                   </div>
                 </div>
@@ -529,20 +574,27 @@
 
                 <!-- Official Signature Block -->
                 <div id="pad-signatures" class="pad-signature-section">
-                  <div class="signature-box">
+                  <div class="signature-box signature-box-provider">
+                    <div class="sig-badge-top">
+                      <i data-lucide="award"></i> Authorized Software Engineer
+                    </div>
                     <div class="sig-line">
                       <span class="sig-sign-text">Abdullah Hossain</span>
+                      <div class="sig-seal"><i data-lucide="shield-check"></i> Verified</div>
                     </div>
                     <span class="sig-name">Abdullah Hossain</span>
-                    <span class="sig-title">Lead Engineer & Consultant</span>
-                    <span class="sig-date">Date: <span id="preview-sig-date">25 Aug 2026</span></span>
+                    <span class="sig-title">Lead Full-Stack &amp; Mobile Engineer</span>
+                    <span class="sig-date">Issuance Date: <span id="preview-sig-date">25 Aug 2026</span></span>
                   </div>
 
-                  <div class="signature-box">
+                  <div class="signature-box signature-box-client">
+                    <div class="sig-badge-top">
+                      <i data-lucide="user-check"></i> Client Acceptance &amp; Sign-off
+                    </div>
                     <div class="sig-line"></div>
                     <span class="sig-name">Authorized Client Acceptance</span>
-                    <span class="sig-title">Representative Name & Signature</span>
-                    <span class="sig-date">Date: ________________________</span>
+                    <span class="sig-title">Representative Name, Title &amp; Official Seal</span>
+                    <span class="sig-date">Acceptance Date: ________________________</span>
                   </div>
                 </div>
 

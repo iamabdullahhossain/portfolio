@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setupTheme();
   setupMobileNav();
-  setupMobileViewTabs();
+  setupStudioTabs();
   setupPreviewScale();
   setupTechChipsPicker();
   setupMilestonesBuilder();
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   1. Theme Management & Mobile Navigation
+   1. Theme Management & Studio Tabs Navigation
    -------------------------------------------------------------------------- */
 function setupTheme() {
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -328,40 +328,72 @@ function setupMobileNav() {
   });
 }
 
-function setupMobileViewTabs() {
-  const tabs = document.querySelectorAll('.mobile-view-tab');
+function setupStudioTabs() {
+  const tabs = document.querySelectorAll('.studio-tab-btn');
   const studioGrid = document.getElementById('studio-grid');
+  const btnQuickPreview = document.getElementById('btn-quick-preview');
+  const btnViewPreviewBottom = document.getElementById('btn-view-preview-bottom');
+  const btnBackEditor = document.getElementById('btn-back-editor');
+  const btnPrintPreview = document.getElementById('btn-print-pad-preview');
+  const btnDownloadPdfPreview = document.getElementById('btn-download-pdf-preview');
 
   if (!tabs.length || !studioGrid) return;
 
-  if (window.innerWidth <= 992) {
-    studioGrid.classList.add('show-editor');
+  function switchTab(targetTab) {
+    tabs.forEach(t => {
+      if (t.getAttribute('data-tab') === targetTab) {
+        t.classList.add('active');
+      } else {
+        t.classList.remove('active');
+      }
+    });
+
+    if (targetTab === 'editor') {
+      studioGrid.classList.remove('tab-preview-active');
+      studioGrid.classList.add('tab-editor-active');
+    } else {
+      studioGrid.classList.remove('tab-editor-active');
+      studioGrid.classList.add('tab-preview-active');
+      if (window.applyPadScale) {
+        setTimeout(window.applyPadScale, 50);
+      }
+    }
   }
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
       const target = tab.getAttribute('data-tab');
-      if (target === 'editor') {
-        studioGrid.classList.remove('show-preview');
-        studioGrid.classList.add('show-editor');
-      } else {
-        studioGrid.classList.remove('show-editor');
-        studioGrid.classList.add('show-preview');
-        if (window.applyPadScale) window.applyPadScale();
-      }
+      switchTab(target);
     });
   });
 
+  if (btnQuickPreview) {
+    btnQuickPreview.addEventListener('click', () => switchTab('preview'));
+  }
+
+  if (btnViewPreviewBottom) {
+    btnViewPreviewBottom.addEventListener('click', () => switchTab('preview'));
+  }
+
+  if (btnBackEditor) {
+    btnBackEditor.addEventListener('click', () => switchTab('editor'));
+  }
+
+  if (btnPrintPreview) {
+    btnPrintPreview.addEventListener('click', () => window.print());
+  }
+
+  if (btnDownloadPdfPreview) {
+    const mainExportBtn = document.getElementById('btn-download-pdf');
+    btnDownloadPdfPreview.addEventListener('click', () => {
+      if (mainExportBtn) mainExportBtn.click();
+    });
+  }
+
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 992) {
-      studioGrid.classList.remove('show-editor', 'show-preview');
-    } else if (!studioGrid.classList.contains('show-editor') && !studioGrid.classList.contains('show-preview')) {
-      studioGrid.classList.add('show-editor');
+    if (studioGrid.classList.contains('tab-preview-active') && window.applyPadScale) {
+      window.applyPadScale();
     }
-    if (window.applyPadScale) window.applyPadScale();
   });
 }
 
@@ -947,7 +979,7 @@ function updatePadPreview() {
 
   } else {
     // -------------------------------------------------------------
-    // BRANDED LETTERHEAD MEMO LAYOUT
+    // BRANDED LETTERHEAD MEMO LAYOUT (Ultra-Professional Design)
     // -------------------------------------------------------------
 
     // 1. Overview
@@ -955,7 +987,7 @@ function updatePadPreview() {
     if (overviewVal) {
       html += `
         <div class="pad-sec-block">
-          <h2 class="pad-sec-title"><span class="pad-sec-badge">1</span> Project Overview</h2>
+          <h2 class="pad-sec-title"><span class="pad-sec-badge">1</span> Project Overview &amp; Executive Summary</h2>
           <div class="pad-sec-content">${formatParagraphs(overviewVal)}</div>
         </div>
         ${getPageBreakHtml(1)}
@@ -967,8 +999,8 @@ function updatePadPreview() {
     if (featuresVal) {
       html += `
         <div class="pad-sec-block">
-          <h2 class="pad-sec-title"><span class="pad-sec-badge">2</span> Key Features &amp; Scope</h2>
-          <div class="pad-sec-content">${formatBullets(featuresVal)}</div>
+          <h2 class="pad-sec-title"><span class="pad-sec-badge">2</span> Scope of Work &amp; Functional Modules</h2>
+          <div class="pad-sec-content">${formatLetterheadFeatures(featuresVal)}</div>
         </div>
         ${getPageBreakHtml(2)}
       `;
@@ -979,7 +1011,7 @@ function updatePadPreview() {
       const techTags = Array.from(selectedTechs).map(t => `<span class="pad-tech-tag"><i data-lucide="check-circle-2"></i> ${escapeHtml(t)}</span>`).join('');
       html += `
         <div class="pad-sec-block">
-          <h2 class="pad-sec-title"><span class="pad-sec-badge">3</span> Technology Stack &amp; Architecture</h2>
+          <h2 class="pad-sec-title"><span class="pad-sec-badge">3</span> Technology Stack &amp; Architecture Blueprint</h2>
           <div class="pad-tech-pills">${techTags}</div>
         </div>
         ${getPageBreakHtml(3)}
@@ -992,22 +1024,22 @@ function updatePadPreview() {
       milestoneItems.forEach(item => {
         tableRows += `
           <tr>
-            <td style="font-weight: 700; width: 140px; color: #0f172a;">${escapeHtml(item.week)}</td>
-            <td>${escapeHtml(item.desc)}</td>
-            <td style="font-weight: 700; width: 120px; text-align: right; color: #0f172a;">${escapeHtml(item.amount)}</td>
+            <td class="pad-td-timeline">${escapeHtml(item.week)}</td>
+            <td class="pad-td-desc">${escapeHtml(item.desc)}</td>
+            <td class="pad-td-amt">${escapeHtml(item.amount)}</td>
           </tr>
         `;
       });
 
       html += `
         <div class="pad-sec-block">
-          <h2 class="pad-sec-title"><span class="pad-sec-badge">4</span> Milestones &amp; Payment Schedule</h2>
+          <h2 class="pad-sec-title"><span class="pad-sec-badge">4</span> Milestones Roadmap &amp; Payment Schedule</h2>
           <table class="pad-milestones-tbl">
             <thead>
               <tr>
-                <th>Timeline</th>
+                <th style="width: 140px;">Timeline</th>
                 <th>Milestone Scope &amp; Deliverables</th>
-                <th style="text-align: right;">Amount</th>
+                <th style="width: 130px; text-align: right;">Amount</th>
               </tr>
             </thead>
             <tbody>
@@ -1026,7 +1058,7 @@ function updatePadPreview() {
           <h2 class="pad-sec-title"><span class="pad-sec-badge">5</span> Commercial Investment &amp; Delivery Schedule</h2>
           <div class="pad-commercials-grid">
             <div class="pad-comm-item">
-              <span class="pad-comm-label">TOTAL PROJECT INVESTMENT</span>
+              <span class="pad-comm-label">TOTAL ESTIMATED INVESTMENT</span>
               <span class="pad-comm-val" style="color: #0284c7;">${escapeHtml(totalCost)}</span>
             </div>
             <div class="pad-comm-item">
@@ -1045,7 +1077,7 @@ function updatePadPreview() {
     if (revisionVal) {
       html += `
         <div class="pad-sec-block">
-          <h2 class="pad-sec-title"><span class="pad-sec-badge">7</span> Review &amp; Revision Policy</h2>
+          <h2 class="pad-sec-title"><span class="pad-sec-badge">7</span> Review, Iteration &amp; Revision Policy</h2>
           <div class="pad-sec-content">${formatParagraphs(revisionVal)}</div>
         </div>
         ${getPageBreakHtml(7)}
@@ -1057,7 +1089,7 @@ function updatePadPreview() {
     if (maintenanceVal) {
       html += `
         <div class="pad-sec-block">
-          <h2 class="pad-sec-title"><span class="pad-sec-badge">8</span> Maintenance &amp; Warranty Support</h2>
+          <h2 class="pad-sec-title"><span class="pad-sec-badge">8</span> Maintenance, Support SLA &amp; Warranty</h2>
           <div class="pad-sec-content">${formatParagraphs(maintenanceVal)}</div>
         </div>
         ${getPageBreakHtml(8)}
@@ -1069,8 +1101,8 @@ function updatePadPreview() {
     if (deliverablesVal) {
       html += `
         <div class="pad-sec-block">
-          <h2 class="pad-sec-title"><span class="pad-sec-badge">9</span> Final Deliverables</h2>
-          <div class="pad-sec-content">${formatBullets(deliverablesVal)}</div>
+          <h2 class="pad-sec-title"><span class="pad-sec-badge">9</span> Handover &amp; Final Deliverables</h2>
+          <div class="pad-sec-content">${formatLetterheadDeliverables(deliverablesVal)}</div>
         </div>
         ${getPageBreakHtml(9)}
       `;
@@ -1082,7 +1114,7 @@ function updatePadPreview() {
       html += `
         <div class="pad-sec-block">
           <h2 class="pad-sec-title"><span class="pad-sec-badge">10</span> Proposal Summary &amp; Commercial Terms</h2>
-          <div class="pad-sec-content">${formatParagraphs(summaryVal)}</div>
+          <div class="pad-sec-content">${formatLetterheadSummary(summaryVal, projectTitle, totalCost, timeline)}</div>
         </div>
         ${getPageBreakHtml(10)}
       `;
@@ -1093,8 +1125,8 @@ function updatePadPreview() {
     if (commentsVal) {
       html += `
         <div class="pad-sec-block">
-          <h2 class="pad-sec-title"><span class="pad-sec-badge">11</span> Comments &amp; Special Notes</h2>
-          <div class="pad-sec-content">${formatParagraphs(commentsVal)}</div>
+          <h2 class="pad-sec-title"><span class="pad-sec-badge">11</span> Comments, Prerequisites &amp; Technical Notes</h2>
+          <div class="pad-sec-content">${formatLetterheadNotes(commentsVal)}</div>
         </div>
         ${getPageBreakHtml(11)}
       `;
@@ -1109,7 +1141,7 @@ function updatePadPreview() {
 }
 
 /* --------------------------------------------------------------------------
-   Executive Proposal Text & Bullet Formatters
+   Executive & Letterhead Proposal Formatters
    -------------------------------------------------------------------------- */
 
 function formatParagraphs(text) {
@@ -1119,6 +1151,114 @@ function formatParagraphs(text) {
     if (!trimmed) return '';
     return `<p style="margin-bottom: 8px; line-height: 1.6;">${escapeHtml(trimmed).replace(/\n/g, '<br>')}</p>`;
   }).join('');
+}
+
+function formatLetterheadFeatures(text) {
+  if (!text) return '';
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  let result = '<div class="pad-features-matrix">';
+  let inGroup = false;
+
+  lines.forEach(line => {
+    const isBullet = line.startsWith('●') || line.startsWith('•') || line.startsWith('-') || line.startsWith('*') || line.startsWith('·') || /^\d+[\.\)]/.test(line);
+    if (!isBullet) {
+      if (inGroup) {
+        result += '</div></div>';
+      }
+      result += `
+        <div class="pad-feature-module">
+          <h3 class="pad-module-title"><i data-lucide="layers"></i> ${escapeHtml(line)}</h3>
+          <div class="pad-module-bullets">
+      `;
+      inGroup = true;
+    } else {
+      const clean = line.replace(/^[●•\-\*·]\s*/, '').replace(/^\d+[\.\)]\s*/, '');
+      if (!inGroup) {
+        result += '<div class="pad-feature-module"><div class="pad-module-bullets">';
+        inGroup = true;
+      }
+      result += `
+        <div class="pad-feature-item">
+          <span class="pad-feature-bullet">▸</span>
+          <span class="pad-feature-text">${escapeHtml(clean)}</span>
+        </div>
+      `;
+    }
+  });
+
+  if (inGroup) result += '</div></div>';
+  result += '</div>';
+  return result;
+}
+
+function formatLetterheadDeliverables(text) {
+  if (!text) return '';
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  let html = '<div class="pad-deliverables-grid">';
+  lines.forEach(line => {
+    const clean = line.replace(/^[●•\-\*·\d\.\)]\s*/, '');
+    html += `
+      <div class="pad-deliverable-card">
+        <div class="pad-deliv-icon"><i data-lucide="check-circle-2"></i></div>
+        <div class="pad-deliv-text">${escapeHtml(clean)}</div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  return html;
+}
+
+function formatLetterheadNotes(text) {
+  if (!text) return '';
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  let html = '<div class="pad-notes-box">';
+  lines.forEach(line => {
+    if (line.toLowerCase().startsWith('data & sync') || line.toLowerCase().startsWith('notes:') || line.toLowerCase().startsWith('prerequisites:')) {
+      html += `<h4 class="pad-notes-title"><i data-lucide="shield-alert"></i> ${escapeHtml(line)}</h4>`;
+    } else if (line.startsWith('·') || line.startsWith('●') || line.startsWith('•') || line.startsWith('-')) {
+      const clean = line.replace(/^[·●•\-]\s*/, '');
+      html += `
+        <div class="pad-note-item">
+          <span class="pad-note-bullet">•</span>
+          <span>${escapeHtml(clean)}</span>
+        </div>
+      `;
+    } else {
+      html += `<p class="pad-note-p">${escapeHtml(line)}</p>`;
+    }
+  });
+  html += '</div>';
+  return html;
+}
+
+function formatLetterheadSummary(text, title, cost, timeline) {
+  if (!text) return '';
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  let summaryFieldsHtml = '';
+  let closingParagraphs = '';
+
+  lines.forEach(line => {
+    if (line.includes(':') && (line.startsWith('Project:') || line.startsWith('Technology:') || line.startsWith('Estimated Duration:') || line.startsWith('Total Cost:') || line.startsWith('Payment:') || line.startsWith('Review:') || line.startsWith('Final Delivery:'))) {
+      const parts = line.split(':');
+      const key = parts[0].trim();
+      const val = parts.slice(1).join(':').trim();
+      summaryFieldsHtml += `
+        <div class="pad-sum-field">
+          <span class="pad-sum-key">${escapeHtml(key)}:</span>
+          <span class="pad-sum-val">${escapeHtml(val)}</span>
+        </div>
+      `;
+    } else {
+      closingParagraphs += `<p class="pad-sum-closing">${escapeHtml(line)}</p>`;
+    }
+  });
+
+  return `
+    <div class="pad-summary-wrapper">
+      ${summaryFieldsHtml ? `<div class="pad-summary-card">${summaryFieldsHtml}</div>` : ''}
+      ${closingParagraphs}
+    </div>
+  `;
 }
 
 function formatExecutiveFeatures(text) {
