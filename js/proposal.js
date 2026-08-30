@@ -1666,44 +1666,80 @@ function setupWatermarkControls() {
 }
 
 /* --------------------------------------------------------------------------
-   8. High-Resolution PDF Export Engine
+   8. High-Resolution PDF Export Engine (Isolated Clone & Anti-Cut Geometry)
    -------------------------------------------------------------------------- */
 function setupPdfExport() {
-  const exportBtn = document.getElementById('btn-download-pdf');
+  const exportBtns = [
+    document.getElementById('btn-download-pdf'),
+    document.getElementById('btn-download-pdf-preview')
+  ].filter(Boolean);
+
   const loadingOverlay = document.getElementById('pdf-loading-overlay');
   const sheet = document.getElementById('letterhead-sheet');
 
-  if (!exportBtn || !sheet) return;
+  if (exportBtns.length === 0 || !sheet) return;
 
-  exportBtn.addEventListener('click', async () => {
-    const paperWrapper = document.getElementById('paper-wrapper');
+  const handleExport = async () => {
+    let exportContainer = null;
     try {
-      exportBtn.disabled = true;
+      exportBtns.forEach(b => b.disabled = true);
       if (loadingOverlay) loadingOverlay.classList.add('active');
-
-      document.body.classList.add('exporting-pdf');
-      sheet.style.transform = '';
-      if (paperWrapper) paperWrapper.style.minHeight = '';
 
       const clientName = document.getElementById('prop-client')?.value || 'Client';
       const projectTitle = document.getElementById('prop-title')?.value || 'Proposal';
       const cleanFileName = `${clientName.replace(/[^a-zA-Z0-9]/g, '_')}_${projectTitle.replace(/[^a-zA-Z0-9]/g, '_')}_Proposal.pdf`;
 
-      // Allow DOM repaint
-      await new Promise(r => setTimeout(r, 200));
+      // 1. Create an isolated off-screen wrapper strictly attached at top-left (0, 0)
+      exportContainer = document.createElement('div');
+      exportContainer.id = 'pdf-export-container';
+      exportContainer.style.position = 'fixed';
+      exportContainer.style.top = '0';
+      exportContainer.style.left = '0';
+      exportContainer.style.width = '210mm';
+      exportContainer.style.zIndex = '-99999';
+      exportContainer.style.background = '#ffffff';
+      exportContainer.style.margin = '0';
+      exportContainer.style.padding = '0';
+      exportContainer.style.boxSizing = 'border-box';
+      exportContainer.style.overflow = 'visible';
+
+      // 2. Clone the rendered letterhead sheet
+      const clone = sheet.cloneNode(true);
+      clone.id = 'pdf-export-sheet';
+      clone.style.position = 'static';
+      clone.style.transform = 'none';
+      clone.style.transformOrigin = 'top left';
+      clone.style.width = '210mm';
+      clone.style.maxWidth = '210mm';
+      clone.style.minWidth = '210mm';
+      clone.style.margin = '0';
+      clone.style.boxShadow = 'none';
+      clone.style.border = 'none';
+      clone.style.borderRadius = '0';
+      clone.style.overflow = 'visible';
+      clone.style.background = '#ffffff';
+
+      exportContainer.appendChild(clone);
+      document.body.appendChild(exportContainer);
+
+      // Re-create icons inside clone if needed
+      if (window.lucide) {
+        window.lucide.createIcons({ root: exportContainer });
+      }
+
+      // Allow DOM to settle and images/fonts to render
+      await new Promise(r => setTimeout(r, 300));
 
       const opt = {
-        margin: [0, 0, 0, 0], // mm - 0 margins because sheet has exact, balanced padding
+        margin: [0, 0, 0, 0], // mm - 0 margins because sheet has exact internal 20mm padding
         filename: cleanFileName,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
-          scale: 2, // Crisp 300 DPI vector clarity
+          scale: 2, // 2x gives 300 DPI vector clarity
           useCORS: true,
           logging: false,
           scrollY: 0,
-          scrollX: 0,
-          letterRendering: true,
-          windowWidth: 794 // Exact standard A4 width in px (210mm)
+          scrollX: 0
         },
         jsPDF: {
           unit: 'mm',
@@ -1712,40 +1748,22 @@ function setupPdfExport() {
           compress: true
         },
         pagebreak: {
-          mode: ['avoid-all', 'css', 'legacy'],
+          mode: ['css', 'legacy'],
           avoid: [
             '.exec-block',
             '.exec-feature-group',
-            '.exec-features-container',
-            '.exec-bullet-row',
             '.exec-timeline-item',
-            '.exec-timeline-breakdown',
-            '.exec-tech-list',
-            '.exec-milestones-tbl',
             '.exec-milestones-tbl tr',
-            '.exec-payment-sched',
-            '.exec-summary-card',
-            '.exec-header-top',
-            '.exec-title-block',
             '.pad-sec-block',
             '.pad-feature-module',
-            '.pad-feature-item',
-            '.pad-milestones-tbl',
             '.pad-milestones-tbl tr',
-            '.pad-commercials-grid',
-            '.pad-signature-section',
-            '.pad-header',
-            '.pad-meta-bar',
-            'table',
-            'tr',
-            'p',
-            'h1', 'h2', 'h3', 'h4'
+            '.pad-signature-section'
           ]
         }
       };
 
       if (window.html2pdf) {
-        await window.html2pdf().set(opt).from(sheet).save();
+        await window.html2pdf().set(opt).from(clone).save();
       } else {
         window.print();
       }
@@ -1755,19 +1773,26 @@ function setupPdfExport() {
       alert('PDF generation encountered an issue. Opening print dialog as fallback.');
       window.print();
     } finally {
-      document.body.classList.remove('exporting-pdf');
-      if (window.applyPadScale) window.applyPadScale();
-      exportBtn.disabled = false;
+      if (exportContainer && exportContainer.parentNode) {
+        exportContainer.parentNode.removeChild(exportContainer);
+      }
+      exportBtns.forEach(b => b.disabled = false);
       if (loadingOverlay) loadingOverlay.classList.remove('active');
     }
-  });
+  };
+
+  exportBtns.forEach(btn => btn.addEventListener('click', handleExport));
 }
 
 function setupPrintButton() {
-  const printBtn = document.getElementById('btn-print-pad');
-  if (printBtn) {
-    printBtn.addEventListener('click', () => {
+  const printBtns = [
+    document.getElementById('btn-print-pad'),
+    document.getElementById('btn-print-pad-preview')
+  ].filter(Boolean);
+
+  printBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
       window.print();
     });
-  }
+  });
 }

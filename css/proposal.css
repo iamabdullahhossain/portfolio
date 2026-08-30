@@ -2479,21 +2479,19 @@
    6. PDF & Print Specific Rules
    -------------------------------------------------------------------------- */
 /* Dedicated PDF Export State for html2pdf (Pixel-Perfect A4 & Anti-Clipping) */
-body.exporting-pdf {
-  overflow: visible !important;
-  background: #ffffff !important;
-}
-
-body.exporting-pdf .paper-wrapper {
-  background: #ffffff !important;
-  padding: 0 !important;
-  margin: 0 auto !important;
-  border: none !important;
-  box-shadow: none !important;
-  overflow: visible !important;
+#pdf-export-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 210mm !important;
+  background: #ffffff !important;
+  z-index: -99999 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
 }
 
+#pdf-export-sheet,
 body.exporting-pdf .letterhead-sheet {
   width: 210mm !important;
   max-width: 210mm !important;
@@ -2505,17 +2503,47 @@ body.exporting-pdf .letterhead-sheet {
   border-radius: 0 !important;
   transform: none !important;
   overflow: visible !important;
+  background: #ffffff !important;
 }
 
+#pdf-export-sheet.style-executive,
 body.exporting-pdf .letterhead-sheet.style-executive {
   padding: 20mm 20mm 20mm 20mm !important;
 }
 
+#pdf-export-sheet.style-letterhead,
 body.exporting-pdf .letterhead-sheet.style-letterhead {
   padding: 16mm 18mm 16mm 18mm !important;
 }
 
 /* Strict page-break protection for individual units during PDF conversion */
+#pdf-export-sheet .exec-block,
+#pdf-export-sheet .pad-sec-block,
+#pdf-export-sheet .exec-feature-group,
+#pdf-export-sheet .exec-features-container,
+#pdf-export-sheet .exec-bullet-row,
+#pdf-export-sheet .exec-timeline-item,
+#pdf-export-sheet .exec-timeline-breakdown,
+#pdf-export-sheet .exec-tech-list,
+#pdf-export-sheet .exec-payment-sched,
+#pdf-export-sheet .exec-summary-card,
+#pdf-export-sheet .exec-header-top,
+#pdf-export-sheet .exec-title-block,
+#pdf-export-sheet .pad-feature-module,
+#pdf-export-sheet .pad-feature-item,
+#pdf-export-sheet .pad-commercials-grid,
+#pdf-export-sheet .pad-signature-section,
+#pdf-export-sheet .pad-header,
+#pdf-export-sheet .pad-meta-bar,
+#pdf-export-sheet table,
+#pdf-export-sheet tr,
+#pdf-export-sheet td,
+#pdf-export-sheet th,
+#pdf-export-sheet p,
+#pdf-export-sheet h1,
+#pdf-export-sheet h2,
+#pdf-export-sheet h3,
+#pdf-export-sheet h4,
 body.exporting-pdf .exec-block,
 body.exporting-pdf .pad-sec-block,
 body.exporting-pdf .exec-feature-group,
@@ -2548,6 +2576,14 @@ body.exporting-pdf h4 {
   -webkit-column-break-inside: avoid !important;
 }
 
+#pdf-export-sheet .exec-sec-title,
+#pdf-export-sheet .pad-sec-title,
+#pdf-export-sheet .exec-feature-group-title,
+#pdf-export-sheet .exec-doc-title,
+#pdf-export-sheet .exec-project-title,
+#pdf-export-sheet h1,
+#pdf-export-sheet h2,
+#pdf-export-sheet h3,
 body.exporting-pdf .exec-sec-title,
 body.exporting-pdf .pad-sec-title,
 body.exporting-pdf .exec-feature-group-title,
