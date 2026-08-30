@@ -2674,6 +2674,8 @@
   width: 175mm !important;
   max-width: 175mm !important;
   min-width: 175mm !important;
+  min-height: auto !important;
+  height: auto !important;
   box-sizing: border-box !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -2685,12 +2687,22 @@
   background: #ffffff !important;
 }
 
-#pdf-export-sheet.style-executive {
-  padding: 0 !important;
-}
-
+#pdf-export-sheet.style-executive,
 #pdf-export-sheet.style-letterhead {
   padding: 0 !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+#pdf-export-sheet .pad-header-top-accent {
+  margin: 0 0 14px 0 !important;
+  width: 100% !important;
+}
+
+#pdf-export-sheet .pad-content-layer {
+  min-height: auto !important;
+  height: auto !important;
+  display: block !important;
 }
 
 /* Strict page-break protection for individual units during PDF conversion */
@@ -2711,6 +2723,7 @@
 #pdf-export-sheet .pad-commercials-grid,
 #pdf-export-sheet .pad-signature-section,
 #pdf-export-sheet .pad-header,
+#pdf-export-sheet .pad-brand-row,
 #pdf-export-sheet .pad-meta-bar,
 #pdf-export-sheet table,
 #pdf-export-sheet tr,
@@ -2738,6 +2751,7 @@ body.exporting-pdf .pad-feature-item,
 body.exporting-pdf .pad-commercials-grid,
 body.exporting-pdf .pad-signature-section,
 body.exporting-pdf .pad-header,
+body.exporting-pdf .pad-brand-row,
 body.exporting-pdf .pad-meta-bar,
 body.exporting-pdf table,
 body.exporting-pdf tr,

@@ -1955,6 +1955,8 @@ function setupPdfExport() {
       clone.style.width = '175mm';
       clone.style.maxWidth = '175mm';
       clone.style.minWidth = '175mm';
+      clone.style.minHeight = 'auto';
+      clone.style.height = 'auto';
       clone.style.margin = '0';
       clone.style.padding = '0';
       clone.style.boxShadow = 'none';
@@ -2001,7 +2003,13 @@ function setupPdfExport() {
             '.pad-sec-block',
             '.pad-feature-module',
             '.pad-milestones-tbl tr',
-            '.pad-signature-section'
+            '.pad-signature-section',
+            '.pad-header',
+            '.pad-brand-row',
+            '.pad-meta-bar',
+            '.exec-header-top',
+            '.exec-title-block',
+            '.pad-commercials-grid'
           ]
         }
       };
