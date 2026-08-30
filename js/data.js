@@ -10,6 +10,7 @@ const portfolioTranslations = {
       tech: "Tech Stack",
       github: "GitHub",
       projects: "Projects",
+      packages: "Packages",
       reviews: "Reviews",
       faq: "FAQ",
       contact: "Contact"
@@ -357,6 +358,7 @@ const portfolioTranslations = {
       tech: "টেক স্ট্যাক",
       github: "গিটহাব",
       projects: "প্রজেক্টস",
+      packages: "প্যাকেজসমূহ",
       reviews: "মতামত",
       faq: "প্রশ্নোত্তর",
       contact: "যোগাযোগ"

@@ -214,6 +214,7 @@ function renderStaticUITexts() {
     '#tech': data.nav.tech,
     '#github': data.nav.github,
     '#projects': data.nav.projects,
+    'packages.html': data.nav.packages,
     '#testimonials': data.nav.reviews,
     '#faq': data.nav.faq,
     '#contact': data.nav.contact
