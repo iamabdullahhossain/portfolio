@@ -2705,6 +2705,10 @@
   display: block !important;
 }
 
+#pdf-export-sheet .pad-watermark {
+  display: none !important;
+}
+
 /* Strict page-break protection for individual units during PDF conversion */
 #pdf-export-sheet .exec-block,
 #pdf-export-sheet .pad-sec-block,

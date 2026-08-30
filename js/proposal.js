@@ -1946,6 +1946,12 @@ function setupPdfExport() {
       clone.style.overflow = 'visible';
       clone.style.background = '#ffffff';
 
+      // Remove watermark background element from PDF clone to prevent html2canvas opacity rendering bug
+      const cloneWatermark = clone.querySelector('#pad-watermark');
+      if (cloneWatermark) {
+        cloneWatermark.remove();
+      }
+
       exportContainer.appendChild(clone);
       document.body.appendChild(exportContainer);
 
