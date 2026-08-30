@@ -1957,8 +1957,19 @@ function setupPdfExport() {
       // Allow DOM to settle and images/fonts to render
       await new Promise(r => setTimeout(r, 300));
 
+      // Check single continuous page PDF setting
+      const singlePageCheck = document.getElementById('toggle-single-page-pdf');
+      const isSinglePage = !!(singlePageCheck && singlePageCheck.checked);
+
+      // Calculate total height in mm for 1 single continuous seamless page
+      const pxToMm = 0.264583;
+      const contentHeightPx = clone.offsetHeight || clone.scrollHeight;
+      const topMarginMm = 16;
+      const bottomMarginMm = 16;
+      const totalHeightMm = Math.max(297, Math.ceil(contentHeightPx * pxToMm) + topMarginMm + bottomMarginMm + 8);
+
       const opt = {
-        margin: [16, 17.5, 16, 17.5], // mm: [top, right, bottom, left] uniform margins on EVERY page
+        margin: [topMarginMm, 17.5, bottomMarginMm, 17.5], // mm: [top, right, bottom, left]
         filename: cleanFileName,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
@@ -1970,11 +1981,11 @@ function setupPdfExport() {
         },
         jsPDF: {
           unit: 'mm',
-          format: 'a4',
+          format: isSinglePage ? [210, totalHeightMm] : 'a4',
           orientation: 'portrait',
           compress: true
         },
-        pagebreak: {
+        pagebreak: isSinglePage ? { mode: [] } : {
           mode: ['css', 'legacy'],
           avoid: [
             '.exec-block',
@@ -2028,6 +2039,31 @@ function setupPdfExport() {
   };
 
   exportBtns.forEach(btn => btn.addEventListener('click', handleExport));
+
+  // Single Continuous Page Toggle Listener
+  const singlePageToggleBtn = document.getElementById('btn-toggle-single-page');
+  const singlePageCheckbox = document.getElementById('toggle-single-page-pdf');
+  const formatLabel = document.getElementById('pdf-format-label');
+
+  const syncFormatUI = () => {
+    const isSingle = !!(singlePageCheckbox && singlePageCheckbox.checked);
+    if (formatLabel) {
+      formatLabel.textContent = isSingle ? 'Single Page (Seamless)' : 'Multi-Page A4';
+    }
+    if (singlePageToggleBtn) {
+      singlePageToggleBtn.classList.toggle('active', isSingle);
+    }
+  };
+
+  singlePageToggleBtn?.addEventListener('click', () => {
+    if (singlePageCheckbox) {
+      singlePageCheckbox.checked = !singlePageCheckbox.checked;
+      syncFormatUI();
+    }
+  });
+
+  singlePageCheckbox?.addEventListener('change', syncFormatUI);
+  syncFormatUI();
 }
 
 function setupPrintButton() {

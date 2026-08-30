@@ -524,6 +524,10 @@ User Dashboard
                   <input type="checkbox" id="toggle-signature" checked>
                   <span>Include Digital Signature Block</span>
                 </label>
+                <label class="custom-checkbox" title="Download entire document as 1 continuous PDF page without any page breaks">
+                  <input type="checkbox" id="toggle-single-page-pdf">
+                  <span>Single Continuous Page PDF (No Page Breaks)</span>
+                </label>
               </div>
             </div>
           </div>
@@ -558,6 +562,9 @@ User Dashboard
             </div>
             
             <div class="preview-controls-group">
+              <button type="button" class="preview-scale-btn" id="btn-toggle-single-page" title="Toggle Single Continuous Page PDF Mode">
+                <i data-lucide="file-check"></i> <span id="pdf-format-label">Multi-Page A4</span>
+              </button>
               <button type="button" class="preview-scale-btn" id="btn-scale-toggle" title="Toggle Scale Fit Mode">
                 <i data-lucide="maximize-2"></i> <span class="scale-mode-text">Fit View</span>
               </button>
@@ -567,7 +574,6 @@ User Dashboard
               <button type="button" id="btn-download-pdf-preview" class="btn-preview-export" title="Download Official PDF">
                 <i data-lucide="download"></i> <span>Download PDF</span>
               </button>
-              <span class="preview-format-badge">A4 Format</span>
             </div>
           </div>
 
