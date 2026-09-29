@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Abdullah Hossain - Interactive Application Logic
    ========================================================================== */
 
@@ -396,36 +396,77 @@ function renderProjects(categoryFilter = 'All') {
     ? portfolioData.projects
     : portfolioData.projects.filter(p => p.category === categoryFilter);
 
-  container.innerHTML = filteredProjects.map(project => `
-    <div class="project-card" data-project-id="${project.id}">
-      <div class="project-image-box">
-        <img src="${project.image}" alt="${project.title} Screenshot" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'">
-        <span class="project-category-badge">${project.category}</span>
+  container.innerHTML = filteredProjects.map((project, idx) => `
+    <div class="project-card project-fade-in" data-project-id="${project.id}" style="animation-delay: ${idx * 0.08}s;">
+      <!-- Smartphone Mockup Preview Frame -->
+      <div class="project-mockup-wrapper">
+        <div class="mockup-notch"></div>
+        <div class="mockup-sheen"></div>
+        <img src="${project.image}" alt="${project.title} Interface Mockup" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'">
+        
+        <!-- Pulsing Live Beacon Status -->
+        <span class="project-status-pill">
+          <span class="pulse-beacon"></span> ${project.status || 'Live Production'}
+        </span>
+        
+        <!-- Category Badge -->
+        <span class="project-category-badge">
+          <i data-lucide="layers"></i> ${project.category}
+        </span>
       </div>
+
+      <!-- Card Content Details -->
       <div class="project-content">
-        <span class="project-role-tag">${project.role}</span>
-        <h3 class="project-title">${project.title}</h3>
-        <p class="project-impact">${project.impact}</p>
-        <div class="project-tags">
-          ${project.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
+        <div class="project-meta-row">
+          <span class="project-platform-badge">
+            <i class="${project.platform && project.platform.includes('iOS') ? 'fa-brands fa-apple' : 'fa-brands fa-google-play'}"></i>
+            ${project.platform || 'Cross-Platform'}
+          </span>
+          <span class="project-role-tag">${project.role}</span>
         </div>
-        <div class="project-actions" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-          <button class="btn btn-primary btn-sm view-details-btn" onclick="openProjectModal('${project.id}')">
-            View Details <i data-lucide="arrow-right"></i>
+
+        <h3 class="project-title">${project.title}</h3>
+        <p class="project-tagline">${project.tagline}</p>
+        <p class="project-impact">${project.impact}</p>
+
+        <!-- Enriched Highlights / Micro Metrics -->
+        ${project.metrics ? `
+          <div class="project-metrics-grid">
+            ${project.metrics.map(m => `
+              <div class="project-metric-item">
+                <span class="metric-label">${m.label}</span>
+                <span class="metric-val">${m.value}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+
+        <!-- Branded Tech Stack Chips -->
+        <div class="project-tech-chips">
+          ${(project.techStack || project.tags.map(t => ({ name: t, icon: 'code' }))).map(tech => `
+            <span class="tech-chip">
+              <i data-lucide="${tech.icon || 'check'}"></i> ${tech.name}
+            </span>
+          `).join('')}
+        </div>
+
+        <!-- Action Bar -->
+        <div class="project-actions">
+          <button class="btn-case-study view-details-btn" onclick="openProjectModal('${project.id}')">
+            <i data-lucide="sparkles"></i> Case Study & Tech Specs <i data-lucide="arrow-right"></i>
           </button>
           ${project.storeLinks && project.storeLinks.playStore ? `
-            <a href="${project.storeLinks.playStore}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Google Play Store" style="padding: 0.45rem 0.75rem;">
-              <i class="fa-brands fa-google-play"></i> Play Store
+            <a href="${project.storeLinks.playStore}" target="_blank" rel="noopener noreferrer" class="store-badge-btn" title="Google Play Store">
+              <i class="fa-brands fa-google-play" style="color: #34a853;"></i> Play Store
             </a>
           ` : ''}
           ${project.storeLinks && project.storeLinks.appStore ? `
-            <a href="${project.storeLinks.appStore}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Apple App Store" style="padding: 0.45rem 0.75rem;">
-              <i class="fa-brands fa-apple"></i> App Store
+            <a href="${project.storeLinks.appStore}" target="_blank" rel="noopener noreferrer" class="store-badge-btn" title="Apple App Store">
+              <i class="fa-brands fa-apple" style="color: #ffffff;"></i> App Store
             </a>
           ` : ''}
         </div>
       </div>
-
     </div>
   `).join('');
 
@@ -706,52 +747,101 @@ function openProjectModal(projectId) {
   const modalContent = document.getElementById('modal-body');
 
   modalContent.innerHTML = `
-    <div style="margin-bottom: 1.5rem;">
-      <span class="project-category-badge" style="position:static; display:inline-block; margin-bottom:0.75rem;">${project.category}</span>
-      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;">${project.title}</h2>
-      <p style="color: var(--accent-yellow); font-weight: 600;">${project.tagline}</p>
+    <div class="modal-project-header">
+      <div class="modal-header-badges">
+        <span class="project-status-pill" style="position: static; box-shadow: none;">
+          <span class="pulse-beacon"></span> ${project.status || 'Live Production'}
+        </span>
+        <span class="project-category-badge" style="position: static; box-shadow: none;">
+          <i data-lucide="layers"></i> ${project.category}
+        </span>
+        <span class="project-role-tag">${project.role}</span>
+      </div>
+      <h2 class="modal-title">${project.title}</h2>
+      <p class="modal-tagline">${project.tagline}</p>
     </div>
 
-    <div style="width: 100%; height: 300px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);">
-      <img src="${project.image}" alt="${project.title}" style="width:100%; height:100%; object-fit:cover;">
+    <!-- Mockup Hero Frame -->
+    <div class="modal-mockup-frame">
+      <div class="mockup-notch"></div>
+      <div class="mockup-sheen"></div>
+      <img src="${project.image}" alt="${project.title}">
     </div>
 
-    <div style="margin-bottom: 1.5rem;">
-      <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Project Overview</h4>
-      <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">${project.overview}</p>
-    </div>
-
-    <div style="margin-bottom: 1.5rem;">
-      <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Key Features & Architecture</h4>
-      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
-        ${project.features.map(f => `
-          <li style="display: flex; align-items: center; gap: 0.6rem; color: var(--text-secondary); font-size: 0.9rem;">
-            <i data-lucide="check" style="color: var(--accent-yellow);"></i> ${f}
-          </li>
+    <!-- Key Performance / Architecture Metrics Grid -->
+    ${project.metrics ? `
+      <div class="modal-metrics-grid">
+        ${project.metrics.map(m => `
+          <div class="modal-metric-card">
+            <div class="modal-metric-label">${m.label}</div>
+            <div class="modal-metric-val">${m.value}</div>
+          </div>
         `).join('')}
-      </ul>
+      </div>
+    ` : ''}
+
+    <!-- Project Overview -->
+    <div class="modal-section">
+      <h4 class="modal-section-title"><i data-lucide="compass"></i> Project Overview & Scope</h4>
+      <p class="modal-section-p">${project.overview}</p>
     </div>
 
-    ${project.storeLinks ? `
-      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
-        ${project.storeLinks.playStore ? `
-          <a href="${project.storeLinks.playStore}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="gap: 0.5rem;">
-            <i class="fa-brands fa-google-play"></i> Get on Play Store
+    <!-- Core Architecture & State Flow -->
+    ${project.architecture ? `
+      <div class="modal-section">
+        <h4 class="modal-section-title"><i data-lucide="cpu"></i> Clean Architecture & State Flow</h4>
+        <p class="modal-section-p">${project.architecture}</p>
+      </div>
+    ` : ''}
+
+    <!-- Key Features & Implementations -->
+    <div class="modal-section">
+      <h4 class="modal-section-title"><i data-lucide="shield-check"></i> Key Engineering Features</h4>
+      <div class="modal-features-list">
+        ${project.features.map(f => `
+          <div class="modal-feature-item">
+            <i data-lucide="check-circle-2"></i>
+            <span>${f}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Integrated Technologies & Tools -->
+    <div class="modal-section">
+      <h4 class="modal-section-title"><i data-lucide="code-2"></i> Technologies & Integrations</h4>
+      <div class="modal-tech-pills">
+        ${(project.techStack || project.tags.map(t => ({ name: t, icon: 'code' }))).map(t => `
+          <span class="modal-tech-pill">
+            <i data-lucide="${t.icon || 'check'}"></i> ${t.name}
+          </span>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Direct Store Actions -->
+    <div class="modal-store-footer">
+      <div style="font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem;">
+        <i data-lucide="badge-check" style="color: var(--accent-emerald);"></i> Verified Production Shipped Build
+      </div>
+      <div class="modal-store-btns">
+        ${project.storeLinks && project.storeLinks.playStore ? `
+          <a href="${project.storeLinks.playStore}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="gap: 0.6rem;">
+            <i class="fa-brands fa-google-play"></i> Get on Google Play
           </a>
         ` : ''}
-        ${project.storeLinks.appStore ? `
-          <a href="${project.storeLinks.appStore}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="gap: 0.5rem;">
+        ${project.storeLinks && project.storeLinks.appStore ? `
+          <a href="${project.storeLinks.appStore}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="gap: 0.6rem;">
             <i class="fa-brands fa-apple"></i> Download on App Store
           </a>
         ` : ''}
       </div>
-    ` : ''}
+    </div>
   `;
 
   modalOverlay.classList.add('open');
   if (window.lucide) window.lucide.createIcons();
 }
-
 function setupModalEvents() {
   const modalOverlay = document.getElementById('project-modal');
   const closeBtn = document.getElementById('modal-close');
