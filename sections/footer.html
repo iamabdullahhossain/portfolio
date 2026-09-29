@@ -35,13 +35,72 @@
 </div>
 
 <!-- =========================================================================
-     15. Direct WhatsApp Chat Button (Original Style)
+     15. Floating Action Widgets (WhatsApp & CLI Terminal)
      ========================================================================= -->
-<div class="floating-chat-widget">
-  <a href="https://wa.me/8801624563436?text=Hello%20Abdullah,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project%20/%20opportunity.%20Are%20you%20available%20for%20a%20quick%20chat%3F" target="_blank" rel="noopener noreferrer" class="chat-trigger-btn" aria-label="Chat on WhatsApp">
+<div class="floating-widgets-group">
+  <!-- Developer Terminal Launcher -->
+  <button class="terminal-trigger-btn" id="terminal-trigger-btn" aria-label="Open Developer CLI Terminal" title="Developer Terminal (Ctrl + ~)">
+    <i data-lucide="terminal"></i>
+    <span class="terminal-btn-text">CLI</span>
+  </button>
+
+  <!-- WhatsApp Chat Trigger -->
+  <a href="https://wa.me/8801624563436?text=Hello%20Abdullah,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project%20/%20opportunity.%20Are%20you%20available%20for%20a%20quick%20chat%3F" target="_blank" rel="noopener noreferrer" class="chat-trigger-btn" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
     <i data-lucide="message-square"></i>
     <span class="chat-notification-badge">1</span>
   </a>
+</div>
+
+<!-- =========================================================================
+     16. Developer Terminal (Interactive macOS Glassmorphic CLI)
+     ========================================================================= -->
+<div class="terminal-overlay" id="dev-terminal-overlay">
+  <div class="terminal-window" id="dev-terminal-window">
+    <!-- macOS Window Bar -->
+    <div class="terminal-header" id="terminal-drag-handle">
+      <div class="terminal-traffic-lights">
+        <button class="traffic-dot dot-close" id="terminal-dot-close" title="Close terminal (Esc)"></button>
+        <button class="traffic-dot dot-min" id="terminal-dot-min" title="Minimize"></button>
+        <button class="traffic-dot dot-max" id="terminal-dot-max" title="Maximize / Restore"></button>
+      </div>
+      <div class="terminal-title">
+        <i data-lucide="terminal"></i> abdullah@portfolio: ~ (bash)
+      </div>
+      <div class="terminal-header-actions">
+        <span class="terminal-shortcut-pill">Ctrl + ~</span>
+      </div>
+    </div>
+
+    <!-- Matrix Rain Canvas Overlay -->
+    <canvas id="terminal-matrix-canvas" class="terminal-matrix-canvas"></canvas>
+
+    <!-- Terminal Screen Body -->
+    <div class="terminal-body" id="terminal-body">
+      <div class="terminal-output" id="terminal-output">
+        <!-- Initial Welcome Banner -->
+        <div class="term-welcome">
+          <pre class="term-ascii">
+   ___   __       __      ____     __  __               _     
+  / _ | / /  ____/ /_ __ / / /__ _/ / / /__  ___ ___ __(_ ___ 
+ / __ |/ _ \/ _  / // // / / _ `/ _ \/ _ \/ _ `(_-</_-</ / _ `/
+/_/ |_/_.__/\_,_/\_,_//_/_/\_,_/_//_/_//_/\_,_/___/___/_/\_,_/ 
+          </pre>
+          <div class="term-welcome-msg">
+            <p>Welcome to <strong>Abdullah Hossain</strong>'s Interactive CLI Console <span class="term-version">[v2.4.0-prod]</span></p>
+            <p class="term-muted">Type <span class="term-cmd-highlight">'help'</span> to view commands, <span class="term-cmd-highlight">'skills'</span> for tech stack, or <span class="term-cmd-highlight">'matrix'</span> for rain.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Interactive Command Line -->
+      <div class="terminal-input-row" id="terminal-input-row">
+        <span class="term-prompt">
+          <span class="prompt-user">guest@abdullah</span>:<span class="prompt-dir">~</span>$
+        </span>
+        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type a command...">
+      </div>
+    </div>
+  </div>
 </div>
 
 

@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupLanguageToggle();
   checkUrlPackageParam();
   setupFloatingChat();
+  setupDeveloperTerminal();
 
   // Re-create Lucide icons for dynamically loaded elements
   if (window.lucide) {
@@ -1740,3 +1741,322 @@ function setupSoundEffects() {
 
 
 
+
+// ==========================================================================
+// 17. Developer Terminal (Interactive macOS Glassmorphic CLI)
+// ==========================================================================
+function setupDeveloperTerminal() {
+  const overlay = document.getElementById('dev-terminal-overlay');
+  const windowEl = document.getElementById('dev-terminal-window');
+  const triggerBtn = document.getElementById('terminal-trigger-btn');
+  const closeBtn = document.getElementById('terminal-dot-close');
+  const minBtn = document.getElementById('terminal-dot-min');
+  const maxBtn = document.getElementById('terminal-dot-max');
+  const inputEl = document.getElementById('terminal-input');
+  const outputEl = document.getElementById('terminal-output');
+  const canvas = document.getElementById('terminal-matrix-canvas');
+
+  if (!overlay || !inputEl) return;
+
+  let commandHistory = [];
+  let historyIndex = -1;
+  let matrixInterval = null;
+
+  // Open / Close functions
+  function openTerminal() {
+    overlay.classList.add('open');
+    setTimeout(() => {
+      inputEl.focus();
+    }, 100);
+  }
+
+  function closeTerminal() {
+    overlay.classList.remove('open');
+    stopMatrixRain();
+  }
+
+  function toggleTerminal() {
+    if (overlay.classList.contains('open')) {
+      closeTerminal();
+    } else {
+      openTerminal();
+    }
+  }
+
+  // Trigger clicks
+  if (triggerBtn) triggerBtn.addEventListener('click', openTerminal);
+  if (closeBtn) closeBtn.addEventListener('click', closeTerminal);
+  if (minBtn) minBtn.addEventListener('click', closeTerminal);
+  if (maxBtn) {
+    maxBtn.addEventListener('click', () => {
+      windowEl.classList.toggle('maximized');
+    });
+  }
+
+  // Backdrop click
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeTerminal();
+  });
+
+  // Global Hotkey (Ctrl + ~ or ~ when not typing in other inputs)
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey && e.key === '`') || (e.ctrlKey && e.key === '~') || (e.key === '`' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName))) {
+      e.preventDefault();
+      toggleTerminal();
+    } else if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      closeTerminal();
+    }
+  });
+
+  // Matrix Rain Effect
+  function startMatrixRain() {
+    if (!canvas) return;
+    canvas.classList.add('active');
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+
+    const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZã‚¢ã‚¤ã‚¦ã‚¨ã‚ªã‚«ã‚­ã‚¯ã‚±ã‚³ã‚µã‚·ã‚¹ã‚»ã‚½ã‚¿ãƒãƒ„ãƒ†ãƒˆ';
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    if (matrixInterval) clearInterval(matrixInterval);
+
+    matrixInterval = setInterval(() => {
+      ctx.fillStyle = 'rgba(13, 14, 20, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00ff66';
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }, 40);
+  }
+
+  function stopMatrixRain() {
+    if (matrixInterval) {
+      clearInterval(matrixInterval);
+      matrixInterval = null;
+    }
+    if (canvas) {
+      canvas.classList.remove('active');
+      const ctx = canvas.getContext('2d');
+      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+
+  // Command Execution Engine
+  function handleCommand(cmdRaw) {
+    const cmd = cmdRaw.trim();
+    if (!cmd) return;
+
+    commandHistory.push(cmd);
+    historyIndex = commandHistory.length;
+
+    // Echo user input
+    const entryEl = document.createElement('div');
+    entryEl.className = 'term-entry';
+    entryEl.innerHTML = `
+      <div class="term-cmd-echo">
+        <span class="term-prompt"><span class="prompt-user">guest@abdullah</span>:<span class="prompt-dir">~</span>$</span>
+        <span>${escapeHtml(cmd)}</span>
+      </div>
+      <div class="term-response">
+        ${executeCommand(cmd)}
+      </div>
+    `;
+
+    outputEl.appendChild(entryEl);
+    inputEl.value = '';
+
+    // Scroll to bottom
+    const terminalBody = document.getElementById('terminal-body');
+    if (terminalBody) {
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function executeCommand(cmdStr) {
+    const parts = cmdStr.toLowerCase().trim().split(' ');
+    const mainCmd = parts[0];
+    const arg = parts.slice(1).join(' ');
+
+    switch (mainCmd) {
+      case 'help':
+        return `
+          <p style="margin-bottom: 0.5rem; color: #38bdf8;"><strong>Available Interactive Commands:</strong></p>
+          <div class="term-grid-list">
+            <div class="term-badge-item"><span class="term-cmd-highlight">whoami</span> <span>About Abdullah</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">skills</span> <span>Tech stack & tools</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">projects</span> <span>Shipped portfolio apps</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">open &lt;id&gt;</span> <span>Launch case study modal</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">packages</span> <span>Service packages & rates</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">contact</span> <span>Reach out & book</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">hire</span> <span>Quick project inquiry</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">matrix</span> <span>Toggle matrix code rain</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">theme</span> <span>Toggle Dark/Light mode</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">clear</span> <span>Clear console screen</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">sudo</span> <span>Admin privilege</span></div>
+            <div class="term-badge-item"><span class="term-cmd-highlight">exit</span> <span>Close this terminal</span></div>
+          </div>
+        `;
+
+      case 'whoami':
+      case 'about':
+        return `
+          <p><strong>Abdullah Hossain</strong> â€” <span style="color: var(--accent-yellow);">Full Stack Mobile Software Engineer</span></p>
+          <p style="color: var(--text-secondary); margin: 0.35rem 0;">4+ years of engineering experience shipping production Flutter & Cross-Platform mobile applications with clean architecture, real-time WebSocket/Pusher systems, and offline-first databases.</p>
+          <p>ðŸ“ Location: <strong>Dhaka, Bangladesh</strong> | ðŸš€ Status: <span class="term-success">Available for new projects & roles</span></p>
+        `;
+
+      case 'skills':
+      case 'tech':
+        return `
+          <p style="color: #38bdf8; margin-bottom: 0.4rem;"><strong>Core Technical Arsenal:</strong></p>
+          <div class="term-grid-list">
+            <div class="term-badge-item"><span>ðŸ“± Flutter & Dart</span> <span class="term-success">Expert</span></div>
+            <div class="term-badge-item"><span>âš¡ Riverpod & GetX</span> <span class="term-success">Expert</span></div>
+            <div class="term-badge-item"><span>ðŸ’¾ Hive DB (Offline-First)</span> <span class="term-success">Expert</span></div>
+            <div class="term-badge-item"><span>ðŸ”¥ Firebase FCM & Auth</span> <span class="term-success">Expert</span></div>
+            <div class="term-badge-item"><span>ðŸ“¡ Pusher & WebSockets</span> <span class="term-success">Expert</span></div>
+            <div class="term-badge-item"><span>ðŸŒ Dio REST APIs & PHP</span> <span class="term-success">Expert</span></div>
+            <div class="term-badge-item"><span>ðŸ—ºï¸ Google Maps SDK</span> <span class="term-success">Advanced</span></div>
+            <div class="term-badge-item"><span>ðŸ¤– AI Integration & LLMs</span> <span class="term-success">Advanced</span></div>
+          </div>
+        `;
+
+      case 'projects':
+        return `
+          <p style="color: #38bdf8; margin-bottom: 0.4rem;"><strong>Production Shipped Projects:</strong> (Type <span class="term-cmd-highlight">open &lt;id&gt;</span> to inspect)</p>
+          <div class="term-grid-list">
+            <div class="term-badge-item">
+              <span><strong>1. supraskills-tm</strong></span>
+              <span class="term-link" onclick="openProjectModal('supraskills-tm')">[Inspect Modal]</span>
+            </div>
+            <div class="term-badge-item">
+              <span><strong>2. ready-classify</strong></span>
+              <span class="term-link" onclick="openProjectModal('ready-classify')">[Inspect Modal]</span>
+            </div>
+            <div class="term-badge-item">
+              <span><strong>3. bridge-lms</strong></span>
+              <span class="term-link" onclick="openProjectModal('bridge-lms')">[Inspect Modal]</span>
+            </div>
+            <div class="term-badge-item">
+              <span><strong>4. chuty-rooms</strong></span>
+              <span class="term-link" onclick="openProjectModal('chuty-rooms')">[Inspect Modal]</span>
+            </div>
+          </div>
+        `;
+
+      case 'open':
+      case 'view':
+      case 'project':
+        if (!arg) {
+          return `<span class="term-error">Error: Please specify a project id. Example: <span class="term-cmd-highlight">open supraskills-tm</span></span>`;
+        }
+        const targetProj = portfolioData.projects.find(p => p.id === arg || p.id.includes(arg));
+        if (targetProj) {
+          openProjectModal(targetProj.id);
+          return `<span class="term-success">âœ“ Launching case study modal for '${targetProj.title}'...</span>`;
+        } else {
+          return `<span class="term-error">Project '${escapeHtml(arg)}' not found. Available: supraskills-tm, ready-classify, bridge-lms, chuty-rooms.</span>`;
+        }
+
+      case 'packages':
+      case 'pricing':
+        return `
+          <p style="color: #38bdf8; margin-bottom: 0.4rem;"><strong>Available Service Packages:</strong></p>
+          <p>â€¢ <strong>Pro Mobile App Tier:</strong> Complete production Flutter app with clean architecture, offline DB & push notifications.</p>
+          <p>â€¢ <strong>Full Stack & Real-Time Tier:</strong> Live chat, Google Maps routing, payment gateway & REST backend.</p>
+          <p style="margin-top: 0.4rem;">ðŸ‘‰ Visit <a href="packages.html" class="term-link">packages.html</a> for full package specifications.</p>
+        `;
+
+      case 'contact':
+      case 'hire':
+        return `
+          <p style="color: #38bdf8; margin-bottom: 0.4rem;"><strong>Get In Touch:</strong></p>
+          <p>ðŸ“§ Email: <a href="mailto:abdullah.cse503@gmail.com" class="term-link">abdullah.cse503@gmail.com</a></p>
+          <p>ðŸ’¬ WhatsApp: <a href="https://wa.me/8801624563436" target="_blank" class="term-link">+880 1624 563436</a></p>
+          <p>ðŸ’¼ LinkedIn: <a href="https://linkedin.com/in/iamabdullahhossain" target="_blank" class="term-link">linkedin.com/in/iamabdullahhossain</a></p>
+        `;
+
+      case 'matrix':
+        if (canvas && canvas.classList.contains('active')) {
+          stopMatrixRain();
+          return `<span class="term-muted">Matrix rain disabled.</span>`;
+        } else {
+          startMatrixRain();
+          return `<span class="term-success">ðŸŸ¢ Matrix rain initialized. Type 'matrix' again to toggle off.</span>`;
+        }
+
+      case 'theme':
+        const themeBtn = document.getElementById('theme-toggle');
+        if (themeBtn) themeBtn.click();
+        const isLight = document.body.classList.contains('light-theme');
+        return `<span class="term-success">âœ“ Switched to ${isLight ? 'Light' : 'Dark'} theme.</span>`;
+
+      case 'clear':
+      case 'cls':
+        outputEl.innerHTML = '';
+        return '';
+
+      case 'sudo':
+        return `<span class="term-error">Permission denied: With great power comes great responsibility. You are not root!</span>`;
+
+      case 'quote':
+        const quotes = [
+          `"Clean code always looks like it was written by someone who cares." â€” Robert C. Martin`,
+          `"Simplicity is prerequisite for reliability." â€” Edsger W. Dijkstra`,
+          `"Make it work, make it right, make it fast." â€” Kent Beck`
+        ];
+        return `<em>${quotes[Math.floor(Math.random() * quotes.length)]}</em>`;
+
+      case 'exit':
+      case 'quit':
+        closeTerminal();
+        return `<span class="term-muted">Session terminated.</span>`;
+
+      default:
+        return `<span class="term-error">Command not found: '${escapeHtml(cmdStr)}'. Type <span class="term-cmd-highlight">'help'</span> for list of valid commands.</span>`;
+    }
+  }
+
+  // Keydown in terminal input
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      handleCommand(inputEl.value);
+    } else if (e.key === 'ArrowUp') {
+      if (commandHistory.length > 0 && historyIndex > 0) {
+        historyIndex--;
+        inputEl.value = commandHistory[historyIndex];
+      }
+      e.preventDefault();
+    } else if (e.key === 'ArrowDown') {
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        inputEl.value = commandHistory[historyIndex];
+      } else {
+        historyIndex = commandHistory.length;
+        inputEl.value = '';
+      }
+      e.preventDefault();
+    }
+  });
+}
