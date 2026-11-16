@@ -35,6 +35,11 @@
   <link rel="stylesheet" href="css/proposal.css">
 </head>
 <body>
+  <script>
+    if (localStorage.getItem('portfolio-theme') === 'light') {
+      document.body.classList.add('light-theme');
+    }
+  </script>
 
   <!-- =========================================================================
        1. Navigation Header
