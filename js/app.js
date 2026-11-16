@@ -1946,22 +1946,12 @@ function setupDeveloperTerminal() {
         return `
           <p style="color: #38bdf8; margin-bottom: 0.4rem;"><strong>Production Shipped Projects:</strong> (Type <span class="term-cmd-highlight">open &lt;id&gt;</span> to inspect)</p>
           <div class="term-grid-list">
-            <div class="term-badge-item">
-              <span><strong>1. supraskills-tm</strong></span>
-              <span class="term-link" onclick="openProjectModal('supraskills-tm')">[Inspect Modal]</span>
-            </div>
-            <div class="term-badge-item">
-              <span><strong>2. ready-classify</strong></span>
-              <span class="term-link" onclick="openProjectModal('ready-classify')">[Inspect Modal]</span>
-            </div>
-            <div class="term-badge-item">
-              <span><strong>3. bridge-lms</strong></span>
-              <span class="term-link" onclick="openProjectModal('bridge-lms')">[Inspect Modal]</span>
-            </div>
-            <div class="term-badge-item">
-              <span><strong>4. chuty-rooms</strong></span>
-              <span class="term-link" onclick="openProjectModal('chuty-rooms')">[Inspect Modal]</span>
-            </div>
+            ${(portfolioData.projects || []).map((p, i) => `
+              <div class="term-badge-item">
+                <span><strong>${i + 1}. ${p.id}</strong> (${p.title})</span>
+                <span class="term-link" onclick="openProjectModal('${p.id}')">[Inspect Modal]</span>
+              </div>
+            `).join('')}
           </div>
         `;
 
@@ -1969,14 +1959,15 @@ function setupDeveloperTerminal() {
       case 'view':
       case 'project':
         if (!arg) {
-          return `<span class="term-error">Error: Please specify a project id. Example: <span class="term-cmd-highlight">open supraskills-tm</span></span>`;
+          return `<span class="term-error">Error: Please specify a project id. Example: <span class="term-cmd-highlight">open shukran-beverage</span></span>`;
         }
-        const targetProj = portfolioData.projects.find(p => p.id === arg || p.id.includes(arg));
+        const targetProj = portfolioData.projects ? portfolioData.projects.find(p => p.id === arg || p.id.toLowerCase().includes(arg.toLowerCase())) : null;
         if (targetProj) {
           openProjectModal(targetProj.id);
-          return `<span class="term-success">âœ“ Launching case study modal for '${targetProj.title}'...</span>`;
+          return `<span class="term-success">✓ Launching case study modal for '${targetProj.title}'...</span>`;
         } else {
-          return `<span class="term-error">Project '${escapeHtml(arg)}' not found. Available: supraskills-tm, ready-classify, bridge-lms, chuty-rooms.</span>`;
+          const availableIds = portfolioData.projects ? portfolioData.projects.map(p => p.id).join(', ') : '';
+          return `<span class="term-error">Project '${escapeHtml(arg)}' not found. Available: ${availableIds}.</span>`;
         }
 
       case 'packages':

@@ -227,41 +227,44 @@ const portfolioTranslations = {
     ],
     projects: [
       {
-        id: "supraskills-tm",
-        title: "Supraskills TM",
-        tagline: "Productivity & Task Management Platform",
-        category: "Productivity",
-        role: "Flutter Developer",
-        status: "Live on App Store",
-        statusType: "live",
-        platform: "iOS (iPhone / iPad)",
-        impact: "Production task management platform featuring instant push notifications, Hive offline sync, interactive timeline scheduling, and multi-language localization.",
-        image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=1000",
-        tags: ["Flutter", "Riverpod", "Hive DB", "Firebase FCM", "Localization"],
+        id: "shukran-beverage",
+        title: "Shukran Beverage",
+        tagline: "Sales Force Automation & Field Delivery Logistics Platform",
+        category: "Logistics",
+        role: "Software Engineer",
+        status: "Enterprise Production",
+        statusType: "enterprise",
+        platform: "Android & iOS (Enterprise)",
+        impact: "Enterprise-grade Sales Force Automation (SFA) and Field Delivery logistics platform featuring on-device Google ML Kit face detection attendance, GPS geofencing, route checkpoints, and offline-first Hive caching.",
+        image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000",
+        tags: ["Flutter", "Riverpod", "Google ML Kit", "Google Maps & GPS", "Hive DB", "GoRouter", "Pusher WebSockets", "Dio API"],
         techStack: [
           { name: "Flutter & Dart", icon: "smartphone", color: "#02569B" },
-          { name: "Riverpod", icon: "layers", color: "#38bdf8" },
-          { name: "Hive DB", icon: "database", color: "#ffc700" },
-          { name: "Firebase FCM", icon: "bell", color: "#ff9100" },
-          { name: "i18n", icon: "globe", color: "#10b981" }
+          { name: "Riverpod & GoRouter", icon: "layers", color: "#38bdf8" },
+          { name: "Google ML Kit", icon: "scan-face", color: "#8b5cf6" },
+          { name: "Google Maps & GPS", icon: "map-pin", color: "#ea4335" },
+          { name: "Hive Offline DB", icon: "database", color: "#ffc700" },
+          { name: "Dio HTTP & Pusher", icon: "zap", color: "#10b981" },
+          { name: "Firebase FCM", icon: "bell", color: "#ff9100" }
         ],
         metrics: [
-          { label: "Offline First", value: "100% Hive Cache" },
-          { label: "Notification Sync", value: "Real-Time FCM" },
-          { label: "Frame Rate", value: "60 FPS Smooth" },
-          { label: "Architecture", value: "Feature-First" }
+          { label: "Biometrics", value: "ML Kit Face ID" },
+          { label: "Field Tracking", value: "GPS Geofencing" },
+          { label: "Offline Mode", value: "Hive Cache Sync" },
+          { label: "Architecture", value: "Clean Architecture" }
         ],
-        overview: "Supraskills TM is a production task management platform built with Flutter. It streamlines workflow management with real-time push notifications, internal messaging, timeline scheduling, media uploads, and multi-language localization.",
-        architecture: "Engineered with a Feature-First Clean Architecture paired with Riverpod state management and Hive local storage engine for seamless offline synchronization when internet connectivity drops.",
+        overview: "Shukran Beverage is an enterprise-grade Sales Force Automation (SFA) and Field Delivery Logistics mobile application built with Flutter. It streamlines end-to-end sales operations, field agent tracking, delivery management, inventory preparation, and outlet onboarding with robust real-time communication.",
+        architecture: "Engineered following Clean Architecture with strict separation of Data, Domain, and Presentation layers. Utilizes Riverpod for reactive state management, GoRouter route guards for Role-Based Access Control (RBAC), Dio HTTP interceptors for token management and error logging, and Hive for resilient offline persistence.",
         features: [
-          "Firebase push notifications & real-time internal team messaging",
-          "Riverpod state management & Hive local database offline-first support",
-          "Interactive drag-and-drop timeline scheduling & media file uploads",
-          "Multi-language localization and high-density dashboard analytics"
+          "Role-Based Access Control (RBAC) & dynamic navigation for Sales Reps and Delivery Personnel",
+          "On-device Google ML Kit Face Detection for selfie-based biometric clock-in and clock-out attendance",
+          "GPS tracking, geofencing, geolocation, distance calculation, and Google Maps outlet onboarding",
+          "End-to-end Order & Delivery Management: inventory prep, goods loading, route checkpoints, delivery handover & invoices",
+          "Scalable Dio REST API integration with HTTP interceptors, token refresh, and centralized error handling",
+          "Hive local database for offline persistence of auth sessions, user profiles, configs, and cached data",
+          "Firebase Cloud Messaging (FCM), Local Notifications, and Pusher WebSockets for instant order & dispatch updates"
         ],
-        storeLinks: {
-          appStore: "https://apps.apple.com/us/app/supraskills-tm/id6757388694"
-        }
+        storeLinks: {}
       },
       {
         id: "ready-classify",
@@ -291,10 +294,12 @@ const portfolioTranslations = {
         overview: "Ready Classify is a high-performance marketplace application enabling users to list and buy products locally. Integrated with Google Maps for location pinpointing, Pusher for instant messaging, and Riverpod for fluid state management.",
         architecture: "Layered architecture separating Dio network client interceptors, Riverpod global/family providers, and WebSocket event subscribers with background notification dispatching.",
         features: [
-          "Firebase authentication & social sign-in (Google, Facebook)",
-          "Google Maps & geolocation integration with radius-based nearby listings",
-          "Sub-100ms instant buyer-seller chat powered by Pusher Channels",
-          "Permission-driven mobile workflows for camera, storage, and live location"
+          "Firebase authentication & secure social sign-in (Google, Apple)",
+          "Pusher real-time messaging, Firebase Push Notifications & Local Notifications",
+          "Dio RESTful API integration with network logging, error handling & data synchronization",
+          "Google Maps, geolocation, geocoding & radius-based marketplace discovery",
+          "Device permission workflows for camera, image picking, caching, webviews & sharing",
+          "Riverpod state management & Hive local storage for a fast, reliable shopping experience"
         ],
         storeLinks: {
           playStore: "https://play.google.com/store/apps/details?id=com.readyclassify"
@@ -324,16 +329,95 @@ const portfolioTranslations = {
           { label: "Media Handling", value: "Video & Quizzes" },
           { label: "Architecture", value: "Clean Layered" }
         ],
-        overview: "Bridge LMS connects students and instructors seamlessly. Features include interactive course progress tracking, assignment submissions, digital quizzes, and fast backend synchronization.",
+        overview: "Bridge LMS is a cross-platform mobile LMS application connecting students and educators with seamless access to digital learning resources, assignments, assessments, and real-time communication.",
         architecture: "Modular clean architecture with decoupled repository layers, optimistic UI progress updates, and robust media playback management.",
         features: [
-          "Interactive course progress & lesson tracking with high-res video players",
-          "Assignment submission pipeline with digital evaluation feedback",
-          "Scalable backend API integrations with optimized data loading",
-          "Full bilingual Arabic & English localized user interface"
+          "Seamless student and educator access to digital learning resources and online courses",
+          "Interactive course materials, assignments, assessments, and progress tracking",
+          "RESTful APIs to synchronize courses, user data, learning content, and progress",
+          "Responsive, user-friendly UI adhering to Clean Architecture and Flutter best practices",
+          "Secure authentication, notifications, media/content handling, and real-time communication"
         ],
         storeLinks: {
           appStore: "https://apps.apple.com/us/app/bridge-%D8%AC%D8%B3%D8%B1-%D8%B9%D8%A0%D9%88%D8%B1%D9%83/id6751279145"
+        }
+      },
+      {
+        id: "isp-oman",
+        title: "ISP Oman",
+        tagline: "Healthcare, Travel & Multi-Service Booking Platform",
+        category: "Services",
+        role: "Flutter Developer",
+        status: "Production Shipped",
+        statusType: "live",
+        platform: "Android & iOS",
+        impact: "Comprehensive multi-service booking platform covering hospital & doctor appointments, medical cost estimation, visa services, accommodation, vehicle rentals, and tour bookings with GoRouter guarded navigation.",
+        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000",
+        tags: ["Flutter", "Riverpod", "GoRouter", "Dio REST API", "Hive DB", "Firebase FCM", "Service Booking"],
+        techStack: [
+          { name: "Flutter & Dart", icon: "smartphone", color: "#02569B" },
+          { name: "Riverpod & Clean Arch", icon: "layers", color: "#38bdf8" },
+          { name: "GoRouter Navigation", icon: "compass", color: "#a855f7" },
+          { name: "Dio HTTP Client", icon: "send", color: "#10b981" },
+          { name: "Hive Storage", icon: "database", color: "#ffc700" },
+          { name: "Firebase FCM", icon: "bell", color: "#ff9100" }
+        ],
+        metrics: [
+          { label: "Architecture", value: "Feature-First Clean" },
+          { label: "Service Booking", value: "Hospital, Visa, Tours" },
+          { label: "Routing Security", value: "GoRouter Route Guards" },
+          { label: "API Resilience", value: "Centralized Dio Client" }
+        ],
+        overview: "ISP Oman is a scalable multi-service concierge and healthcare booking mobile application built with Flutter. It delivers end-to-end booking workflows for hospital and doctor appointments, medical cost estimation, visa processing, accommodations, vehicle rentals, and guided tour reservations.",
+        architecture: "Built using Riverpod and Feature-First Clean Architecture with strict separation of Data, Domain, and Presentation layers. Features a centralized Dio REST API client with HTTP interceptors for auth token refresh, session-expiration parsing, and guarded GoRouter navigation.",
+        features: [
+          "Feature-First Clean Architecture with clear separation of Data, Domain, and Presentation layers",
+          "Centralized Dio REST API client and interceptor layer for token lifecycle, timeouts, and error handling",
+          "Complete Authentication suite: Login, Registration, OTP Verification, Password Reset, and secure Logout",
+          "End-to-end service booking for doctor visits, hospital cost estimates, visa services, hotels, and tours",
+          "My Requests management module with live request tracking, cancellation, and document downloads",
+          "Hive local storage for tokens, user profiles, theme preferences, and multi-language application settings",
+          "Firebase Cloud Messaging (FCM) & Local Notifications with foreground, background, and cold-start handling",
+          "Scalable GoRouter guarded route flows protecting authenticated user and booking contexts"
+        ],
+        storeLinks: {}
+      },
+      {
+        id: "supraskills-tm",
+        title: "Supraskills TM",
+        tagline: "Productivity & Task Management Platform",
+        category: "Productivity",
+        role: "Flutter Developer",
+        status: "Live on App Store",
+        statusType: "live",
+        platform: "iOS (iPhone / iPad)",
+        impact: "Production task management platform featuring instant push notifications, Hive offline sync, interactive timeline scheduling, and multi-language localization.",
+        image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=1000",
+        tags: ["Flutter", "Riverpod", "Hive DB", "Firebase FCM", "Localization"],
+        techStack: [
+          { name: "Flutter & Dart", icon: "smartphone", color: "#02569B" },
+          { name: "Riverpod", icon: "layers", color: "#38bdf8" },
+          { name: "Hive DB", icon: "database", color: "#ffc700" },
+          { name: "Firebase FCM", icon: "bell", color: "#ff9100" },
+          { name: "i18n", icon: "globe", color: "#10b981" }
+        ],
+        metrics: [
+          { label: "Offline First", value: "100% Hive Cache" },
+          { label: "Notification Sync", value: "Real-Time FCM" },
+          { label: "Frame Rate", value: "60 FPS Smooth" },
+          { label: "Architecture", value: "Feature-First" }
+        ],
+        overview: "Supraskills TM is a cross-platform Flutter task management application with Riverpod state management and Hive-based offline data persistence. It streamlines workflow management with task scheduling, calendar timeline, and progress tracking.",
+        architecture: "Engineered with a Feature-First Clean Architecture paired with Riverpod state management and Hive local storage engine for seamless offline synchronization when internet connectivity drops.",
+        features: [
+          "Cross-platform Flutter task management with Riverpod and Hive offline data persistence",
+          "Task scheduling, calendar timeline, task management, and progress tracking for efficient workflows",
+          "Firebase Push Notifications, internal messaging, file/image uploads, and camera functionality",
+          "Background file downloads and offline-first data synchronization during low network connectivity",
+          "Responsive UI, internationalization & localization, and Android/iOS native integrations"
+        ],
+        storeLinks: {
+          appStore: "https://apps.apple.com/us/app/supraskills-tm/id6757388694"
         }
       },
       {
@@ -361,13 +445,14 @@ const portfolioTranslations = {
           { label: "Sync Engine", value: "Real-Time Avail" },
           { label: "Design", value: "Pixel-Perfect UI" }
         ],
-        overview: "Chuty Rooms provides travelers with a seamless hotel booking experience. Offers interactive map search, real-time room reservation status, detailed amenities listing, and verified guest reviews.",
+        overview: "Chuty Rooms is a cross-platform Flutter room booking application for iOS and Android, enabling travelers to search, filter, and reserve rooms with seamless in-app booking, payment integration, and booking history.",
         architecture: "Domain-driven architecture containing dedicated room availability state machines, reservation checkout pipelines, and Google Places SDK routing.",
         features: [
-          "Google Maps integration for hotel search & turn-by-turn routing",
-          "Real-time room availability calendar & instant reservation booking",
-          "Verified guest review & star-rating submission platform",
-          "Responsive, pixel-perfect mobile UI design with rich media carousel"
+          "Cross-platform Flutter room booking application for iOS and Android with search & filtering",
+          "Real-time room availability, in-app booking, payment gateway integration, and booking history",
+          "Google Maps, location services, push notifications, user profiles, reviews & multilingual support",
+          "Offline access and data handling ensuring usability in low-connectivity environments",
+          "Responsive UI, analytics tracking, sorting, filtering, and third-party API integrations"
         ],
         storeLinks: {
           playStore: "https://play.google.com/store/apps/details?id=com.chutyrooms.crapp"
@@ -650,24 +735,43 @@ const portfolioTranslations = {
     ],
     projects: [
       {
-        id: "supraskills-tm",
-        title: "Supraskills TM",
-        tagline: "প্রোডাক্টিভিটি ও টাস্ক ম্যানেজমেন্ট প্ল্যাটফর্ম",
-        category: "Productivity",
-        role: "ফ্ল্যাটার ডেভেলপার",
-        impact: "পুশ নোটিফিকেশন, অফলাইন সাপোর্ট ও টাইমলাইন শিডিউলিং সমন্বিত প্রোডাক্টিভিটি মোবাইল অ্যাপ।",
-        image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800",
-        tags: ["Flutter", "Riverpod", "Hive DB", "Firebase FCM", "Localization"],
-        overview: "Supraskills TM একটি পূর্ণাঙ্গ টাস্ক ম্যানেজমেন্ট প্ল্যাটফর্ম। রিয়েল-টাইম পুশ নোটিফিকেশন, টাইমলাইন শিডিউলিং ও মাল্টিপল ল্যাঙ্গুয়েজ সাপোর্ট সমৃদ্ধ।",
-        features: [
-          "ফায়ারবেস পুশ নোটিফিকেশন ও ইন্টারনাল চ্যাট",
-          "রিভারপড স্টেট ম্যানেজমেন্ট ও Hive অফলাইন সাপোর্ট",
-          "ইন্টারঅ্যাক্টিভ টাইমলাইন শিডিউলিং ও মিডিয়া আপলোড",
-          "বহুভাষিক (Multi-language) লোকালাইজেশন"
+        id: "shukran-beverage",
+        title: "Shukran Beverage",
+        tagline: "সেলস ফোর্স অটোমেশন ও ফিল্ড ডেলিভারি লজিস্টিকস প্ল্যাটফর্ম",
+        category: "Logistics",
+        role: "সফটওয়্যার ইঞ্জিনিয়ার",
+        status: "এন্টারপ্রাইজ প্রোডাকশন",
+        statusType: "enterprise",
+        platform: "Android & iOS (Enterprise)",
+        impact: "গুগল ML Kit ফেস ডিটেকশন বায়োমেট্রিক হাজিরা, GPS জিওফেন্সিং, ডেলিভারি চেকপয়েন্ট ও অফলাইন Hive ডাটাবেস সমন্বিত এন্টারপ্রাইজ লজিস্টিকস অ্যাপ।",
+        image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
+        tags: ["Flutter", "Riverpod", "Google ML Kit", "Google Maps & GPS", "Hive DB", "GoRouter", "Pusher WebSockets", "Dio API"],
+        techStack: [
+          { name: "Flutter & Dart", icon: "smartphone", color: "#02569B" },
+          { name: "Riverpod & GoRouter", icon: "layers", color: "#38bdf8" },
+          { name: "Google ML Kit", icon: "scan-face", color: "#8b5cf6" },
+          { name: "Google Maps & GPS", icon: "map-pin", color: "#ea4335" },
+          { name: "Hive Offline DB", icon: "database", color: "#ffc700" },
+          { name: "Dio HTTP & Pusher", icon: "zap", color: "#10b981" }
         ],
-        storeLinks: {
-          appStore: "https://apps.apple.com/us/app/supraskills-tm/id6757388694"
-        }
+        metrics: [
+          { label: "বায়োমেট্রিক্স", value: "ML Kit ফেস আইডি" },
+          { label: "ফিল্ড ট্র্যাকিং", value: "GPS জিওফেন্সিং" },
+          { label: "অফলাইন মোড", value: "Hive ক্যাশ সিঙ্ক" },
+          { label: "আর্কিটেকচার", value: "ক্লিন আর্কিটেকচার" }
+        ],
+        overview: "Shukran Beverage একটি এন্টারপ্রাইজ-গ্রেড সেলস ফোর্স অটোমেশন (SFA) এবং ফিল্ড ডেলিভারি লজিস্টিকস অ্যাপ্লিকেশন। এটি ফিল্ড এজেন্ট ট্র্যাকিং, আউটলেট অনবোর্ডিং, অর্ডার প্রস্তুতি এবং রিয়েল-টাইম ডেলিভারি হ্যান্ডওভার অত্যন্ত দক্ষতার সাথে পরিচালনা করে।",
+        architecture: "ক্লিন আর্কিটেকচার নীতি অনুসরণ করে Data, Domain ও Presentation লেয়ার পৃথক রাখা হয়েছে। রিভারপড স্টেট ম্যানেজমেন্ট, GoRouter রাউট গার্ডের মাধ্যমে RBAC সিকিউরিটি, এবং অফলাইন সাপোর্টের জন্য Hive ডাটাবেস সমন্বিত।",
+        features: [
+          "সেলস রিপ্রেজেন্টেটিভ ও ডেলিভারি টিমের জন্য রোল-বেসড অ্যাক্সেস কন্ট্রোল (RBAC) ও ডায়নামিক নেভিগেশন",
+          "অন-ডিভাইস Google ML Kit ফেস ডিটেকশন সমন্বিত সেলফি বায়োমেট্রিক হাজিরা (Clock-in / Clock-out)",
+          "GPS ট্র্যাকিং, জিওফেন্সিং, দূরত্ব গণনা এবং আউটলেট ভ্যালিডেশনের জন্য গুগল ম্যাপস ইন্টিগ্রেশন",
+          "এন্ড-টু-এন্ড অর্ডার ও ডেলিভারি ম্যানেজমেন্ট: ইনভেন্টরি প্রস্তুতি, পণ্য লোডিং, রুট চেকপয়েন্ট ও ইনভয়েস",
+          "Dio HTTP ইন্টারসেপ্টর, টোকেন রিনিউয়াল এবং অপটিমাইজড REST API নেটওয়ার্ক লেয়ার",
+          "Hive লোকাল ডাটাবেস ও অফলাইন ডাটা পারসিস্টেন্স নিশ্চিতকরণ",
+          "Firebase FCM, লোকাল নোটিফিকেশন ও Pusher WebSockets-এর মাধ্যমে তাৎক্ষণিক অর্ডার ও ডেলিভারি আপডেট"
+        ],
+        storeLinks: {}
       },
       {
         id: "ready-classify",
@@ -675,15 +779,34 @@ const portfolioTranslations = {
         tagline: "রিয়েল-টাইম ক্লাসিফায়েড মার্কেটপ্লেস",
         category: "Marketplace",
         role: "ফ্ল্যাটার ডেভেলপার",
+        status: "লাইভ (প্লে স্টোর)",
+        statusType: "live",
+        platform: "Android & iOS Ready",
         impact: "সোশ্যাল লগইন, রিয়েল-টাইম লাইভ চ্যাট ও গুগল ম্যাপস সমৃদ্ধ মোবাইল মার্কেটপ্লেস।",
         image: "https://images.unsplash.com/photo-1556742049-0a674d89a4ee?auto=format&fit=crop&q=80&w=800",
         tags: ["Flutter", "Google Maps", "Pusher", "Riverpod", "Dio API"],
+        techStack: [
+          { name: "Flutter", icon: "smartphone", color: "#02569B" },
+          { name: "Google Maps", icon: "map-pin", color: "#ea4335" },
+          { name: "Pusher Realtime", icon: "zap", color: "#a855f7" },
+          { name: "Riverpod", icon: "layers", color: "#38bdf8" },
+          { name: "Dio HTTP", icon: "send", color: "#10b981" }
+        ],
+        metrics: [
+          { label: "মেসেজিং লেটেন্সি", value: "< 100ms Pusher" },
+          { label: "জিও অ্যাকুরেসি", value: "Google Maps API" },
+          { label: "নেটওয়ার্ক লেয়ার", value: "Dio Interceptors" },
+          { label: "স্টেট ইঞ্জিন", value: "Riverpod Providers" }
+        ],
         overview: "লোকাল পণ্য কেনাবেচার জন্য উচ্চ-পারফরম্যান্স মোবাইল মার্কেটপ্লেস। গুগল ম্যাপস লোকেশন সার্চ এবং Pusher ইনস্ট্যান্ট চ্যাট সমৃদ্ধ।",
+        architecture: "Layered architecture separating Dio network client interceptors, Riverpod global/family providers, and WebSocket event subscribers with background notification dispatching.",
         features: [
-          "ফায়ারবেস অথেন্টিকেশন ও গুগল/ফেসবুক সোশ্যাল সাইন-ইন",
-          "গুগল ম্যাপস ও নিকটস্থ পণ্য খোঁজার জিওলোকেশন",
-          "Dio ক্লায়েন্ট ও Pusher রিয়েল-টাইম আপডেট",
-          "ক্যামেরা ও ডিভাইস পারমিশন ম্যানেজমেন্ট"
+          "ফায়ারবেস অথেন্টিকেশন ও গুগল/অ্যাপল সোশ্যাল সাইন-ইন",
+          "Pusher রিয়েল-টাইম মেসেজিং, Firebase FCM পুশ নোটিফিকেশন ও লোকাল নোটিফিকেশন",
+          "Dio RESTful API ইন্টিগ্রেশন সহ নেটওয়ার্ক লগিং ও ডাটা সিঙ্ক্রোনাইজেশন",
+          "গুগল ম্যাপস, জিওলোকেশন, জিওকোডিং ও নিকটস্থ পণ্য খোঁজার সুবিধা",
+          "ক্যামেরা, ইমেজ পিকিং, ক্যাশিং, ওয়েবভিউ ও ডিভাইস পারমিশন ম্যানেজমেন্ট",
+          "Riverpod স্টেট ম্যানেজমেন্ট ও Hive লোকাল স্টোরেজ নির্ভর নির্ভরযোগ্য শপিং অভিজ্ঞতা"
         ],
         storeLinks: {
           playStore: "https://play.google.com/store/apps/details?id=com.readyclassify"
@@ -691,22 +814,116 @@ const portfolioTranslations = {
       },
       {
         id: "bridge-lms",
-        title: "Bridge LMS",
+        title: "Bridge LMS (جسر عبورك)",
         tagline: "এডটেক লার্নিং ম্যানেজমেন্ট প্ল্যাটফর্ম",
         category: "EdTech",
         role: "ফ্ল্যাটার ডেভেলপার",
+        status: "লাইভ (অ্যাপ স্টোর)",
+        statusType: "live",
+        platform: "iOS (iPhone / iPad)",
         impact: "কোর্স ট্র্যাকিং, অ্যাসাইনমেন্ট সাবমিশন ও দ্রুতগতির ব্যাকএন্ড সমন্বিত মোবাইল LMS।",
         image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800",
-        tags: ["Flutter", "Dart", "REST API", "State Management"],
-        overview: "শিক্ষক ও শিক্ষার্থীদের নিরবচ্ছিন্নভাবে সংযুক্ত করতে তৈরি। কোর্স প্রগ্রেস ট্র্যাক, কুইজ ও অ্যাসাইনমেন্ট সাবমিশন ফিচার সমৃদ্ধ।",
+        tags: ["Flutter", "Dart", "REST API", "State Management", "EdTech"],
+        techStack: [
+          { name: "Flutter & Dart", icon: "smartphone", color: "#02569B" },
+          { name: "REST API & Dio", icon: "server", color: "#10b981" },
+          { name: "Video Modules", icon: "play-circle", color: "#ef4444" },
+          { name: "State Mgmt", icon: "layers", color: "#38bdf8" }
+        ],
+        metrics: [
+          { label: "প্ল্যাটফর্ম", value: "iOS ইকোসিস্টেম" },
+          { label: "ডাটা পাইপলাইন", value: "RESTful ক্যাশ" },
+          { label: "মিডিয়া হ্যান্ডলিং", value: "ভিডিও ও কুইজ" },
+          { label: "আর্কিটেকচার", value: "ক্লিন লেয়ার্ড" }
+        ],
+        overview: "শিক্ষক ও শিক্ষার্থীদের নিরবচ্ছিন্নভাবে সংযুক্ত করতে তৈরি ক্রস-প্ল্যাটফর্ম ফ্ল্যাটার LMS অ্যাপ। কোর্স প্রগ্রেস ট্র্যাক, ডিজিটাল কুইজ ও অ্যাসাইনমেন্ট সাবমিশন ফিচার সমৃদ্ধ।",
+        architecture: "Modular clean architecture with decoupled repository layers, optimistic UI progress updates, and robust media playback management.",
         features: [
-          "ইন্টারঅ্যাক্টিভ মডিউল সহ কোর্স প্রগ্রেস ট্র্যাকিং",
-          "ডিজিটাল অ্যাসাইনমেন্ট সাবমিশন ও গ্রেডিং সিস্টেম",
-          "অপটিমাইজড ডাটা লোডিং সহ ব্যাকএন্ড API",
-          "ক্লিন ফিচার-ফার্স্ট মোবাইল আর্কিটেকচার"
+          "শিক্ষার্থী ও শিক্ষকদের জন্য ডিজিটাল লার্নিং রিসোর্সে নিরবচ্ছিন্ন প্রবেশাধিকার",
+          "অনলাইন কোর্স, কোর্স ম্যাটেরিয়াল, অ্যাসাইনমেন্ট ও শিক্ষার্থী প্রগ্রেস ট্র্যাকিং",
+          "কোর্স ও ইউজার ডাটা সিঙ্ক্রোনাইজেশনের জন্য RESTful API ইন্টিগ্রেশন",
+          "ক্লিন আর্কিটেকচার ও স্কেলেবল ফ্ল্যাটার ডেভেলপমেন্ট পদ্ধতি",
+          "নিরাপদ অথেন্টিকেশন, পুশ নোটিফিকেশন, মিডিয়া হ্যান্ডলিং ও রিয়েল-টাইম যোগাযোগ"
         ],
         storeLinks: {
           appStore: "https://apps.apple.com/us/app/bridge-%D8%AC%D8%B3%D8%B1-%D8%B9%D8%A0%D9%88%D8%B1%D9%83/id6751279145"
+        }
+      },
+      {
+        id: "isp-oman",
+        title: "ISP Oman",
+        tagline: "স্বাস্থ্যসেবা, ভ্রমণ ও মাল্টি-সার্ভিস বুকিং প্ল্যাটফর্ম",
+        category: "Services",
+        role: "ফ্ল্যাটার ডেভেলপার",
+        status: "প্রোডাকশন শিপড",
+        statusType: "live",
+        platform: "Android & iOS",
+        impact: "ডাক্তার ও হাসপাতাল অ্যাপয়েন্টমেন্ট, চিকিৎসা খরচ নির্ধারণ, ভিসা প্রসেসিং, হোটেল ও ট্যুর বুকিং সমন্বিত পূর্ণাঙ্গ কনসিয়ার্জ প্ল্যাটফর্ম।",
+        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800",
+        tags: ["Flutter", "Riverpod", "GoRouter", "Dio REST API", "Hive DB", "Firebase FCM", "Service Booking"],
+        techStack: [
+          { name: "Flutter & Dart", icon: "smartphone", color: "#02569B" },
+          { name: "Riverpod & Clean Arch", icon: "layers", color: "#38bdf8" },
+          { name: "GoRouter Navigation", icon: "compass", color: "#a855f7" },
+          { name: "Dio HTTP Client", icon: "send", color: "#10b981" },
+          { name: "Hive Storage", icon: "database", color: "#ffc700" }
+        ],
+        metrics: [
+          { label: "আর্কিটেকচার", value: "ফিচার-ফার্স্ট ক্লিন" },
+          { label: "সার্ভিস বুকিং", value: "ডাক্তার, ভিসা, ট্যুর" },
+          { label: "রাউটিং সিকিউরিটি", value: "GoRouter গার্ডস" },
+          { label: "API রেজিলিয়েন্স", value: "Dio ইন্টারসেপ্টর" }
+        ],
+        overview: "ISP Oman একটি স্কেলেবল স্বাস্থ্যসেবা ও বহুমুখী কনসিয়ার্জ সার্ভিস বুকিং প্ল্যাটফর্ম। এর মাধ্যমে ব্যবহারকারীরা সহজে হাসপাতাল ও ডাক্তারের অ্যাপয়েন্টমেন্ট, চিকিৎসা ব্যয় প্রাক্কলন, ভিসা প্রসেসিং, হোটেল বাসস্থান, গাড়ি ভাড়া এবং ট্যুর বুক করতে পারেন।",
+        architecture: "Riverpod ও Feature-First Clean Architecture ব্যবহার করে তৈরি। Data, Domain এবং Presentation লেয়ারের সুস্পষ্ট বিভাজন রয়েছে। Dio ক্লায়েন্টের মাধ্যমে সেশন এক্সপায়ার হ্যান্ডলিং ও টোকেন ম্যানেজমেন্ট নিশ্চিত করা হয়েছে।",
+        features: [
+          "ফিচার-ফার্স্ট ক্লিন আর্কিটেকচার সহ Data, Domain ও Presentation লেয়ারের সুস্পষ্ট বিভাজন",
+          "কেন্দ্রীভূত Dio REST API ক্লায়েন্ট ও ইন্টারসেপ্টর লেয়ারের মাধ্যমে টোকেন ও সেশন এক্সপায়ার নিয়ন্ত্রণ",
+          "সম্পূর্ণ অথেন্টিকেশন ফ্লো: লগইন, রেজিস্ট্রেশন, OTP ভেরিফিকেশন, পাসওয়ার্ড রিসেট ও নিরাপদ লগআউট",
+          "হাসপাতাল ও ডাক্তার অ্যাপয়েন্টমেন্ট, খরচ হিসাব, ভিসা সার্ভিস, হোটেল ও ভ্রমণ বুকিং",
+          "My Requests মডিউল যার মাধ্যমে রিকোয়েস্ট ট্র্যাকিং, বাতিলকরণ ও ডকুমেন্ট ডাউনলোড সুবিধা",
+          "টোকেন, প্রোফাইল, থিম এবং ভাষা সেটিংসের জন্য Hive লোকাল স্টোরেজ",
+          "ফোরগ্রাউন্ড, ব্যাকগ্রাউন্ড ও কোল্ড-স্টার্ট হ্যান্ডলিং সহ Firebase FCM এবং লোকাল নোটিফিকেশন",
+          "নিরাপদ ইউজার ও বুকিং ফ্লো নিশ্চিত করার জন্য GoRouter গার্ডেড নেভিগেশন"
+        ],
+        storeLinks: {}
+      },
+      {
+        id: "supraskills-tm",
+        title: "Supraskills TM",
+        tagline: "প্রোডাক্টিভিটি ও টাস্ক ম্যানেজমেন্ট প্ল্যাটফর্ম",
+        category: "Productivity",
+        role: "ফ্ল্যাটার ডেভেলপার",
+        status: "লাইভ (অ্যাপ স্টোর)",
+        statusType: "live",
+        platform: "iOS (iPhone / iPad)",
+        impact: "পুশ নোটিফিকেশন, অফলাইন সাপোর্ট ও টাইমলাইন শিডিউলিং সমন্বিত প্রোডাক্টিভিটি মোবাইল অ্যাপ।",
+        image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800",
+        tags: ["Flutter", "Riverpod", "Hive DB", "Firebase FCM", "Localization"],
+        techStack: [
+          { name: "Flutter & Dart", icon: "smartphone", color: "#02569B" },
+          { name: "Riverpod", icon: "layers", color: "#38bdf8" },
+          { name: "Hive DB", icon: "database", color: "#ffc700" },
+          { name: "Firebase FCM", icon: "bell", color: "#ff9100" },
+          { name: "i18n", icon: "globe", color: "#10b981" }
+        ],
+        metrics: [
+          { label: "অফলাইন ফার্স্ট", value: "১০০% Hive ক্যাশ" },
+          { label: "নোটিফিকেশন সিঙ্ক", value: "রিয়েল-টাইম FCM" },
+          { label: "ফ্রেম রেট", value: "৬০ FPS স্মুথ" },
+          { label: "আর্কিটেকচার", value: "ফিচার-ফার্স্ট" }
+        ],
+        overview: "Supraskills TM একটি ক্রস-প্ল্যাটফর্ম টাস্ক ম্যানেজমেন্ট প্ল্যাটফর্ম যা Riverpod এবং Hive লোকাল স্টোরেজ দিয়ে নির্মিত। এটি টাস্ক শিডিউলিং, ক্যালেন্ডার টাইমলাইন ও প্রগ্রেস ট্র্যাকিংকে অত্যন্ত সহজ করে।",
+        architecture: "Engineered with a Feature-First Clean Architecture paired with Riverpod state management and Hive local storage engine for seamless offline synchronization when internet connectivity drops.",
+        features: [
+          "Riverpod এবং Hive অফলাইন ডাটা পারসিস্টেন্স সহ ক্রস-প্ল্যাটফর্ম ফ্ল্যাটার অ্যাপ",
+          "কার্যকর ওয়ার্কফ্লো ম্যানেজমেন্টের জন্য টাস্ক শিডিউলিং, ক্যালেন্ডার টাইমলাইন ও প্রগ্রেস ট্র্যাকিং",
+          "ফায়ারবেস পুশ নোটিফিকেশন, ইন্টারনাল মেসেজিং, ফাইল/ইমেজ আপলোড ও ক্যামেরা কার্যকারিতা",
+          "সীমিত নেটওয়ার্ক সংযোগেও নির্ভরযোগ্য অফলাইন-ফার্স্ট কার্যকারিতা ও ব্যাকগ্রাউন্ড ডাউনলোড",
+          "রেসপনসিভ UI, বহুভাষিক লোকালাইজেশন এবং অ্যান্ড্রয়েড ও iOS নেটিভ ইন্টিগ্রেশন"
+        ],
+        storeLinks: {
+          appStore: "https://apps.apple.com/us/app/supraskills-tm/id6757388694"
         }
       },
       {
@@ -715,15 +932,33 @@ const portfolioTranslations = {
         tagline: "হোটেল ও রুম বুকিং প্ল্যাটফর্ম",
         category: "Hospitality",
         role: "ফ্ল্যাটার ডেভেলপার",
+        status: "লাইভ (প্লে স্টোর)",
+        statusType: "live",
+        platform: "Android & iOS Ready",
         impact: "রিয়েল-টাইম রুম বুকিং, গুগল ম্যাপস নেভিগেশন ও কাস্টমার রিভিউ সমৃদ্ধ প্ল্যাটফর্ম।",
         image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800",
         tags: ["Flutter", "Google Maps", "Hotel Booking", "Reviews", "Real-time DB"],
-        overview: "ভ্রমণকারীদের হোটেল খোঁজা ও দ্রুত বুকিংয়ের জন্য তৈরি অ্যাপ। ইন্টারেক্টিভ ম্যাপ সার্চ, রিয়েল-টাইম রুম ক্যালেন্ডার ও ভেরিফাইড রিভিউ যুক্ত।",
+        techStack: [
+          { name: "Flutter", icon: "smartphone", color: "#02569B" },
+          { name: "Google Maps", icon: "map-pin", color: "#ea4335" },
+          { name: "Booking Engine", icon: "calendar", color: "#ffc700" },
+          { name: "Review System", icon: "star", color: "#f59e0b" },
+          { name: "REST Backend", icon: "server", color: "#10b981" }
+        ],
+        metrics: [
+          { label: "বুকিং ফ্লো", value: "ইনস্ট্যান্ট চেকআউট" },
+          { label: "ম্যাপ নেভিগেশন", value: "Google Places" },
+          { label: "সিঙ্ক ইঞ্জিন", value: "রিয়েল-টাইম সিঙ্ক" },
+          { label: "ডিজাইন", value: "পিক্সেল-পারফেক্ট UI" }
+        ],
+        overview: "ভ্রমণকারীদের হোটেল খোঁজা ও দ্রুত বুকিংয়ের জন্য তৈরি ক্রস-প্ল্যাটফর্ম ফ্ল্যাটার অ্যাপ। রিয়েল-টাইম রুম প্রাপ্যতা, ইন-অ্যাপ বুকিং, পেমেন্ট ইন্টিগ্রেশন ও বুকিং হিস্ট্রি সমৃদ্ধ।",
+        architecture: "Domain-driven architecture containing dedicated room availability state machines, reservation checkout pipelines, and Google Places SDK routing.",
         features: [
-          "হোটেল সার্চ ও রাউটিংয়ের জন্য গুগল ম্যাপস ইন্টিগ্রেশন",
-          "রিয়েল-টাইম রুম অ্যাভেইলেবিলিটি ক্যালেন্ডার ও বুকিং",
-          "যাচাইকৃত কাস্টমার রিভিউ ও স্টার রেটিং সিস্টেম",
-          "রেসপনসিভ ও পিক্সেল-পারফেক্ট মোবাইল UI"
+          "iOS এবং Android-এর জন্য ক্রস-প্ল্যাটফর্ম রুম সার্চ, ফিল্টারিং ও রিজার্ভেশন সিস্টেম",
+          "রিয়েল-টাইম রুম প্রাপ্যতা ক্যালেন্ডার, ইন-অ্যাপ বুকিং, পেমেন্ট গেটওয়ে ও বুকিং হিস্ট্রি",
+          "গুগল ম্যাপস, লোকেশন সার্ভিস, পুশ নোটিফিকেশন, ইউজার প্রোফাইল ও বহুভাষিক সাপোর্ট",
+          "দুর্বল বা সীমিত ইন্টারনেটেও ব্যবহারের জন্য অফলাইন অ্যাক্সেস ও নির্ভরযোগ্য ডাটা হ্যান্ডলিং",
+          "রেসপনসিভ UI, অ্যানালিটিক্স ট্র্যাকিং, সর্টিং, ফিল্টারিং ও থার্ড-পার্টি সার্ভিস ইন্টিগ্রেশন"
         ],
         storeLinks: {
           playStore: "https://play.google.com/store/apps/details?id=com.chutyrooms.crapp"

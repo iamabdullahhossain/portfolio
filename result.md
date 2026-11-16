@@ -52,30 +52,62 @@ Mobile App Engineer with 4+ years of experience building production-ready mobile
 
 ---
 
-## Featured Projects
+## Featured Projects (Aligned with PDF)
 
-### 1. Supraskills TM *(Productivity)*
-Flutter-based task management platform featuring:
-- Firebase push notifications & internal messaging
-- Riverpod state management & Hive offline support
-- Timeline scheduling & media uploads
-- Localization support
+### 1. Shukran Beverage *(Logistics & SFA)*
+Enterprise-grade Flutter Sales Force Automation (SFA) and Field Delivery Logistics application:
+- Role-Based Access Control (RBAC) and dynamic GoRouter navigation for sales and delivery agents
+- On-device Google ML Kit Face Detection for biometric clock-in/out attendance
+- GPS Tracking, Geofencing, Distance Calculation & Google Maps outlet onboarding
+- End-to-end Order & Delivery Management with route checkpoints and invoice generation
+- Scalable Dio REST API layer with HTTP interceptors, token refresh & error handling
+- Hive local database for offline persistence of auth sessions, user profiles & cached data
+- Firebase Cloud Messaging (FCM), Local Notifications & Pusher WebSockets
 
 ### 2. Ready Classify *(Marketplace)*
-Flutter marketplace app featuring:
-- Firebase auth, messaging & social sign-in
-- Google Maps & geolocation integration
-- Dio APIs, Riverpod & Pusher real-time updates
-- Permission-driven mobile workflows
+Responsive Flutter classifieds marketplace application:
+- Firebase authentication & social sign-in (Google, Apple)
+- Real-time messaging and updates using Pusher Channels & Firebase Push Notifications
+- RESTful APIs using Dio with network logging, error handling & data synchronization
+- Google Maps, geolocation, geocoding, image picking, caching & device permissions
+- Riverpod state management & Hive local storage for seamless shopping experience
+- Live on Google Play Store: https://play.google.com/store/apps/details?id=com.readyclassify
 
 ### 3. Bridge LMS *(EdTech)*
-Learning management app with course tracking, assignments, and scalable backend integrations.
+Cross-platform Flutter LMS mobile application:
+- Online courses, course materials, assignments, assessments & student progress tracking
+- RESTful APIs communicating with LMS backend services & content synchronization
+- Clean Architecture with decoupled repository layers
+- Authentication, notifications, media/content handling & real-time communication
+- Live on Apple App Store: https://apps.apple.com/us/app/bridge-%D8%AC%D8%B3%D8%B1-%D8%B9%D8%A0%D9%88%D8%B1%D9%83/id6751279145
 
-### 4. EduMali *(LMS)*
-Full LMS ecosystem featuring video streaming, offline support, payment integration, analytics, messaging, and notifications.
+### 4. ISP Oman *(Services & Healthcare)*
+Scalable Flutter concierge, healthcare & travel service booking application:
+- Feature-First Clean Architecture segregating Data, Domain & Presentation layers
+- Centralized Dio REST API client and interceptor layer for token lifecycle & session expiration
+- Complete Authentication workflows (Login, Registration, OTP, Forgot/Reset Password, Logout)
+- End-to-end service booking for hospital/doctor visits, cost estimation, visa, accommodation & tours
+- "My Requests" management module with request tracking, cancellation & document downloads
+- Hive local storage for tokens, user profiles, theme preferences & language settings
+- Firebase Cloud Messaging (FCM) & Local Notifications with foreground, background & cold-start routing
+- Scalable GoRouter navigation with guarded routes
 
-### 5. Chuty Rooms *(Hospitality)*
-Hotel booking platform with Google Maps integration, real-time availability, and review/rating features.
+### 5. Supraskills TM *(Productivity)*
+Cross-platform Flutter task management platform:
+- Riverpod state management & Hive-based offline data persistence
+- Task scheduling, calendar timeline, task management & progress tracking
+- Firebase Push Notifications, internal messaging, file/image uploads & camera functionality
+- Offline-first functionality ensuring reliable data access during low connectivity
+- Responsive UI, multi-language localization & native Android/iOS integrations
+- Live on Apple App Store: https://apps.apple.com/us/app/supraskills-tm/id6757388694
+
+### 6. Chuty Rooms *(Hospitality)*
+Cross-platform Flutter room booking application for iOS and Android:
+- Real-time room availability calendar, in-app booking, payment integration & booking history
+- Google Maps integration, location services, push notifications & reviews/ratings
+- Offline access and data handling for low-connectivity environments
+- Responsive UI, analytics, sorting, filtering & third-party integrations
+- Live on Google Play Store: https://play.google.com/store/apps/details?id=com.chutyrooms.crapp
 
 ---
 
