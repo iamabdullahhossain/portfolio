@@ -28,7 +28,7 @@ const portfolioTranslations = {
       viewProjectsCta: "View Projects",
       badgeExp: "4+ Yrs Exp.",
       tagline: "Mobile App Engineer with 4+ years of experience building production-ready mobile apps with clean architecture, real-time systems, and scalable API integrations.",
-      bio: "Mobile App Engineer with 4+ years of experience building production-ready mobile apps with clean architecture, real-time systems, and scalable API integrations. Specializing in high-performance Flutter applications, real-time systems, and pixel-perfect mobile UI implementation. Currently working at RazinSoft Limited as a Flutter Developer with a strong focus on maintainable architecture and reliable product delivery.",
+      bio: "Software Engineer with 4+ years of experience building production-ready mobile applications and scalable backend systems. Specializing in high-performance Flutter applications, RESTful API architecture, and real-time cloud integrations. Currently working at NIBIZ Soft as a Software Engineer, driving both mobile and backend development with a strong focus on clean architecture and reliable delivery.",
       location: "Dhaka, Bangladesh",
       stats: [
         { label: "Years Experience", value: 4, suffix: "+" },
@@ -83,11 +83,19 @@ const portfolioTranslations = {
     },
     experience: [
       {
-        role: "Flutter Developer (Mid-Level)",
-        company: "RazinSoft Limited",
-        duration: "2025 - Present",
+        role: "Software Engineer",
+        company: "NIBIZ Soft",
+        duration: "2026 - Present",
         type: "Full-Time",
         isCurrent: true,
+        description: "Leading end-to-end development across cross-platform mobile applications and scalable backend services. Engineering high-performance Flutter apps with clean architecture alongside robust RESTful APIs, relational databases, and real-time cloud integrations."
+      },
+      {
+        role: "Flutter Developer (Mid-Level)",
+        company: "RazinSoft Limited",
+        duration: "2025 - 2026",
+        type: "Full-Time",
+        isCurrent: false,
         description: "Leading Flutter app development with Riverpod and clean architecture. Engineering real-time chat, Google Maps geolocation, and offline-first data sync for enterprise and marketplace applications."
       },
       {
@@ -407,7 +415,7 @@ const portfolioTranslations = {
       },
       {
         question: "What is your work experience?",
-        answer: "I have 4+ years of professional experience as a Flutter and Android developer across companies like RazinSoft Limited (Mid-Level Flutter Developer), Chuty Bangladesh PVT Ltd, and Authentic Four Technology."
+        answer: "I have 4+ years of professional experience across companies like NIBIZ Soft (Software Engineer), RazinSoft Limited (Mid-Level Flutter Developer), Chuty Bangladesh PVT Ltd, and Authentic Four Technology, engineering both mobile apps and backend systems."
       },
       {
         question: "How can we get in touch or start a project?",
@@ -443,7 +451,7 @@ const portfolioTranslations = {
       viewProjectsCta: "প্রজেক্ট দেখুন",
       badgeExp: "৪+ বছর অভিজ্ঞতা",
       tagline: "৪+ বছরের বাস্তব অভিজ্ঞতাসম্পন্ন মোবাইল অ্যাপ ইঞ্জিনিয়ার। ক্লিন আর্কিটেকচার ও রিয়েল-টাইম সিস্টেমে দক্ষ।",
-      bio: "৪+ বছরের অভিজ্ঞতাসম্পন্ন মোবাইল অ্যাপ্লিকেশন ইঞ্জিনিয়ার। ক্লিন আর্কিটেকচার, রিয়েল-টাইম মেসেজিং সিস্টেম ও পিক্সেল-পারফেক্ট মোবাইল UI নির্মাণে পারদর্শী। বর্তমানে রাজিনসফট লিমিটেডে মিড-লেভেল ফ্ল্যাটার ডেভেলপার হিসেবে কর্মরত।",
+      bio: "৪+ বছরের অভিজ্ঞতাসম্পন্ন সফটওয়্যার ও মোবাইল অ্যাপ ইঞ্জিনিয়ার। হাই-পারফরম্যান্স মোবাইল অ্যাপ্লিকেশন এবং স্কেলেবল ব্যাকএন্ড সিস্টেম তৈরিতে দক্ষ। বর্তমানে NIBIZ Soft-এ সফটওয়্যার ইঞ্জিনিয়ার হিসেবে কর্মরত, যেখানে মোবাইল অ্যাপ ও ব্যাকএন্ড আর্কিটেকচার উভয়ই দক্ষতার সাথে পরিচালনা করছি।",
       location: "ঢাকা, বাংলাদেশ",
       stats: [
         { label: "বছরের অভিজ্ঞতা", value: 4, suffix: "+" },
@@ -498,11 +506,19 @@ const portfolioTranslations = {
     },
     experience: [
       {
-        role: "ফ্ল্যাটার ডেভেলপার (মিড-লেভেল)",
-        company: "রাজিনসফট লিমিটেড (RazinSoft)",
-        duration: "২০২৫ - বর্তমান",
+        role: "সফটওয়্যার ইঞ্জিনিয়ার",
+        company: "NIBIZ Soft",
+        duration: "২০২৬ - বর্তমান",
         type: "ফুল-টাইম",
         isCurrent: true,
+        description: "ক্রস-প্ল্যাটফর্ম মোবাইল অ্যাপ্লিকেশন ও স্কেলেবল ব্যাকএন্ড সিস্টেমের এন্ড-টু-এন্ড ডেভেলপমেন্ট পরিচালনা। ক্লিন আর্কিটেকচার সহ হাই-পারফরম্যান্স ফ্ল্যাটার অ্যাপ, রোবাস্ট RESTful API, ডাটাবেস ডিজাইন এবং ক্লাউড সার্ভিস ইন্টিগ্রেশন বাস্তবায়ন।"
+      },
+      {
+        role: "ফ্ল্যাটার ডেভেলপার (মিড-লেভেল)",
+        company: "রাজিনসফট লিমিটেড (RazinSoft)",
+        duration: "২০২৫ - ২০২৬",
+        type: "ফুল-টাইম",
+        isCurrent: false,
         description: "রিভারপড (Riverpod) ও ক্লিন আর্কিটেকচারের মাধ্যমে এন্টারপ্রাইজ ফ্ল্যাটার অ্যাপ তৈরি। রিয়েল-টাইম চ্যাট, গুগল ম্যাপস জিওলোকেশন ও অফলাইন ডাটা সিঙ্ক পরিচালনা।"
       },
       {
@@ -755,7 +771,7 @@ const portfolioTranslations = {
       },
       {
         question: "আপনার কাজের অভিজ্ঞতা কেমন?",
-        answer: "ফ্ল্যাটার এবং অ্যান্ড্রয়েড ডেভেলপার হিসেবে আমার ৪+ বছরের বাস্তব অভিজ্ঞতা রয়েছে। আমি রাজিনসফট লিমিটেড (মিড-লেভেল ফ্ল্যাটার ডেভেলপার), ছুটি বাংলাদেশ এবং অথেন্টিক ফোর টেকনোলজিতে সফলভাবে কাজ করেছি।"
+        answer: "সফটওয়্যার ও মোবাইল অ্যাপ ডেভেলপমেন্টে আমার ৪+ বছরের বাস্তব অভিজ্ঞতা রয়েছে। আমি NIBIZ Soft (সফটওয়্যার ইঞ্জিনিয়ার), রাজিনসফট লিমিটেড (মিড-লেভেল ফ্ল্যাটার ডেভেলপার), ছুটি বাংলাদেশ এবং অথেন্টিক ফোর টেকনোলজিতে সফলভাবে কাজ করেছি।"
       },
       {
         question: "আপনার সাথে কীভাবে যোগাযোগ বা প্রজেক্ট শুরু করতে পারি?",
